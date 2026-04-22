@@ -38,7 +38,7 @@ export function WhyLora() {
 
   return (
     <section ref={ref} className="relative py-32 md:py-44 px-6 md:px-20">
-      <SectionLabel word="ADVANTAGE" index="03" label="Why LORA" side="right" />
+      <SectionLabel word={t("label.advantage")} index="03" label="Why LORA" side="right" />
       <div className="max-w-6xl mx-auto">
         <motion.div initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} className="flex items-center gap-4 mb-6">
           <div className="w-8 h-px bg-white/20" />
@@ -136,8 +136,8 @@ export function WhyLora() {
                 "{t("why.quote")}"
               </p>
               <div>
-                <p className="text-white/50" style={{ fontSize: "0.8rem", fontWeight: 700 }}>Sarah Chen</p>
-                <p className="text-white/20" style={{ fontSize: "0.7rem" }}>VP Growth, Nexus Commerce</p>
+                <p className="text-white/50" style={{ fontSize: "0.8rem", fontWeight: 700 }}>{t("why.quoteAuthor")}</p>
+                <p className="text-white/20" style={{ fontSize: "0.7rem" }}>{t("why.quoteRole")}</p>
               </div>
             </TiltCard>
           </motion.div>

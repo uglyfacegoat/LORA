@@ -18,7 +18,7 @@ export function LanguageModal({ open, onClose }: Props) {
       if (!popRef.current) return;
       const target = e.target as HTMLElement;
       if (popRef.current.contains(target)) return;
-      if (target.closest?.('[aria-label="Change language"]')) return;
+      if (target.closest?.('[data-lang-trigger="true"]')) return;
       onClose();
     };
     window.addEventListener("keydown", onKey);

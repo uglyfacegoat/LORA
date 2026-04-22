@@ -57,7 +57,7 @@ export function SolutionSection() {
 
   return (
     <section ref={ref} className="relative py-28 md:py-36 px-6 md:px-20">
-      <SectionLabel word="SOLUTION" />
+      <SectionLabel word={t("label.solution")} />
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0 }}

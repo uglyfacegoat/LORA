@@ -47,6 +47,7 @@ function AppInner() {
           --fg-2: rgba(255,255,255,0.7);
           --fg-3: rgba(255,255,255,0.45);
           --fg-4: rgba(255,255,255,0.25);
+          --fg-5: rgba(255,255,255,0.15);
           --surface-soft: rgba(255,255,255,0.02);
           --surface-mid: rgba(255,255,255,0.04);
           --surface-strong: rgba(255,255,255,0.08);
@@ -54,6 +55,17 @@ function AppInner() {
           --accent-soft: rgba(255,255,255,0.08);
           --accent-strong: rgba(255,255,255,0.15);
           --accent-border: rgba(255,255,255,0.2);
+          --line-soft: rgba(255,255,255,0.2);
+          --line-mid: rgba(255,255,255,0.12);
+          --line-strong: rgba(255,255,255,0.4);
+          --glow-soft: rgba(255,255,255,0.04);
+          --glow-mid: rgba(255,255,255,0.08);
+          --shadow-soft: rgba(255,255,255,0.1);
+          --button-shadow: rgba(255,255,255,0.2);
+          --icon-stroke: rgba(255,255,255,0.4);
+          --icon-stroke-soft: rgba(255,255,255,0.12);
+          --terminal-live: rgba(120,255,150,0.6);
+          --terminal-live-glow: rgba(120,255,150,0.3);
           --modal-bg: rgba(12,12,12,0.9);
           --modal-border: rgba(255,255,255,0.08);
           --cta-bg: #fff;
@@ -69,6 +81,7 @@ function AppInner() {
           --fg-2: rgba(10,10,10,0.7);
           --fg-3: rgba(10,10,10,0.45);
           --fg-4: rgba(10,10,10,0.25);
+          --fg-5: rgba(10,10,10,0.15);
           --surface-soft: rgba(10,10,10,0.02);
           --surface-mid: rgba(10,10,10,0.05);
           --surface-strong: rgba(10,10,10,0.09);
@@ -76,6 +89,17 @@ function AppInner() {
           --accent-soft: rgba(10,10,10,0.06);
           --accent-strong: rgba(10,10,10,0.12);
           --accent-border: rgba(10,10,10,0.2);
+          --line-soft: rgba(10,10,10,0.2);
+          --line-mid: rgba(10,10,10,0.12);
+          --line-strong: rgba(10,10,10,0.32);
+          --glow-soft: rgba(10,10,10,0.03);
+          --glow-mid: rgba(10,10,10,0.06);
+          --shadow-soft: rgba(10,10,10,0.08);
+          --button-shadow: rgba(10,10,10,0.12);
+          --icon-stroke: rgba(10,10,10,0.42);
+          --icon-stroke-soft: rgba(10,10,10,0.16);
+          --terminal-live: rgba(18,122,66,0.7);
+          --terminal-live-glow: rgba(18,122,66,0.24);
           --modal-bg: rgba(245,243,239,0.94);
           --modal-border: rgba(10,10,10,0.08);
           --cta-bg: #0a0a0a;
@@ -84,6 +108,10 @@ function AppInner() {
           --nav-border: rgba(10,10,10,0.06);
         }
         @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        html, body {
+          overflow-x: clip;
+          background: var(--app-bg);
+        }
         html { scroll-behavior: smooth; }
         ::selection { background: rgba(125,125,125,0.25); color: var(--fg-1); }
       `}</style>
@@ -139,13 +167,14 @@ function AppInner() {
           {/* Language button */}
           <button
             onClick={() => setLangOpen(true)}
+            data-lang-trigger="true"
             className="group flex items-center gap-2 px-3 py-2 rounded-lg transition-all duration-400"
             style={{
               background: "var(--surface-soft)",
               border: "1px solid var(--surface-border)",
               color: "var(--fg-3)",
             }}
-            aria-label="Change language"
+            aria-label={t("nav.languageAria")}
           >
             <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
               <circle cx="7" cy="7" r="6" stroke="currentColor" strokeWidth="1" />
@@ -159,7 +188,7 @@ function AppInner() {
             onClick={toggle}
             className="relative w-9 h-9 rounded-lg transition-all duration-400 flex items-center justify-center"
             style={{ background: "var(--surface-soft)", border: "1px solid var(--surface-border)", color: "var(--fg-3)" }}
-            aria-label="Toggle theme"
+            aria-label={t("nav.themeAria")}
           >
             {theme === "dark" ? (
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none">

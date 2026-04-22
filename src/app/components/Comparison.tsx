@@ -15,7 +15,7 @@ export function Comparison() {
 
   return (
     <section ref={ref} className="relative py-32 md:py-44 px-6 md:px-20">
-      <SectionLabel word="CONTRAST" />
+      <SectionLabel word={t("label.contrast")} />
       <div className="max-w-6xl mx-auto">
         <motion.div initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} className="flex items-center gap-4 mb-6">
           <div className="w-8 h-px bg-white/20" />
@@ -100,7 +100,7 @@ export function Comparison() {
               </div>
               <span className="px-2.5 py-1 rounded-md uppercase"
                 style={{ fontSize: "0.48rem", letterSpacing: "0.2em", fontWeight: 800, background: "var(--fg-1)", color: "var(--app-bg)" }}>
-                OUR WAY
+                {t("cmp.badge")}
               </span>
             </div>
 

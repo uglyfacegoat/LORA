@@ -1,6 +1,5 @@
 import { motion, useMotionValueEvent, useScroll } from "motion/react";
 import { useEffect, useRef, useState } from "react";
-import { SectionLabel } from "./SectionLabel";
 import { ScrambleText } from "./ScrambleText";
 import { useI18n } from "../i18n";
 
@@ -38,8 +37,6 @@ export function PainSection() {
 
   return (
     <section ref={sectionRef} className="relative px-6 md:px-20">
-      <SectionLabel word="DIAGNOSIS" />
-
       <div className="h-[360vh]">
         <div className="sticky top-0 flex min-h-screen items-center py-16 md:py-24">
           <div className="max-w-6xl mx-auto relative w-full">
@@ -48,13 +45,13 @@ export function PainSection() {
               animate={inView ? { opacity: 1 } : {}}
               className="flex items-center gap-4 mb-6"
             >
-              <div className="w-8 h-px bg-white/20" />
+              <div className="w-8 h-px" style={{ background: "var(--line-soft)" }} />
               <ScrambleText
                 as="span"
                 text={t("pain.eyebrow")}
                 trigger={inView}
-                className="text-white/40 uppercase tracking-[0.35em]"
-                style={{ fontSize: "0.65rem", fontWeight: 600, fontFamily: "ui-monospace, SFMono-Regular, monospace" }}
+                className="uppercase tracking-[0.35em]"
+                style={{ fontSize: "0.65rem", fontWeight: 600, fontFamily: "ui-monospace, SFMono-Regular, monospace", color: "var(--fg-3)" }}
               />
             </motion.div>
 
@@ -62,11 +59,11 @@ export function PainSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.1 }}
-              className="text-white mb-6"
-              style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)", fontWeight: 700, lineHeight: 1.1, letterSpacing: "-0.03em" }}
+              style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)", fontWeight: 700, lineHeight: 1.1, letterSpacing: "-0.03em", color: "var(--fg-1)", marginBottom: "1.5rem" }}
             >
-              {t("pain.title")}<br />
-              <span className="text-white/30">{t("pain.titleAccent")}</span>
+              {t("pain.title")}
+              <br />
+              <span style={{ color: "var(--fg-3)" }}>{t("pain.titleAccent")}</span>
             </motion.h2>
 
             <div className="grid md:grid-cols-[1.3fr_1fr] gap-10 md:gap-16 mt-16">
@@ -75,11 +72,11 @@ export function PainSection() {
                 animate={inView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="relative rounded-2xl overflow-hidden p-8 md:p-12"
-                style={{ background: current.color, border: "1px solid rgba(255,255,255,0.06)" }}
+                style={{ background: current.color, border: "1px solid var(--surface-border)" }}
               >
                 <div className="absolute top-4 right-4 flex items-center gap-2 opacity-30">
-                  <div className="w-1 h-1 rounded-full bg-white" />
-                  <div className="w-6 h-px bg-white/30" />
+                  <div className="w-1 h-1 rounded-full" style={{ background: "var(--fg-1)" }} />
+                  <div className="w-6 h-px" style={{ background: "var(--fg-3)" }} />
                 </div>
 
                 <div>
@@ -89,32 +86,32 @@ export function PainSection() {
                       fontWeight: 900,
                       lineHeight: 0.85,
                       letterSpacing: "-0.05em",
-                      color: "white",
-                      textShadow: "0 0 80px rgba(255,255,255,0.1)",
+                      color: "var(--fg-1)",
+                      textShadow: "0 0 80px var(--shadow-soft)",
                     }}
                   >
                     {current.percent}
                   </p>
-                  <p className="text-white/30 uppercase tracking-[0.25em] mt-4" style={{ fontSize: "0.65rem", fontWeight: 700 }}>
+                  <p className="uppercase tracking-[0.25em] mt-4" style={{ fontSize: "0.65rem", fontWeight: 700, color: "var(--fg-3)" }}>
                     {current.percentLabel}
                   </p>
                 </div>
 
                 <motion.div key={current.id + "-text"} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4, delay: 0.15 }} className="mt-10">
-                  <h3 className="text-white mb-3" style={{ fontSize: "clamp(1.2rem, 2.5vw, 1.6rem)", fontWeight: 700, lineHeight: 1.2 }}>
+                  <h3 style={{ fontSize: "clamp(1.2rem, 2.5vw, 1.6rem)", fontWeight: 700, lineHeight: 1.2, color: "var(--fg-1)", marginBottom: "0.75rem" }}>
                     {current.text}
                   </h3>
-                  <p className="text-white/30" style={{ fontSize: "0.9rem", lineHeight: 1.7, maxWidth: 380 }}>
+                  <p style={{ fontSize: "0.9rem", lineHeight: 1.7, maxWidth: 380, color: "var(--fg-3)" }}>
                     {current.sub}
                   </p>
                 </motion.div>
 
                 <div className="flex gap-1.5 mt-10">
                   {pains.map((_, i) => (
-                    <div key={i} className="h-[3px] rounded-full overflow-hidden flex-1" style={{ background: "rgba(255,255,255,0.08)" }}>
+                    <div key={i} className="h-[3px] rounded-full overflow-hidden flex-1" style={{ background: "var(--surface-strong)" }}>
                       <motion.div
                         className="h-full rounded-full"
-                        style={{ background: "rgba(255,255,255,0.5)" }}
+                        style={{ background: "var(--line-strong)" }}
                         initial={{ width: "0%" }}
                         animate={{ width: i === active ? "100%" : i < active ? "100%" : "0%" }}
                         transition={{ duration: 0.3, ease: "linear" }}
@@ -138,19 +135,19 @@ export function PainSection() {
                       onClick={() => setActive(i)}
                       className="relative cursor-pointer transition-all duration-500 py-5 px-6 rounded-xl group"
                       style={{
-                        background: isActive ? "rgba(255,255,255,0.04)" : "transparent",
-                        border: `1px solid ${isActive ? "rgba(255,255,255,0.1)" : "rgba(255,255,255,0.03)"}`,
+                        background: isActive ? "var(--surface-mid)" : "transparent",
+                        border: `1px solid ${isActive ? "var(--accent-border)" : "var(--surface-border)"}`,
                       }}
                     >
                       <div className="flex items-center gap-4">
                         <div
                           className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 transition-all duration-500"
                           style={{
-                            background: isActive ? "rgba(255,255,255,0.08)" : "rgba(255,255,255,0.02)",
-                            border: `1px solid ${isActive ? "rgba(255,255,255,0.15)" : "rgba(255,255,255,0.04)"}`,
+                            background: isActive ? "var(--surface-strong)" : "var(--surface-soft)",
+                            border: `1px solid ${isActive ? "var(--accent-border)" : "var(--surface-border)"}`,
                           }}
                         >
-                          <span style={{ fontSize: "0.5rem", fontWeight: 800, color: isActive ? "rgba(255,255,255,0.7)" : "rgba(255,255,255,0.15)" }}>
+                          <span style={{ fontSize: "0.5rem", fontWeight: 800, color: isActive ? "var(--fg-2)" : "var(--fg-5)" }}>
                             {pain.id}
                           </span>
                         </div>
@@ -159,7 +156,7 @@ export function PainSection() {
                           style={{
                             fontSize: "0.88rem",
                             fontWeight: 600,
-                            color: isActive ? "rgba(255,255,255,0.95)" : "rgba(255,255,255,0.25)",
+                            color: isActive ? "var(--fg-1)" : "var(--fg-4)",
                           }}
                         >
                           {pain.text}
@@ -169,8 +166,8 @@ export function PainSection() {
                         <motion.p
                           initial={{ opacity: 0, height: 0 }}
                           animate={{ opacity: 1, height: "auto" }}
-                          className="text-white/25 mt-3 ml-11"
-                          style={{ fontSize: "0.8rem", lineHeight: 1.6 }}
+                          className="mt-3 ml-11"
+                          style={{ fontSize: "0.8rem", lineHeight: 1.6, color: "var(--fg-4)" }}
                         >
                           {pain.sub}
                         </motion.p>

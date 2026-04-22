@@ -52,7 +52,7 @@ export function ContactSection() {
 
   return (
     <section ref={ref} id="contact" className="relative py-32 md:py-44 px-6 md:px-20">
-      <SectionLabel word="CONNECT" />
+      <SectionLabel word={t("label.connect")} />
       <div className="max-w-3xl mx-auto relative">
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[700px] pointer-events-none"
           style={{ background: "radial-gradient(circle, var(--surface-mid), transparent 55%)" }} />

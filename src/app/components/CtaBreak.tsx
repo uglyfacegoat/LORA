@@ -1,14 +1,16 @@
 import { motion } from "motion/react";
 import { useInView } from "./useInView";
 import { SectionLabel } from "./SectionLabel";
+import { useI18n } from "../i18n";
 
 export function CtaBreak() {
   const [ref, inView] = useInView(0.2);
-  const bigLines = ["Если вы тут,", "то ваши конкуренты уже позади"];
+  const { t } = useI18n();
+  const bigLines = [t("cta.line1"), t("cta.line2")];
 
   return (
     <section ref={ref} className="relative py-32 md:py-40 px-6 md:px-20 overflow-hidden">
-      <SectionLabel word="CHOICE" />
+      <SectionLabel word={t("label.choice")} />
 
       <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] pointer-events-none"
@@ -23,7 +25,7 @@ export function CtaBreak() {
           className="mb-10 uppercase"
           style={{ fontSize: "0.75rem", letterSpacing: "0.32em", fontWeight: 700, color: "var(--fg-4)" }}
         >
-          LEAVE OLD RULES AHEAD
+          {t("cta.eyebrow")}
         </motion.p>
 
         <motion.h2
@@ -58,7 +60,7 @@ export function CtaBreak() {
           className="mx-auto max-w-3xl"
           style={{ fontSize: "clamp(1rem, 1.6vw, 1.15rem)", lineHeight: 1.8, color: "var(--fg-3)" }}
         >
-          LEAVE OLD RULES AHEAD
+          {t("cta.slogan")}
         </motion.p>
       </div>
     </section>
