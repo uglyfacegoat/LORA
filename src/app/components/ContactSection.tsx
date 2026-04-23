@@ -18,6 +18,9 @@ type AlertState = {
   text: string;
 } | null;
 
+const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || "").replace(/\/$/, "");
+const LEADS_API_URL = `${API_BASE_URL}/api/leads`;
+
 const COUNTRY_OPTIONS: CountryOption[] = [
   { iso: "AR", flag: "AR", dialCode: "+54", nationalPlaceholder: "11 2345-6789", label: "Argentina", search: ["argentina", "ar", "+54"] },
   { iso: "AU", flag: "AU", dialCode: "+61", nationalPlaceholder: "412 345 678", label: "Australia", search: ["australia", "au", "+61"] },
@@ -349,6 +352,7 @@ function CountryPickerModal({
 export function ContactSection() {
   const [ref, inView] = useInView(0.1);
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [focused, setFocused] = useState<string | null>(null);
   const [countryOpen, setCountryOpen] = useState(false);
   const [countryAnchorRect, setCountryAnchorRect] = useState<DOMRect | null>(null);
@@ -453,8 +457,10 @@ export function ContactSection() {
 
   const phoneFocused = focused === "phone";
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (submitting) return;
 
     if (!values.name.trim() || !values.phone.trim() || !values.email.trim()) {
       setAlert({ tone: "error", text: copy.missingFields });
@@ -466,8 +472,37 @@ export function ContactSection() {
       return;
     }
 
-    setAlert({ tone: "success", text: copy.success });
-    setSubmitted(true);
+    setSubmitting(true);
+
+    try {
+      const response = await fetch(LEADS_API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: values.name.trim(),
+          email: values.email.trim(),
+          phone: values.phone.trim(),
+          company: values.company.trim(),
+          dialCode: selectedCountry.dialCode,
+          countryIso: selectedCountry.iso,
+          countryLabel: selectedCountry.label,
+        }),
+      });
+
+      if (!response.ok) {
+        setAlert({ tone: "error", text: "Could not send the request." });
+        return;
+      }
+
+      setAlert({ tone: "success", text: copy.success });
+      setSubmitted(true);
+    } catch {
+      setAlert({ tone: "error", text: "Could not send the request." });
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const handleOpenCountryPicker = () => {
@@ -652,6 +687,7 @@ export function ContactSection() {
 
               <button
                 type="submit"
+                disabled={submitting}
                 className="relative mt-5 w-full cursor-pointer overflow-hidden rounded-xl py-5 uppercase tracking-[0.3em] transition-all duration-500 hover:scale-[1.005] active:scale-[0.995]"
                 style={{
                   fontSize: "0.72rem",
@@ -659,6 +695,8 @@ export function ContactSection() {
                   background: "var(--fg-1)",
                   color: "var(--app-bg)",
                   boxShadow: "0 20px 60px -20px var(--surface-strong)",
+                  opacity: submitting ? 0.72 : 1,
+                  pointerEvents: submitting ? "none" : "auto",
                 }}
               >
                 <span className="relative z-10 flex items-center justify-center gap-3">

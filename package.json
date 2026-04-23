@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "backend:dev": "node --watch backend/server.mjs",
+    "backend:start": "node backend/server.mjs",
     "build": "vite build",
     "preview": "vite preview"
   },
