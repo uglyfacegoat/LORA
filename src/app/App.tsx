@@ -79,25 +79,25 @@ function AppInner() {
           --app-bg: #f5f3ef;
           --fg-1: #0a0a0a;
           --fg-2: rgba(10,10,10,0.7);
-          --fg-3: rgba(10,10,10,0.45);
-          --fg-4: rgba(10,10,10,0.25);
-          --fg-5: rgba(10,10,10,0.15);
-          --surface-soft: rgba(10,10,10,0.02);
-          --surface-mid: rgba(10,10,10,0.05);
-          --surface-strong: rgba(10,10,10,0.09);
-          --surface-border: rgba(10,10,10,0.08);
-          --accent-soft: rgba(10,10,10,0.06);
-          --accent-strong: rgba(10,10,10,0.12);
-          --accent-border: rgba(10,10,10,0.2);
-          --line-soft: rgba(10,10,10,0.2);
-          --line-mid: rgba(10,10,10,0.12);
-          --line-strong: rgba(10,10,10,0.32);
-          --glow-soft: rgba(10,10,10,0.03);
-          --glow-mid: rgba(10,10,10,0.06);
-          --shadow-soft: rgba(10,10,10,0.08);
-          --button-shadow: rgba(10,10,10,0.12);
-          --icon-stroke: rgba(10,10,10,0.42);
-          --icon-stroke-soft: rgba(10,10,10,0.16);
+          --fg-3: rgba(10,10,10,0.52);
+          --fg-4: rgba(10,10,10,0.34);
+          --fg-5: rgba(10,10,10,0.2);
+          --surface-soft: rgba(10,10,10,0.008);
+          --surface-mid: rgba(10,10,10,0.018);
+          --surface-strong: rgba(10,10,10,0.04);
+          --surface-border: rgba(10,10,10,0.12);
+          --accent-soft: rgba(10,10,10,0.02);
+          --accent-strong: rgba(10,10,10,0.07);
+          --accent-border: rgba(10,10,10,0.24);
+          --line-soft: rgba(10,10,10,0.24);
+          --line-mid: rgba(10,10,10,0.16);
+          --line-strong: rgba(10,10,10,0.38);
+          --glow-soft: rgba(10,10,10,0.022);
+          --glow-mid: rgba(10,10,10,0.05);
+          --shadow-soft: rgba(10,10,10,0.06);
+          --button-shadow: rgba(10,10,10,0.14);
+          --icon-stroke: rgba(10,10,10,0.5);
+          --icon-stroke-soft: rgba(10,10,10,0.22);
           --terminal-live: rgba(18,122,66,0.7);
           --terminal-live-glow: rgba(18,122,66,0.24);
           --modal-bg: rgba(245,243,239,0.94);
@@ -111,8 +111,25 @@ function AppInner() {
         html, body {
           overflow-x: clip;
           background: var(--app-bg);
+          scrollbar-width: thin;
+          scrollbar-color: var(--line-strong) var(--surface-soft);
         }
         html { scroll-behavior: smooth; }
+        *::-webkit-scrollbar {
+          width: 10px;
+          height: 10px;
+        }
+        *::-webkit-scrollbar-track {
+          background: var(--surface-soft);
+        }
+        *::-webkit-scrollbar-thumb {
+          background: var(--line-strong);
+          border-radius: 999px;
+          border: 2px solid var(--app-bg);
+        }
+        *::-webkit-scrollbar-thumb:hover {
+          background: var(--fg-3);
+        }
         ::selection { background: rgba(125,125,125,0.25); color: var(--fg-1); }
       `}</style>
 

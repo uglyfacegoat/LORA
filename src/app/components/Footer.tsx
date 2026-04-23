@@ -1,5 +1,3 @@
-import logoLargeDark from "../../assets/logo-large-dark.svg";
-import logoLargeLight from "../../assets/logo-large-light.svg";
 import logoSmallDark from "../../assets/logo-small-dark.svg";
 import logoSmallLight from "../../assets/logo-small-light.svg";
 import { useTheme } from "../theme";
@@ -8,15 +6,10 @@ import { useI18n } from "../i18n";
 export function Footer() {
   const { theme } = useTheme();
   const { t } = useI18n();
-  const largeLogo = theme === "dark" ? logoLargeDark : logoLargeLight;
   const smallLogo = theme === "dark" ? logoSmallDark : logoSmallLight;
 
   return (
     <footer className="relative mt-16 overflow-hidden">
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 pointer-events-none select-none" style={{ opacity: 0.015 }}>
-        <img src={largeLogo} alt="" className="w-[clamp(320px,52vw,620px)] h-auto" draggable={false} />
-      </div>
-
       <div className="max-w-6xl mx-auto px-6 md:px-20 relative">
         <div className="h-px" style={{ background: "var(--surface-border)" }} />
 

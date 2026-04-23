@@ -1,7 +1,9 @@
 import { useEffect, useRef } from "react";
+import { useTheme } from "../theme";
 
 export function CursorGlow() {
   const ref = useRef<HTMLDivElement>(null);
+  const { theme } = useTheme();
 
   useEffect(() => {
     let x = 0, y = 0, cx = 0, cy = 0;
@@ -33,7 +35,10 @@ export function CursorGlow() {
       style={{
         width: 500,
         height: 500,
-        background: "radial-gradient(circle, rgba(255,255,255,0.025) 0%, transparent 55%)",
+        background:
+          theme === "dark"
+            ? "radial-gradient(circle, rgba(255,255,255,0.025) 0%, transparent 55%)"
+            : "radial-gradient(circle, rgba(0,0,0,0.04) 0%, transparent 55%)",
         willChange: "transform",
         top: 0,
         left: 0,

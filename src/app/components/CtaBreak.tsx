@@ -34,10 +34,10 @@ export function CtaBreak() {
           transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           className="mb-8"
           style={{
-            fontSize: "clamp(2.5rem, 6vw, 5.3rem)",
-            fontWeight: 900,
-            lineHeight: 1.04,
-            letterSpacing: "-0.05em",
+            fontSize: "clamp(2.35rem, 5.55vw, 4.85rem)",
+            fontWeight: 850,
+            lineHeight: 1.14,
+            letterSpacing: "-0.008em",
           }}
         >
           {bigLines.map((line, index) => (
@@ -46,6 +46,7 @@ export function CtaBreak() {
               style={{
                 display: "block",
                 color: index === 0 ? "var(--fg-3)" : "var(--fg-1)",
+                paddingBottom: index === 0 ? "0.12em" : 0,
               }}
             >
               {line}
@@ -53,15 +54,27 @@ export function CtaBreak() {
           ))}
         </motion.h2>
 
-        <motion.p
+        <motion.div
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ delay: 0.3, duration: 0.8 }}
-          className="mx-auto max-w-3xl"
-          style={{ fontSize: "clamp(1rem, 1.6vw, 1.15rem)", lineHeight: 1.8, color: "var(--fg-3)" }}
+          className="mx-auto flex max-w-fit items-center justify-center gap-4"
         >
-          {t("cta.slogan")}
-        </motion.p>
+          <span className="h-px w-10 shrink-0" style={{ background: "var(--line-mid)" }} />
+          <span
+            className="uppercase"
+            style={{
+              fontSize: "clamp(0.74rem, 0.98vw, 0.86rem)",
+              letterSpacing: "0.28em",
+              fontWeight: 700,
+              color: "var(--fg-3)",
+              whiteSpace: "nowrap",
+            }}
+          >
+            {t("cta.slogan")}
+          </span>
+          <span className="h-px w-10 shrink-0" style={{ background: "var(--line-mid)" }} />
+        </motion.div>
       </div>
     </section>
   );
