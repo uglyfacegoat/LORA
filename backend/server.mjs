@@ -47,17 +47,7 @@ const server = createServer(async (req, res) => {
         return;
       }
 
-      const text = [
-        "New LORA brief request",
-        "",
-        `Name: ${name}`,
-        `Email: ${email}`,
-        `Phone: ${dialCode} ${phone}`,
-        `Country: ${countryLabel}${countryIso ? ` (${countryIso})` : ""}`,
-        `Company: ${company || "-"}`,
-        "",
-        `Time: ${new Date().toISOString()}`,
-      ].join("\n");
+      const text = formatLeadMessage({ name, email, phone, company, dialCode, countryIso, countryLabel });
 
       const tgResponse = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
         method: "POST",
@@ -65,6 +55,8 @@ const server = createServer(async (req, res) => {
         body: JSON.stringify({
           chat_id: TELEGRAM_ADMIN_CHAT_ID,
           text,
+          parse_mode: "HTML",
+          disable_web_page_preview: true,
         }),
       });
 
@@ -102,6 +94,35 @@ function setCors(res) {
 function json(res, status, payload) {
   res.writeHead(status, { "Content-Type": "application/json; charset=utf-8" });
   res.end(JSON.stringify(payload));
+}
+
+function escapeHtml(value) {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+function formatLeadMessage({ name, email, phone, company, dialCode, countryIso, countryLabel }) {
+  const submittedAt = new Intl.DateTimeFormat("ru-RU", {
+    timeZone: "Europe/Moscow",
+    dateStyle: "medium",
+    timeStyle: "short",
+  }).format(new Date());
+
+  const country = countryLabel ? `${countryLabel}${countryIso ? ` (${countryIso})` : ""}` : "-";
+
+  return [
+    "<b>LORA brief request</b>",
+    "",
+    `<b>Name:</b> ${escapeHtml(name)}`,
+    `<b>Phone:</b> ${escapeHtml(`${dialCode} ${phone}`.trim())}`,
+    `<b>Email:</b> ${escapeHtml(email)}`,
+    `<b>Company:</b> ${escapeHtml(company || "-")}`,
+    `<b>Country:</b> ${escapeHtml(country)}`,
+    "",
+    `<b>Submitted:</b> ${escapeHtml(submittedAt)} MSK`,
+  ].join("\n");
 }
 
 function readJson(req) {
