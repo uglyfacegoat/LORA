@@ -98,6 +98,7 @@ export function SolutionSection() {
               color: "var(--fg-2)",
               background: "var(--surface-soft)",
               border: "1px solid var(--surface-border)",
+              overflowWrap: "anywhere",
             }}
           >
             {t("sol.fastNote")}

@@ -13,7 +13,7 @@ export function CtaBreak() {
       <SectionLabel word={t("label.choice")} />
 
       <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] pointer-events-none"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 hidden md:block w-[900px] h-[900px] pointer-events-none"
         style={{ background: "radial-gradient(circle, rgba(255,255,255,0.05), transparent 60%)" }}
       />
 
@@ -22,7 +22,7 @@ export function CtaBreak() {
           initial={{ opacity: 0, y: 10 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
-          className="mb-10 uppercase"
+          className="mb-8 sm:mb-10 uppercase px-2"
           style={{ fontSize: "0.75rem", letterSpacing: "0.32em", fontWeight: 700, color: "var(--fg-4)" }}
         >
           {t("cta.eyebrow")}
@@ -32,9 +32,9 @@ export function CtaBreak() {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-8"
+          className="mb-8 px-2"
           style={{
-            fontSize: "clamp(2.35rem, 5.55vw, 4.85rem)",
+            fontSize: "clamp(2rem, 5.55vw, 4.85rem)",
             fontWeight: 850,
             lineHeight: 1.14,
             letterSpacing: "-0.008em",
@@ -58,9 +58,9 @@ export function CtaBreak() {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ delay: 0.3, duration: 0.8 }}
-          className="mx-auto flex max-w-fit items-center justify-center gap-4"
+          className="mx-auto flex max-w-[min(100%,38rem)] flex-wrap items-center justify-center gap-x-4 gap-y-2 px-2"
         >
-          <span className="h-px w-10 shrink-0" style={{ background: "var(--line-mid)" }} />
+          <span className="h-px w-8 sm:w-10 shrink-0" style={{ background: "var(--line-mid)" }} />
           <span
             className="uppercase"
             style={{
@@ -68,12 +68,13 @@ export function CtaBreak() {
               letterSpacing: "0.28em",
               fontWeight: 700,
               color: "var(--fg-3)",
-              whiteSpace: "nowrap",
+              whiteSpace: "normal",
+              textAlign: "center",
             }}
           >
             {t("cta.slogan")}
           </span>
-          <span className="h-px w-10 shrink-0" style={{ background: "var(--line-mid)" }} />
+          <span className="h-px w-8 sm:w-10 shrink-0" style={{ background: "var(--line-mid)" }} />
         </motion.div>
       </div>
     </section>

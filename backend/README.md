@@ -11,7 +11,9 @@ Minimal Node backend for LORA lead submissions.
 HOST=0.0.0.0
 PORT=8787
 TELEGRAM_BOT_TOKEN=your_bot_token
-TELEGRAM_ADMIN_CHAT_ID=989807462
+TELEGRAM_ADMIN_CHAT_IDS=989807462,704281358
+OPENROUTER_API_KEY=your_openrouter_key
+OPENROUTER_MODEL=openai/gpt-oss-120b:free
 ```
 
 ## Run
@@ -33,6 +35,11 @@ pnpm backend:start
 Frontend submits to:
 
 `POST /api/leads`
+
+Telegram bot endpoints:
+
+- `POST /api/telegram`
+- `GET /api/telegram-setup`
 
 By default the UI calls `http://localhost:8787/api/leads`.
 Override with:

@@ -42,7 +42,7 @@ export function ProcessSection() {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ delay: 0.2 }}
-          className="max-w-lg mb-16"
+          className="max-w-lg mb-12 sm:mb-16"
           style={{ fontSize: "0.92rem", lineHeight: 1.7, color: "var(--fg-4)" }}
         >
           {t("process.sub")}
@@ -94,7 +94,7 @@ export function ProcessSection() {
           >
             <div className="absolute -top-16 -left-16 w-48 h-48 pointer-events-none" style={{ background: "radial-gradient(circle, var(--glow-soft), transparent 60%)" }} />
 
-            <div className="p-10 md:p-14 flex items-start gap-14">
+            <div className="p-8 md:p-14 flex items-start gap-10 md:gap-14">
               <p className="shrink-0 select-none" style={{ fontSize: "8rem", fontWeight: 900, lineHeight: 0.8, letterSpacing: "-0.06em", color: "var(--glow-mid)" }}>
                 {steps[active].num}
               </p>

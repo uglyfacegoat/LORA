@@ -131,6 +131,11 @@ function AppInner() {
           background: var(--fg-3);
         }
         ::selection { background: rgba(125,125,125,0.25); color: var(--fg-1); }
+        @media (max-width: 480px) {
+          html {
+            font-size: 15px;
+          }
+        }
       `}</style>
 
       {!loaded && <Preloader onComplete={handleLoaded} />}
@@ -142,7 +147,7 @@ function AppInner() {
 
       {/* Nav */}
       <nav
-        className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-10 transition-all duration-700"
+        className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 sm:px-6 md:px-10 transition-all duration-700"
         style={{
           backdropFilter: scrolled ? "blur(20px)" : "none",
           WebkitBackdropFilter: scrolled ? "blur(20px)" : "none",
@@ -154,16 +159,16 @@ function AppInner() {
           transition: "all 0.7s ease",
         }}
       >
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 sm:gap-4 min-w-0">
           <img src={navLogo} alt="LORA" className="w-6 h-6 object-contain" />
-          <span style={{ fontSize: "1.1rem", fontWeight: 800, letterSpacing: "-0.03em", color: "var(--fg-1)" }}>LORA</span>
+          <span className="truncate" style={{ fontSize: "1.05rem", fontWeight: 800, letterSpacing: "-0.03em", color: "var(--fg-1)" }}>LORA</span>
           <div className="hidden md:block w-px h-4" style={{ background: "var(--surface-border)" }} />
           <span className="hidden md:block uppercase tracking-[0.2em]" style={{ fontSize: "0.5rem", fontWeight: 600, color: "var(--fg-4)" }}>
             {t("nav.tagline")}
           </span>
         </div>
 
-        <div className="flex items-center gap-3 md:gap-4">
+        <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
           <div className="hidden md:flex items-center gap-5">
             {[
               { id: "process", key: "nav.process" },
@@ -221,7 +226,7 @@ function AppInner() {
 
           <a
             href="#contact"
-            className="group px-4 md:px-6 py-2.5 uppercase tracking-[0.2em] transition-all duration-500 cursor-pointer rounded-lg"
+            className="group px-3 sm:px-4 md:px-6 py-2.5 uppercase tracking-[0.18em] transition-all duration-500 cursor-pointer rounded-lg whitespace-nowrap text-center"
             style={{ fontSize: "0.6rem", fontWeight: 600, background: "var(--surface-strong)", border: "1px solid var(--surface-border)", color: "var(--fg-2)" }}
           >
             {t("nav.cta")}

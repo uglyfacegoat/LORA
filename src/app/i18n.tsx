@@ -28,7 +28,7 @@ export const translations: Dict = {
     ru: "Мы проектируем системы конверсии, которые превращают ваш трафик в предсказуемую и масштабируемую выручку.",
     zh: "我们设计转化系统，把你的流量变成可预测、可扩展的收入。",
   },
-  "hero.cta.primary": { en: "Get Free Audit", es: "Auditoría gratuita", ru: "Бесплатный аудит", zh: "免费审计" },
+  "hero.cta.primary": { en: "Get Free Brief", es: "Briefing gratuito", ru: "Бесплатный бриф", zh: "免费简报" },
   "hero.cta.secondary": { en: "Contact Us", es: "Contáctanos", ru: "Связаться", zh: "联系我们" },
   "hero.scroll": { en: "Scroll", es: "Desliza", ru: "Листай", zh: "继续下滑" },
 

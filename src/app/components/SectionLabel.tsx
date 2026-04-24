@@ -18,7 +18,7 @@ export function SectionLabel({ word }: Props) {
 
   return (
     <div
-      className="absolute inset-0 pointer-events-none select-none"
+      className="absolute inset-0 pointer-events-none select-none hidden md:block"
       aria-hidden
       style={{ zIndex: 1 }}
     >

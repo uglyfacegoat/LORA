@@ -66,12 +66,12 @@ export function PainSection() {
               <span style={{ color: "var(--fg-3)" }}>{t("pain.titleAccent")}</span>
             </motion.h2>
 
-            <div className="grid md:grid-cols-[1.3fr_1fr] gap-10 md:gap-16 mt-16">
+            <div className="grid md:grid-cols-[1.3fr_1fr] gap-8 md:gap-16 mt-12 sm:mt-16">
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 animate={inView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="relative rounded-2xl overflow-hidden p-8 md:p-12"
+                className="relative rounded-2xl overflow-hidden p-6 sm:p-8 md:p-12"
                 style={{ background: current.color, border: "1px solid var(--surface-border)" }}
               >
                 <div className="absolute top-4 right-4 flex items-center gap-2 opacity-30">
@@ -101,7 +101,7 @@ export function PainSection() {
                   <h3 style={{ fontSize: "clamp(1.2rem, 2.5vw, 1.6rem)", fontWeight: 700, lineHeight: 1.2, color: "var(--fg-1)", marginBottom: "0.75rem" }}>
                     {current.text}
                   </h3>
-                  <p style={{ fontSize: "0.9rem", lineHeight: 1.7, maxWidth: 380, color: "var(--fg-3)" }}>
+                  <p style={{ fontSize: "0.9rem", lineHeight: 1.7, maxWidth: 380, color: "var(--fg-3)", overflowWrap: "anywhere" }}>
                     {current.sub}
                   </p>
                 </motion.div>

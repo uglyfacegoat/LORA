@@ -44,7 +44,7 @@ export function ScrollHUD() {
       initial={false}
       animate={{ opacity: visible ? 1 : 0, y: visible ? 0 : 12 }}
       transition={{ duration: 0.5 }}
-      className="fixed bottom-6 right-6 z-40 flex items-center gap-3 pointer-events-none"
+      className="fixed bottom-6 right-6 z-40 hidden lg:flex items-center gap-3 pointer-events-none"
       style={{ mixBlendMode: "difference" }}
     >
       <div className="flex flex-col items-end gap-0.5">

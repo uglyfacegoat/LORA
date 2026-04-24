@@ -38,7 +38,7 @@ export function LanguageModal({ open, onClose }: Props) {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: -6, scale: 0.97 }}
           transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed z-[70] right-4 md:right-10 top-[64px] w-[260px] rounded-2xl p-2"
+          className="fixed z-[70] left-4 right-4 sm:left-auto sm:right-4 md:right-10 top-[64px] sm:w-[260px] rounded-2xl p-2"
           style={{
             background: "var(--modal-bg)",
             border: "1px solid var(--modal-border)",

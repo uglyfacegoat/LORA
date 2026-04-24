@@ -106,7 +106,7 @@ export function CasesSection() {
             <button
               key={cs.client}
               onClick={() => setActiveCase(i)}
-              className="px-5 py-2.5 transition-all duration-500 cursor-pointer uppercase tracking-[0.15em] rounded-lg"
+              className="px-4 sm:px-5 py-2.5 transition-all duration-500 cursor-pointer uppercase tracking-[0.15em] rounded-lg"
               style={{
                 fontSize: "0.6rem",
                 fontWeight: 700,
@@ -131,8 +131,8 @@ export function CasesSection() {
           <div className="absolute -top-20 -right-20 w-72 h-72 pointer-events-none" style={{ background: "radial-gradient(circle, var(--glow-soft), transparent 55%)" }} />
 
           <div className="p-8 md:p-12">
-            <div className="flex items-center justify-between mb-10">
-              <div className="flex items-center gap-4">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-10">
+              <div className="flex flex-wrap items-center gap-3 sm:gap-4">
                 <span className="px-3 py-1.5 rounded-lg uppercase tracking-[0.2em]" style={{ fontSize: "0.5rem", fontWeight: 700, color: "var(--fg-4)", background: "var(--surface-mid)", border: "1px solid var(--surface-border)" }}>
                   {c.tag}
                 </span>
@@ -145,7 +145,7 @@ export function CasesSection() {
             <div className="mb-10">
               <p
                 style={{
-                  fontSize: "clamp(4.5rem, 15vw, 10rem)",
+                  fontSize: "clamp(3.4rem, 15vw, 10rem)",
                   fontWeight: 900,
                   lineHeight: 0.85,
                   letterSpacing: "-0.06em",

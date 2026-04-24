@@ -287,7 +287,7 @@ export function HeroSection() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden">
+    <section className="relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 overflow-hidden">
       <div className="absolute inset-0 z-0" style={{ background: "var(--app-bg)" }} />
       <div className="absolute inset-0 z-0 pointer-events-none select-none overflow-hidden">
         {HERO_STARS.map((star, index) => (
@@ -321,7 +321,7 @@ export function HeroSection() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.8, duration: 1 }}
-        className="absolute top-24 left-6 md:left-10 z-10 uppercase"
+        className="absolute top-24 left-4 sm:left-6 md:left-10 z-10 uppercase hidden sm:block"
         style={{ fontSize: "0.55rem", letterSpacing: "0.3em", fontWeight: 600, color: "var(--fg-3)" }}
       >
         {clock}
@@ -331,7 +331,7 @@ export function HeroSection() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.8, duration: 1 }}
-        className="absolute top-24 right-6 md:right-10 z-10 flex flex-col items-end gap-1 uppercase"
+        className="absolute top-24 right-4 sm:right-6 md:right-10 z-10 hidden sm:flex flex-col items-end gap-1 uppercase"
         style={{ fontSize: "0.55rem", letterSpacing: "0.3em", fontWeight: 600, color: "var(--fg-3)" }}
       >
         <span>LORA_v04.26</span>
@@ -342,12 +342,12 @@ export function HeroSection() {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.4, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-        className="relative z-10 flex flex-col items-center"
+        className="relative z-10 flex w-full max-w-4xl flex-col items-center"
       >
         <img
           src={heroLogo}
           alt="LORA"
-          className="w-[clamp(280px,58vw,720px)] h-auto pointer-events-none select-none"
+          className="w-[min(84vw,420px)] sm:w-[clamp(280px,58vw,720px)] h-auto pointer-events-none select-none"
           draggable={false}
           style={{ WebkitUserDrag: "none" }}
         />
@@ -356,7 +356,7 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 1.2, ease: [0.16, 1, 0.3, 1] }}
-          className="text-center max-w-md mt-10 mb-16"
+          className="text-center max-w-[34rem] mt-8 sm:mt-10 mb-12 sm:mb-16 px-2"
           style={{ fontSize: "1rem", lineHeight: 1.85, letterSpacing: "0.01em", color: "var(--fg-3)" }}
         >
           {t("hero.tagline")}
@@ -366,11 +366,11 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.5 }}
-          className="flex flex-col sm:flex-row gap-4"
+          className="flex w-full max-w-[34rem] flex-col sm:flex-row gap-3 sm:gap-4 px-2"
         >
           <a
             href="#contact"
-            className="group relative px-14 py-4.5 uppercase tracking-[0.25em] cursor-pointer overflow-hidden transition-all duration-500 rounded-xl hover:scale-[1.02] active:scale-[0.98]"
+            className="group relative flex w-full sm:w-auto justify-center px-8 sm:px-14 py-4.5 uppercase tracking-[0.22em] cursor-pointer overflow-hidden transition-all duration-500 rounded-xl hover:scale-[1.02] active:scale-[0.98]"
             style={{ fontSize: "0.68rem", fontWeight: 700, background: "var(--cta-bg)", color: "var(--cta-fg)", boxShadow: `0 0 60px ${"var(--button-shadow)"}` }}
           >
             <span className="relative z-10 flex items-center gap-2.5">
@@ -382,7 +382,7 @@ export function HeroSection() {
           </a>
           <a
             href="#contact"
-            className="group relative px-14 py-4.5 uppercase tracking-[0.25em] cursor-pointer overflow-hidden transition-all duration-500 rounded-xl"
+            className="group relative flex w-full sm:w-auto justify-center px-8 sm:px-14 py-4.5 uppercase tracking-[0.22em] cursor-pointer overflow-hidden transition-all duration-500 rounded-xl"
             style={{ fontSize: "0.68rem", fontWeight: 500, border: "1px solid var(--surface-border)", color: "var(--fg-2)", background: "transparent" }}
           >
             <span className="relative z-10">{t("hero.cta.secondary")}</span>
@@ -394,7 +394,7 @@ export function HeroSection() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2.5, duration: 1.5 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 uppercase"
+        className="absolute bottom-8 sm:bottom-10 left-1/2 -translate-x-1/2 z-10 hidden sm:flex flex-col items-center gap-2 uppercase"
         style={{ fontSize: "0.5rem", letterSpacing: "0.3em", fontWeight: 600, color: "var(--fg-4)" }}
       >
         <span>{t("hero.scroll")}</span>

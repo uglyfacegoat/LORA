@@ -2,6 +2,7 @@ import { createServer } from "node:http";
 import { readFileSync, existsSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { buildLeadActions, formatLeadMessage, getTelegramAdminChatIds, telegramApi, asText } from "../lib/telegram.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -10,7 +11,7 @@ loadEnvFile(join(__dirname, ".env"));
 const HOST = process.env.HOST || "0.0.0.0";
 const PORT = Number(process.env.PORT || 8787);
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || "";
-const TELEGRAM_ADMIN_CHAT_ID = process.env.TELEGRAM_ADMIN_CHAT_ID || "989807462";
+const TELEGRAM_ADMIN_CHAT_IDS = getTelegramAdminChatIds(process.env);
 
 const server = createServer(async (req, res) => {
   setCors(res);
@@ -38,31 +39,38 @@ const server = createServer(async (req, res) => {
       const email = asText(body.email);
       const phone = asText(body.phone);
       const company = asText(body.company);
+      const briefDate = asText(body.briefDate);
+      const briefTime = asText(body.briefTime);
       const dialCode = asText(body.dialCode);
       const countryIso = asText(body.countryIso);
       const countryLabel = asText(body.countryLabel);
 
-      if (!name || !email || !phone) {
+      if (!name || !email || !phone || !briefDate || !briefTime) {
         json(res, 400, { ok: false, error: "missing_fields" });
         return;
       }
 
-      const text = formatLeadMessage({ name, email, phone, company, dialCode, countryIso, countryLabel });
+      const text = formatLeadMessage({ name, email, phone, company, briefDate, briefTime, dialCode, countryIso, countryLabel });
 
-      const tgResponse = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          chat_id: TELEGRAM_ADMIN_CHAT_ID,
-          text,
-          parse_mode: "HTML",
-          disable_web_page_preview: true,
-        }),
-      });
+      const replyMarkup = buildLeadActions({ email, dialCode, phone });
+      const results = await Promise.allSettled(
+        TELEGRAM_ADMIN_CHAT_IDS.map((chatId) =>
+          telegramApi(TELEGRAM_BOT_TOKEN, "sendMessage", {
+            chat_id: chatId,
+            text,
+            parse_mode: "HTML",
+            disable_web_page_preview: true,
+            reply_markup: replyMarkup,
+          }),
+        ),
+      );
 
-      if (!tgResponse.ok) {
-        const errorText = await tgResponse.text();
-        json(res, 502, { ok: false, error: "telegram_failed", details: errorText });
+      if (results.every((item) => item.status === "rejected")) {
+        json(res, 502, {
+          ok: false,
+          error: "telegram_failed",
+          details: results.map((item) => item.status === "rejected" ? item.reason?.message || "telegram_send_failed" : "").join("; "),
+        });
         return;
       }
 
@@ -96,35 +104,6 @@ function json(res, status, payload) {
   res.end(JSON.stringify(payload));
 }
 
-function escapeHtml(value) {
-  return value
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;");
-}
-
-function formatLeadMessage({ name, email, phone, company, dialCode, countryIso, countryLabel }) {
-  const submittedAt = new Intl.DateTimeFormat("ru-RU", {
-    timeZone: "Europe/Moscow",
-    dateStyle: "medium",
-    timeStyle: "short",
-  }).format(new Date());
-
-  const country = countryLabel ? `${countryLabel}${countryIso ? ` (${countryIso})` : ""}` : "-";
-
-  return [
-    "<b>LORA brief request</b>",
-    "",
-    `<b>Name:</b> ${escapeHtml(name)}`,
-    `<b>Phone:</b> ${escapeHtml(`${dialCode} ${phone}`.trim())}`,
-    `<b>Email:</b> ${escapeHtml(email)}`,
-    `<b>Company:</b> ${escapeHtml(company || "-")}`,
-    `<b>Country:</b> ${escapeHtml(country)}`,
-    "",
-    `<b>Submitted:</b> ${escapeHtml(submittedAt)} MSK`,
-  ].join("\n");
-}
-
 function readJson(req) {
   return new Promise((resolve, reject) => {
     let raw = "";
@@ -146,10 +125,6 @@ function readJson(req) {
 
     req.on("error", reject);
   });
-}
-
-function asText(value) {
-  return typeof value === "string" ? value.trim() : "";
 }
 
 function loadEnvFile(filePath) {
