@@ -85,6 +85,16 @@ async function handleCallback(update, token) {
     return;
   }
 
+  if (data.startsWith("lead_email:")) {
+    await answerCallbackQuery(token, callbackId, data.slice("lead_email:".length));
+    return;
+  }
+
+  if (data.startsWith("lead_phone:")) {
+    await answerCallbackQuery(token, callbackId, data.slice("lead_phone:".length));
+    return;
+  }
+
   if (data === "mode:help") {
     await answerCallbackQuery(token, callbackId, "Help");
     await editTelegramMessage(token, chatId, messageId, BOT_HELP_TEXT, getBotMenuMarkup());
