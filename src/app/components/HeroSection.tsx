@@ -368,8 +368,14 @@ export function HeroSection() {
           transition={{ duration: 0.8, delay: 1.5 }}
           className="flex w-full max-w-[34rem] flex-col sm:flex-row gap-3 sm:gap-4 px-2"
         >
-          <a
-            href="#contact"
+          <button
+            onClick={() => {
+              const el = document.getElementById("contact-form");
+              if (el) {
+                const top = el.getBoundingClientRect().top + window.scrollY - 80;
+                window.scrollTo({ top, behavior: "instant" });
+              }
+            }}
             className="group relative flex w-full sm:w-auto justify-center px-8 sm:px-14 py-4.5 uppercase tracking-[0.22em] cursor-pointer overflow-hidden transition-all duration-500 rounded-xl hover:scale-[1.02] active:scale-[0.98]"
             style={{ fontSize: "0.68rem", fontWeight: 700, background: "var(--cta-bg)", color: "var(--cta-fg)", boxShadow: `0 0 60px ${"var(--button-shadow)"}` }}
           >
@@ -379,14 +385,20 @@ export function HeroSection() {
                 <path d="M1 6H11M11 6L7 2M11 6L7 10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </span>
-          </a>
-          <a
-            href="#contact"
+          </button>
+          <button
+            onClick={() => {
+              const el = document.getElementById("contact-form");
+              if (el) {
+                const top = el.getBoundingClientRect().top + window.scrollY - 80;
+                window.scrollTo({ top, behavior: "instant" });
+              }
+            }}
             className="group relative flex w-full sm:w-auto justify-center px-8 sm:px-14 py-4.5 uppercase tracking-[0.22em] cursor-pointer overflow-hidden transition-all duration-500 rounded-xl"
             style={{ fontSize: "0.68rem", fontWeight: 500, border: "1px solid var(--surface-border)", color: "var(--fg-2)", background: "transparent" }}
           >
             <span className="relative z-10">{t("hero.cta.secondary")}</span>
-          </a>
+          </button>
         </motion.div>
       </motion.div>
 

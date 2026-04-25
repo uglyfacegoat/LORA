@@ -27,26 +27,47 @@ export function ProcessSection() {
           </span>
         </motion.div>
 
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.1 }}
-          style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)", fontWeight: 700, lineHeight: 1.1, letterSpacing: "-0.03em", color: "var(--fg-1)", marginBottom: "1.5rem" }}
-        >
-          {t("process.title")}
-          <br />
-          <span style={{ color: "var(--fg-3)" }}>{t("process.titleAccent")}</span>
-        </motion.h2>
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12 sm:mb-16">
+          <div>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.1 }}
+              style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)", fontWeight: 700, lineHeight: 1.1, letterSpacing: "-0.03em", color: "var(--fg-1)", marginBottom: "1.5rem" }}
+            >
+              {t("process.title")}
+              <br />
+              <span style={{ color: "var(--fg-3)" }}>{t("process.titleAccent")}</span>
+            </motion.h2>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.2 }}
-          className="max-w-lg mb-12 sm:mb-16"
-          style={{ fontSize: "0.92rem", lineHeight: 1.7, color: "var(--fg-4)" }}
-        >
-          {t("process.sub")}
-        </motion.p>
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={inView ? { opacity: 1 } : {}}
+              transition={{ delay: 0.2 }}
+              className="max-w-lg"
+              style={{ fontSize: "0.92rem", lineHeight: 1.7, color: "var(--fg-4)" }}
+            >
+              {t("process.sub")}
+            </motion.p>
+          </div>
+
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.15 }}
+            className="inline-flex px-4 py-2.5 rounded-xl max-w-sm"
+            style={{
+              fontSize: "0.72rem",
+              lineHeight: 1.55,
+              color: "var(--fg-2)",
+              background: "var(--surface-soft)",
+              border: "1px solid var(--surface-border)",
+              overflowWrap: "anywhere",
+            }}
+          >
+            {t("sol.fastNote")}
+          </motion.p>
+        </div>
 
         <div className="hidden md:block">
           <div className="flex items-stretch gap-2 mb-6">

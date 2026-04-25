@@ -759,7 +759,7 @@ export function ContactSection() {
         triggerAttribute="data-brief-time-trigger"
       />
 
-      <div className="relative mx-auto max-w-3xl">
+      <div id="contact-form" className="relative mx-auto max-w-3xl" style={{ scrollMarginTop: "80px" }}>
         <div
           className="pointer-events-none absolute left-1/2 top-1/3 h-[700px] w-[700px] -translate-x-1/2"
           style={{ background: "radial-gradient(circle, var(--surface-mid), transparent 55%)" }}

@@ -87,22 +87,6 @@ export function SolutionSection() {
             {t("sol.title")} <span style={{ color: "var(--fg-3)" }}>{t("sol.titleAccent")}</span>
           </motion.h2>
 
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.15 }}
-            className="inline-flex px-4 py-2.5 rounded-xl max-w-sm"
-            style={{
-              fontSize: "0.72rem",
-              lineHeight: 1.55,
-              color: "var(--fg-2)",
-              background: "var(--surface-soft)",
-              border: "1px solid var(--surface-border)",
-              overflowWrap: "anywhere",
-            }}
-          >
-            {t("sol.fastNote")}
-          </motion.p>
         </div>
 
         <div className="hidden md:block">

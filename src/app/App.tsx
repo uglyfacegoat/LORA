@@ -1,4 +1,5 @@
 import { HeroSection } from "./components/HeroSection";
+import { StorySection } from "./components/StorySection";
 import { Manifesto } from "./components/Manifesto";
 import { PainSection } from "./components/PainSection";
 import { WhyLora } from "./components/WhyLora";
@@ -9,6 +10,7 @@ import { Comparison } from "./components/Comparison";
 import { CasesSection } from "./components/CasesSection";
 import { CtaBreak } from "./components/CtaBreak";
 import { ContactSection } from "./components/ContactSection";
+import { PricingSection } from "./components/PricingSection";
 import { Footer } from "./components/Footer";
 import { CursorGlow } from "./components/CursorGlow";
 import { ScrollHUD } from "./components/ScrollHUD";
@@ -114,7 +116,7 @@ function AppInner() {
           scrollbar-width: thin;
           scrollbar-color: var(--line-strong) var(--surface-soft);
         }
-        html { scroll-behavior: smooth; }
+        html { scroll-behavior: auto; }
         *::-webkit-scrollbar {
           width: 10px;
           height: 10px;
@@ -224,13 +226,19 @@ function AppInner() {
             )}
           </button>
 
-          <a
-            href="#contact"
+          <button
+            onClick={() => {
+              const el = document.getElementById("contact-form");
+              if (el) {
+                const top = el.getBoundingClientRect().top + window.scrollY - 80;
+                window.scrollTo({ top, behavior: "instant" });
+              }
+            }}
             className="group px-3 sm:px-4 md:px-6 py-2.5 uppercase tracking-[0.18em] transition-all duration-500 cursor-pointer rounded-lg whitespace-nowrap text-center"
             style={{ fontSize: "0.6rem", fontWeight: 600, background: "var(--surface-strong)", border: "1px solid var(--surface-border)", color: "var(--fg-2)" }}
           >
             {t("nav.cta")}
-          </a>
+          </button>
         </div>
       </nav>
 
@@ -245,6 +253,8 @@ function AppInner() {
           </div>
         </div>
 
+        <StorySection />
+
         <Manifesto />
         <PainSection />
         <WhyLora />
@@ -254,6 +264,7 @@ function AppInner() {
         <Comparison />
         <div id="results"><CasesSection /></div>
         <CtaBreak />
+        <PricingSection />
         <ContactSection />
         <Footer />
       </div>

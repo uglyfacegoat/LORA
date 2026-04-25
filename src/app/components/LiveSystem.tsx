@@ -131,32 +131,37 @@ export function LiveSystem() {
                 initial={{ opacity: 0, x: 20 }}
                 animate={inView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.5 + i * 0.1 }}
-                className="rounded-xl p-5 relative overflow-hidden"
+                className="rounded-xl px-5 py-4 relative overflow-hidden"
                 style={{ background: "var(--surface-soft)", border: "1px solid var(--surface-border)" }}
               >
-                <div className="flex items-center justify-between mb-3">
-                  <span className="uppercase tracking-[0.15em]" style={{ fontSize: "0.55rem", fontWeight: 700, color: "var(--fg-3)" }}>
+                {/* label + old value */}
+                <div className="flex items-center justify-between mb-2">
+                  <span className="uppercase tracking-[0.2em]" style={{ fontSize: "0.5rem", fontWeight: 700, color: "var(--fg-4)" }}>
                     {m.label}
                   </span>
-                  <div className="flex items-center gap-2">
-                    <span className="line-through" style={{ fontSize: "0.65rem", color: "var(--fg-5)" }}>{m.prev}</span>
-                    <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
-                      <path d="M1 4H9M9 4L6 1M9 4L6 7" stroke="var(--line-mid)" strokeWidth="1" />
-                    </svg>
-                    <span style={{ fontSize: "0.75rem", fontWeight: 700, color: "var(--fg-2)" }}>
-                      {m.value}
-                      {m.suffix}
-                    </span>
-                  </div>
+                  <span style={{ fontSize: "0.72rem", color: "var(--fg-4)", textDecoration: "line-through", textDecorationColor: "var(--fg-4)", letterSpacing: "0.05em", fontWeight: 600 }}>
+                    {m.prev}{m.suffix}
+                  </span>
                 </div>
 
-                <div className="h-1.5 rounded-full overflow-hidden" style={{ background: "var(--surface-mid)" }}>
+                {/* big number */}
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={inView ? { opacity: 1 } : {}}
+                  transition={{ duration: 0.5, delay: 0.7 + i * 0.1 }}
+                  style={{ fontSize: "1.65rem", fontWeight: 800, letterSpacing: "-0.04em", lineHeight: 1, color: "var(--fg-1)", marginBottom: "0.6rem" }}
+                >
+                  {m.value}{m.suffix}
+                </motion.p>
+
+                {/* 1px progress bar */}
+                <div className="h-px w-full" style={{ background: "var(--surface-border)" }}>
                   <motion.div
-                    className="h-full rounded-full"
-                    style={{ background: "linear-gradient(to right, var(--line-mid), var(--line-strong))" }}
-                    initial={{ width: `${(m.prev / Math.max(m.value, 100)) * 100}%` }}
-                    animate={inView ? { width: `${(m.value / Math.max(m.value, 100)) * 100}%` } : {}}
+                    className="h-full"
+                    initial={{ width: `${(m.prev / 100) * 100}%` }}
+                    animate={inView ? { width: `${Math.min(m.value, 100)}%` } : {}}
                     transition={{ duration: 1.5, delay: 1 + i * 0.2, ease: [0.16, 1, 0.3, 1] }}
+                    style={{ background: "var(--fg-2)" }}
                   />
                 </div>
               </motion.div>

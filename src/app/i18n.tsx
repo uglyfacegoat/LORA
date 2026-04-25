@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 export type Lang = "en" | "es" | "ru" | "zh";
 
@@ -31,6 +31,26 @@ export const translations: Dict = {
   "hero.cta.primary": { en: "Get Free Brief", es: "Briefing gratuito", ru: "Бесплатный бриф", zh: "免费简报" },
   "hero.cta.secondary": { en: "Contact Us", es: "Contáctanos", ru: "Связаться", zh: "联系我们" },
   "hero.scroll": { en: "Scroll", es: "Desliza", ru: "Листай", zh: "继续下滑" },
+
+  "story.eyebrow": { en: "Our Story", es: "Nuestra historia", ru: "Наша история", zh: "我们的故事" },
+  "story.title": { en: "Four people.", es: "Cuatro personas.", ru: "Нас четверо.", zh: "四个人。" },
+  "story.titleAccent": { en: "One orbit.", es: "Una órbita.", ru: "Одна орбита.", zh: "一条轨道。" },
+  "story.s1.year": { en: "EARLY DAYS", es: "COMIENZOS", ru: "НАЧАЛО", zh: "早期" },
+  "story.s1.text": { en: "Each of us came to IT and marketing on our own path. Someone was writing code since their first year, someone was launching ads and learning from mistakes. Years of late nights, closed projects, iterations — separately and in small teams.", es: "Cada uno llegó a IT y marketing por su propio camino. Años de noches sin dormir, proyectos cerrados, iteraciones — por separado y en equipos pequeños.", ru: "Каждый пришёл в IT и маркетинг своим путём. Годами мы набивали шишки, закрывали проекты, дорабатывали ночами — по отдельности и небольшими командами.", zh: "我们每个人都走了自己的路进入 IT 和营销领域。多年的深夜加班、关闭的项目、反复迭代——各自为战，或以小团队形式。" },
+  "story.s2.year": { en: "FIRST TEAM", es: "PRIMER EQUIPO", ru: "ПЕРВАЯ КОМАНДА", zh: "初次组队" },
+  "story.s2.text": { en: "Then we met. First freelance together, then a permanent team. We took everything: sites, CRM, integrations, automation. At some point we realized: we weren't just doing technical work — we were genuinely impacting clients' businesses.", es: "Luego nos conocimos. Primero freelance juntos, luego equipo permanente. Tomamos todo: sitios, CRM, integraciones, automatización. En algún momento entendimos que no solo hacíamos trabajo técnico, sino que impactábamos de verdad los negocios.", ru: "Потом мы встретились. Сначала совместный фриланс, затем постоянная команда. Брали всё: сайты, CRM, интеграции, автоматизацию. Однажды поняли: мы не просто делаем техническую работу, а реально влияем на бизнес клиентов.", zh: "后来我们相遇了。先是一起接自由职业，然后成为固定团队。什么都接：网站、CRM、集成、自动化。某一刻我们意识到：我们不只是在做技术活，而是在真实地影响客户的业务。" },
+  "story.s3.year": { en: "GLOBAL SCALE", es: "ESCALA GLOBAL", ru: "МИРОВОЙ МАСШТАБ", zh: "全球规模" },
+  "story.s3.text": { en: "We grew. Foreign clients appeared — Europe, Asia. Dozens of cases. And every time the result was the same: deep diagnostics plus the right technological solution brought millions in additional revenue.", es: "Crecimos. Llegaron clientes extranjeros — Europa, Asia. Decenas de casos. Y cada vez el resultado era el mismo: diagnóstico profundo más la solución tecnológica correcta generaban millones de facturación adicional.", ru: "Мы выросли. Появились зарубежные клиенты — Европа, Азия. Десятки кейсов. И каждый раз результат был один: глубокая диагностика плюс правильное технологическое решение приносят миллионы дополнительного оборота.", zh: "我们成长了。出现了海外客户——欧洲、亚洲。数十个案例。每次结果都一样：深度诊断加上正确的技术方案，带来数百万的额外营收。" },
+  "story.s4.year": { en: "THE NAME", es: "EL NOMBRE", ru: "ИМЯ", zh: "命名" },
+  "story.s4.text": { en: "That evening we gathered to discuss the future. Someone suggested 'Lora' — the word sounded right and stuck. A few hours later, a lunar eclipse happened. Just a coincidence, but it felt like it marked the moment.", es: "Esa noche nos reunimos para hablar del futuro. Alguien propuso 'Lora' — la palabra sonó bien y quedó. Horas después hubo un eclipse lunar. Solo una coincidencia, pero pareció fijar el momento.", ru: "В тот вечер мы собрались обсудить будущее. Кто-то предложил «Lora» — слово прозвучало и запомнилось. Через несколько часов случилось лунное затмение. Просто совпадение, но оно словно зафиксировало момент.", zh: "那天晚上我们聚在一起讨论未来。有人提议用'Lora'——这个词听起来很对，就这样定下来了。几小时后发生了月食。只是巧合，但它仿佛标记了那个时刻。" },
+  "story.acronym": { en: "Leave Old Rules Ahead.", es: "Leave Old Rules Ahead.", ru: "Leave Old Rules Ahead — оставь старые правила позади.", zh: "Leave Old Rules Ahead — 把旧规则抛在身后。" },
+  "story.closing": { en: "Today Lora is a team combining marketing diagnostics with strong development. We don't speak in big words. We show numbers, calculations and ready solutions.", es: "Hoy Lora es un equipo que combina diagnóstico de marketing con desarrollo potente. No usamos palabras vacías. Mostramos números, cálculos y soluciones listas.", ru: "Сегодня Lora — это команда, сочетающая маркетинговую диагностику с сильной разработкой. Мы не говорим громких слов. Мы показываем цифры, расчёты и готовые решения.", zh: "今天，Lora 是一支将营销诊断与强大开发能力相结合的团队。我们不说大话，我们展示数字、计算和现成的解决方案。" },
+  "story.stat1.value": { en: "4", es: "4", ru: "4", zh: "4" },
+  "story.stat1.label": { en: "Founders", es: "Fundadores", ru: "Основателя", zh: "创始人" },
+  "story.stat2.value": { en: "40+", es: "40+", ru: "40+", zh: "40+" },
+  "story.stat2.label": { en: "Cases", es: "Casos", ru: "Кейсов", zh: "案例" },
+  "story.stat3.value": { en: "3", es: "3", ru: "3", zh: "3" },
+  "story.stat3.label": { en: "Continents", es: "Continentes", ru: "Континента", zh: "大洲" },
 
   "manifesto.l1": { en: "We don't experiment.", es: "No experimentamos.", ru: "Мы не экспериментируем.", zh: "我们不做实验。" },
   "manifesto.l2": { en: "We don't try.", es: "No improvisamos.", ru: "Мы не пробуем наугад.", zh: "我们不靠试错。" },
@@ -287,6 +307,117 @@ export const translations: Dict = {
   "label.results": { en: "RESULTS", es: "RESULTADOS", ru: "РЕЗУЛЬТАТЫ", zh: "成果" },
   "label.choice": { en: "CHOICE", es: "ELECCIÓN", ru: "ВЫБОР", zh: "选择" },
   "label.connect": { en: "CONNECT", es: "CONTACTO", ru: "КОНТАКТ", zh: "联系" },
+
+  // ── Pricing ──────────────────────────────────────────────────────────────────
+  "pricing.eyebrow": { en: "Pricing", es: "Precios", ru: "Стоимость", zh: "定价" },
+  "pricing.title": { en: "Transparent pricing.", es: "Precios transparentes.", ru: "Прозрачные цены.", zh: "透明定价。" },
+  "pricing.titleSub": { en: "No hidden fees.", es: "Sin costes ocultos.", ru: "Без скрытых платежей.", zh: "无隐藏费用。" },
+  "pricing.desc": { en: "Choose a product, pick a tier. Prices shown are the minimum starting point — final cost depends on scope.", es: "Elige un producto y un nivel. Los precios indicados son el mínimo de entrada — el coste final depende del alcance.", ru: "Выберите продукт и тариф. Цена — это минимальная точка входа. Итоговая стоимость зависит от объёма задач.", zh: "选择产品和套餐。所示价格为最低起步价，最终费用取决于项目范围。" },
+  "pricing.fromNote": { en: "from", es: "desde", ru: "от", zh: "起" },
+  "pricing.fixed": { en: "Fixed price", es: "Precio fijo", ru: "Фиксировано", zh: "固定价格" },
+  "pricing.monthly": { en: "/ month", es: "/ mes", ru: "/ мес", zh: "/ 月" },
+
+  "pricing.product.website": { en: "Website", es: "Sitio web", ru: "Сайт", zh: "网站" },
+  "pricing.product.app": { en: "Application", es: "Aplicación", ru: "Приложение", zh: "应用程序" },
+  "pricing.product.crm": { en: "CRM / System", es: "CRM / Sistema", ru: "CRM / Система", zh: "CRM / 系统" },
+
+  "pricing.tier.min": { en: "Minimal", es: "Mínimo", ru: "Минимальный", zh: "基础" },
+  "pricing.tier.mid": { en: "Standard", es: "Estándar", ru: "Средний", zh: "标准" },
+  "pricing.tier.max": { en: "Maximum", es: "Máximo", ru: "Максимальный", zh: "高级" },
+  "pricing.tier.custom": { en: "Individual", es: "Individual", ru: "Индивидуальный", zh: "定制" },
+
+  "pricing.cta.default": { en: "Get started", es: "Empezar", ru: "Начать", zh: "开始" },
+  "pricing.cta.custom": { en: "Get a quote", es: "Solicitar presupuesto", ru: "Обсудить", zh: "获取报价" },
+
+  // Website tiers
+  "pricing.website.min.price": { en: "$800", es: "$800", ru: "от 60 000 ₽", zh: "$800" },
+  "pricing.website.min.f1": { en: "Landing page (up to 5 sections)", es: "Página de destino (hasta 5 secciones)", ru: "Лендинг до 5 секций", zh: "落地页（最多5个区块）" },
+  "pricing.website.min.f2": { en: "Mobile-responsive layout", es: "Diseño responsive móvil", ru: "Адаптивный дизайн", zh: "移动端响应式布局" },
+  "pricing.website.min.f3": { en: "Contact form + CRM hook", es: "Formulario de contacto + integración CRM", ru: "Форма заявки + интеграция CRM", zh: "联系表单 + CRM 接入" },
+  "pricing.website.min.f4": { en: "2-week delivery", es: "Entrega en 2 semanas", ru: "Срок 2 недели", zh: "2周交付" },
+
+  "pricing.website.mid.price": { en: "$2 500", es: "$2 500", ru: "от 190 000 ₽", zh: "$2 500" },
+  "pricing.website.mid.f1": { en: "Multi-page website (up to 12 pages)", es: "Sitio multipágina (hasta 12 páginas)", ru: "Многостраничный сайт до 12 страниц", zh: "多页网站（最多12页）" },
+  "pricing.website.mid.f2": { en: "Custom UI/UX design", es: "Diseño UI/UX personalizado", ru: "Дизайн UI/UX под ключ", zh: "定制 UI/UX 设计" },
+  "pricing.website.mid.f3": { en: "CMS integration (admin panel)", es: "Integración CMS (panel admin)", ru: "CMS + панель управления", zh: "CMS 集成（管理后台）" },
+  "pricing.website.mid.f4": { en: "Analytics & pixel setup", es: "Configuración de analítica y pixel", ru: "Аналитика и пиксели", zh: "数据分析与像素配置" },
+  "pricing.website.mid.f5": { en: "4-week delivery", es: "Entrega en 4 semanas", ru: "Срок 4 недели", zh: "4周交付" },
+
+  "pricing.website.max.price": { en: "$6 000", es: "$6 000", ru: "от 450 000 ₽", zh: "$6 000" },
+  "pricing.website.max.f1": { en: "Full-scale web platform", es: "Plataforma web completa", ru: "Полноценная веб-платформа", zh: "完整网络平台" },
+  "pricing.website.max.f2": { en: "Custom animations & motion design", es: "Animaciones y motion design personalizados", ru: "Кастомные анимации и motion-дизайн", zh: "自定义动画与动效设计" },
+  "pricing.website.max.f3": { en: "E-commerce or catalogue module", es: "Módulo e-commerce o catálogo", ru: "Каталог / e-commerce модуль", zh: "电商或产品目录模块" },
+  "pricing.website.max.f4": { en: "SEO & performance optimization", es: "SEO y optimización de rendimiento", ru: "SEO и оптимизация производительности", zh: "SEO 与性能优化" },
+  "pricing.website.max.f5": { en: "Conversion funnel audit included", es: "Auditoría del embudo de conversión incluida", ru: "Аудит воронки в комплекте", zh: "含转化漏斗审计" },
+  "pricing.website.max.f6": { en: "6-week delivery", es: "Entrega en 6 semanas", ru: "Срок 6 недель", zh: "6周交付" },
+
+  // App tiers
+  "pricing.app.min.price": { en: "$3 000", es: "$3 000", ru: "от 220 000 ₽", zh: "$3 000" },
+  "pricing.app.min.f1": { en: "MVP / prototype (1 platform)", es: "MVP / prototipo (1 plataforma)", ru: "MVP / прототип (1 платформа)", zh: "MVP / 原型（单平台）" },
+  "pricing.app.min.f2": { en: "Core feature set only", es: "Solo funciones básicas", ru: "Только основные функции", zh: "仅核心功能集" },
+  "pricing.app.min.f3": { en: "REST API + auth", es: "REST API + autenticación", ru: "REST API + авторизация", zh: "REST API + 身份验证" },
+  "pricing.app.min.f4": { en: "6-week delivery", es: "Entrega en 6 semanas", ru: "Срок 6 недель", zh: "6周交付" },
+
+  "pricing.app.mid.price": { en: "$8 000", es: "$8 000", ru: "от 600 000 ₽", zh: "$8 000" },
+  "pricing.app.mid.f1": { en: "Cross-platform app (iOS + Android)", es: "App multiplataforma (iOS + Android)", ru: "Кросс-платформенное приложение (iOS + Android)", zh: "跨平台应用（iOS + Android）" },
+  "pricing.app.mid.f2": { en: "Push notifications & deep links", es: "Notificaciones push y deep links", ru: "Push-уведомления и диплинки", zh: "推送通知与深度链接" },
+  "pricing.app.mid.f3": { en: "Payment gateway integration", es: "Integración de pasarela de pago", ru: "Интеграция платёжного шлюза", zh: "支付网关集成" },
+  "pricing.app.mid.f4": { en: "Admin dashboard", es: "Panel de administración", ru: "Панель администратора", zh: "管理员仪表板" },
+  "pricing.app.mid.f5": { en: "10-week delivery", es: "Entrega en 10 semanas", ru: "Срок 10 недель", zh: "10周交付" },
+
+  "pricing.app.max.price": { en: "$18 000", es: "$18 000", ru: "от 1 350 000 ₽", zh: "$18 000" },
+  "pricing.app.max.f1": { en: "Full-featured product (iOS + Android + Web)", es: "Producto completo (iOS + Android + Web)", ru: "Полноценный продукт (iOS + Android + Web)", zh: "完整产品（iOS + Android + Web）" },
+  "pricing.app.max.f2": { en: "Custom UI design system", es: "Sistema de diseño UI personalizado", ru: "Кастомная UI дизайн-система", zh: "自定义 UI 设计体系" },
+  "pricing.app.max.f3": { en: "Analytics, A/B testing module", es: "Analítica, módulo de A/B testing", ru: "Аналитика, модуль A/B-тестов", zh: "数据分析、A/B测试模块" },
+  "pricing.app.max.f4": { en: "Scalable cloud infrastructure", es: "Infraestructura cloud escalable", ru: "Масштабируемая облачная инфраструктура", zh: "可扩展云基础设施" },
+  "pricing.app.max.f5": { en: "CI/CD pipelines set up", es: "Configuración de pipelines CI/CD", ru: "CI/CD пайплайны", zh: "CI/CD 流水线配置" },
+  "pricing.app.max.f6": { en: "16-week delivery", es: "Entrega en 16 semanas", ru: "Срок 16 недель", zh: "16周交付" },
+
+  // CRM tiers
+  "pricing.crm.min.price": { en: "$1 500", es: "$1 500", ru: "от 110 000 ₽", zh: "$1 500" },
+  "pricing.crm.min.f1": { en: "CRM setup & pipeline config", es: "Configuración CRM y pipeline", ru: "Настройка CRM и воронки", zh: "CRM配置与销售管道" },
+  "pricing.crm.min.f2": { en: "Basic automations (3–5 triggers)", es: "Automatizaciones básicas (3–5 triggers)", ru: "Базовые автоматизации (3–5 триггеров)", zh: "基础自动化（3-5个触发器）" },
+  "pricing.crm.min.f3": { en: "Email / messenger integration", es: "Integración email / mensajería", ru: "Интеграция email / мессенджеры", zh: "邮件/即时通讯集成" },
+  "pricing.crm.min.f4": { en: "2-week delivery", es: "Entrega en 2 semanas", ru: "Срок 2 недели", zh: "2周交付" },
+
+  "pricing.crm.mid.price": { en: "$4 000", es: "$4 000", ru: "от 300 000 ₽", zh: "$4 000" },
+  "pricing.crm.mid.f1": { en: "Custom CRM / internal tool", es: "CRM personalizado / herramienta interna", ru: "Кастомная CRM / внутренний инструмент", zh: "自定义CRM/内部工具" },
+  "pricing.crm.mid.f2": { en: "Role-based access & permissions", es: "Acceso basado en roles y permisos", ru: "Роли и права доступа", zh: "基于角色的访问权限" },
+  "pricing.crm.mid.f3": { en: "Integration with existing services", es: "Integración con servicios existentes", ru: "Интеграция с текущими сервисами", zh: "现有服务集成" },
+  "pricing.crm.mid.f4": { en: "Reporting & analytics dashboard", es: "Dashboard de reportes y analítica", ru: "Дашборд отчётов и аналитики", zh: "报告与数据分析仪表板" },
+  "pricing.crm.mid.f5": { en: "5-week delivery", es: "Entrega en 5 semanas", ru: "Срок 5 недель", zh: "5周交付" },
+
+  "pricing.crm.max.price": { en: "$12 000", es: "$12 000", ru: "от 900 000 ₽", zh: "$12 000" },
+  "pricing.crm.max.f1": { en: "Full custom business automation platform", es: "Plataforma completa de automatización empresarial", ru: "Полная кастомная платформа автоматизации бизнеса", zh: "完整定制业务自动化平台" },
+  "pricing.crm.max.f2": { en: "AI-powered lead scoring", es: "Scoring de leads con IA", ru: "AI-скоринг лидов", zh: "AI驱动的线索评分" },
+  "pricing.crm.max.f3": { en: "Multi-channel communication hub", es: "Hub de comunicación multicanal", ru: "Мультиканальный коммуникационный хаб", zh: "多渠道通信中心" },
+  "pricing.crm.max.f4": { en: "Data migration from legacy systems", es: "Migración de datos desde sistemas heredados", ru: "Миграция данных со старых систем", zh: "从旧系统迁移数据" },
+  "pricing.crm.max.f5": { en: "Custom API & webhook ecosystem", es: "Ecosistema de API y webhooks personalizado", ru: "Кастомные API и вебхуки", zh: "自定义API与Webhook生态" },
+  "pricing.crm.max.f6": { en: "10-week delivery", es: "Entrega en 10 semanas", ru: "Срок 10 недель", zh: "10周交付" },
+
+  // Individual
+  "pricing.custom.price": { en: "On request", es: "A consultar", ru: "По запросу", zh: "按需报价" },
+  "pricing.custom.note": { en: "fully tailored", es: "totalmente personalizado", ru: "полностью под задачи", zh: "完全定制" },
+  "pricing.custom.f1": { en: "Full consultation & discovery session", es: "Consulta completa y sesión de descubrimiento", ru: "Полная консультация и разбор задачи", zh: "完整咨询与需求发现会" },
+  "pricing.custom.f2": { en: "Technical specification & roadmap", es: "Especificación técnica y hoja de ruta", ru: "Техническое задание и роадмап", zh: "技术规格与路线图" },
+  "pricing.custom.f3": { en: "Flexible timeline & payment schedule", es: "Plazos y pagos flexibles", ru: "Гибкие сроки и график оплат", zh: "灵活时间表与付款安排" },
+  "pricing.custom.f4": { en: "Dedicated project manager", es: "Project manager dedicado", ru: "Выделенный проект-менеджер", zh: "专属项目经理" },
+
+  // Static cards
+  "pricing.audit.label": { en: "Marketing Audit", es: "Auditoría de marketing", ru: "Маркетинговый аудит", zh: "营销审计" },
+  "pricing.audit.price": { en: "$300", es: "$300", ru: "25 000 ₽", zh: "$300" },
+  "pricing.audit.f1": { en: "Full funnel & conversion analysis", es: "Análisis completo de embudo y conversión", ru: "Полный анализ воронки и конверсий", zh: "完整漏斗与转化分析" },
+  "pricing.audit.f2": { en: "Traffic channels & ad spend review", es: "Revisión de canales y gasto publicitario", ru: "Анализ каналов трафика и рекламных расходов", zh: "流量渠道与广告支出审查" },
+  "pricing.audit.f3": { en: "Written report + recommendations", es: "Informe escrito + recomendaciones", ru: "Письменный отчёт + рекомендации", zh: "书面报告 + 建议" },
+
+  "pricing.hosting.label": { en: "Server Hosting", es: "Hosting de servidor", ru: "Обслуживание сервера", zh: "服务器托管" },
+  "pricing.hosting.price": { en: "from $30 / mo", es: "desde $30 / mes", ru: "от 2 500 ₽ / мес", zh: "起 $30 / 月" },
+  "pricing.hosting.f1": { en: "Dedicated VPS or cloud server", es: "VPS dedicado o servidor cloud", ru: "Выделенный VPS или облачный сервер", zh: "专用VPS或云服务器" },
+  "pricing.hosting.f2": { en: "Daily backups & uptime monitoring", es: "Copias diarias y monitoreo de uptime", ru: "Ежедневные бэкапы и мониторинг", zh: "每日备份与正常运行监控" },
+  "pricing.hosting.f3": { en: "SSL + CDN + security patches", es: "SSL + CDN + parches de seguridad", ru: "SSL + CDN + патчи безопасности", zh: "SSL + CDN + 安全补丁" },
+
+  "pricing.reserved.label": { en: "Coming soon", es: "Próximamente", ru: "Скоро", zh: "即将推出" },
+  "pricing.reserved.hint": { en: "New service in development. Stay tuned.", es: "Nuevo servicio en desarrollo. Próximamente.", ru: "Новая услуга в разработке. Скоро расскажем.", zh: "新服务开发中，敬请期待。" },
 };
 
 interface Ctx {

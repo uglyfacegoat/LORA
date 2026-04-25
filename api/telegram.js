@@ -11,22 +11,23 @@ import {
   splitTelegramText,
 } from "../lib/telegram.js";
 
-const chatModes = new Map();
+// NOTE: In-memory Map doesn't work on serverless — each request = new instance.
+// All modes are stateless: user must use /command prefix each time.
+
 const BOT_HELP_TEXT = [
-  "<b>LORA bot modes</b>",
+  "<b>LORA bot — команды</b>",
   "",
-  "• <b>AI Chat</b> — any agency task, sales thinking, offer structure, text polishing",
-  "• <b>Client Reply</b> — response to an inbound lead or client message",
-  "• <b>Follow-up</b> — short follow-up after silence",
-  "• <b>Offer Outline</b> — scope / proposal structure",
+  "• <b>AI Chat</b> — любая задача, продажи, оффер, тексты",
+  "• <b>Client Reply</b> — ответ на лид или сообщение клиента",
+  "• <b>Follow-up</b> — фоллоу-ап после тишины",
+  "• <b>Offer Outline</b> — структура предложения / брифа",
   "",
-  "Direct commands:",
-  "<code>/ai your task</code>",
-  "<code>/reply lead context</code>",
-  "<code>/followup context</code>",
-  "<code>/offer project context</code>",
-  "<code>/menu</code>",
-  "<code>/reset</code>",
+  "<b>Команды:</b>",
+  "<code>/ai текст задачи</code>",
+  "<code>/reply контекст лида</code>",
+  "<code>/followup контекст</code>",
+  "<code>/offer контекст проекта</code>",
+  "<code>/menu</code> — главное меню",
 ].join("\n");
 
 function sendJson(res, status, payload) {
@@ -35,43 +36,38 @@ function sendJson(res, status, payload) {
 
 function getModeIntro(mode) {
   switch (mode) {
-    case "reply":
-      return "Client Reply mode enabled. Send the lead context or the client's message.";
-    case "followup":
-      return "Follow-up mode enabled. Send the situation and I will draft the next touch.";
-    case "offer":
-      return "Offer Outline mode enabled. Send the niche / task / client context.";
-    case "chat":
-    default:
-      return "AI Chat mode enabled. Send any task.";
+    case "reply":    return "✉️ <b>Client Reply</b> — отправь контекст лида или сообщение клиента.";
+    case "followup": return "🔄 <b>Follow-up</b> — отправь ситуацию, подготовлю следующий касание.";
+    case "offer":    return "📋 <b>Offer Outline</b> — отправь нишу / задачу / контекст клиента.";
+    default:         return "🤖 <b>AI Chat</b> — отправь любую задачу.";
   }
 }
 
 function parseCommand(text) {
   const trimmed = asText(text);
   if (!trimmed.startsWith("/")) return { command: "", prompt: "" };
-  const [command, ...rest] = trimmed.split(" ");
-  return {
-    command: command.toLowerCase(),
-    prompt: rest.join(" ").trim(),
-  };
+  const spaceIdx = trimmed.indexOf(" ");
+  if (spaceIdx === -1) return { command: trimmed.toLowerCase(), prompt: "" };
+  return { command: trimmed.slice(0, spaceIdx).toLowerCase(), prompt: trimmed.slice(spaceIdx + 1).trim() };
 }
 
 async function sendAiReply(token, chatId, mode, prompt, openRouterApiKey, openRouterModel) {
-  const output = await generateOpenRouterText({
-    apiKey: openRouterApiKey,
-    model: openRouterModel,
-    mode,
-    prompt,
-  });
+  try {
+    await fetch(`https://api.telegram.org/bot${token}/sendChatAction`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ chat_id: chatId, action: "typing" }),
+    });
+  } catch {}
 
+  const output = await generateOpenRouterText({ apiKey: openRouterApiKey, model: openRouterModel, mode, prompt });
   const chunks = splitTelegramText(output);
   for (const chunk of chunks) {
     await sendTelegramMessage(token, chatId, chunk);
   }
 }
 
-async function handleCallback(update, token) {
+async function handleCallback(update, token, openRouterApiKey, openRouterModel) {
   const callback = update.callback_query;
   const callbackId = callback?.id;
   const chatId = callback?.message?.chat?.id;
@@ -81,17 +77,17 @@ async function handleCallback(update, token) {
   if (!callbackId || !chatId || !messageId) return;
 
   if (!isTelegramAdmin(chatId)) {
-    await answerCallbackQuery(token, callbackId, "Not authorized.");
+    await answerCallbackQuery(token, callbackId, "Нет доступа.", true);
     return;
   }
 
+  // Lead contact buttons — show_alert:true makes it appear as a popup
   if (data.startsWith("lead_email:")) {
-    await answerCallbackQuery(token, callbackId, data.slice("lead_email:".length));
+    await answerCallbackQuery(token, callbackId, data.slice("lead_email:".length) || "—", true);
     return;
   }
-
   if (data.startsWith("lead_phone:")) {
-    await answerCallbackQuery(token, callbackId, data.slice("lead_phone:".length));
+    await answerCallbackQuery(token, callbackId, data.slice("lead_phone:".length) || "—", true);
     return;
   }
 
@@ -102,23 +98,21 @@ async function handleCallback(update, token) {
   }
 
   if (data === "mode:reset") {
-    chatModes.delete(String(chatId));
-    await answerCallbackQuery(token, callbackId, "Reset");
+    await answerCallbackQuery(token, callbackId, "Сброс");
     await editTelegramMessage(token, chatId, messageId, getBotMenuText(), getBotMenuMarkup());
     return;
   }
 
   if (data.startsWith("mode:")) {
     const mode = data.slice("mode:".length);
-    chatModes.set(String(chatId), mode);
-    await answerCallbackQuery(token, callbackId, "Mode updated");
+    const cmdName = mode === "chat" ? "ai" : mode;
+    await answerCallbackQuery(token, callbackId, "Режим выбран");
     await editTelegramMessage(
-      token,
-      chatId,
-      messageId,
-      `<b>${getModeIntro(mode)}</b>\n\nUse <code>/reset</code> to exit this mode.`,
+      token, chatId, messageId,
+      `${getModeIntro(mode)}\n\nИспользуй: <code>/${cmdName} [текст]</code>\n\n<code>/menu</code> — вернуться в меню.`,
       getBotMenuMarkup(),
     );
+    return;
   }
 }
 
@@ -129,61 +123,48 @@ async function handleMessage(update, token, openRouterApiKey, openRouterModel) {
   if (!chatId || !text) return;
 
   if (!isTelegramAdmin(chatId)) {
-    await sendTelegramMessage(token, chatId, "This bot is restricted to the LORA team.");
+    await sendTelegramMessage(token, chatId, "Этот бот закрыт для команды LORA.");
     return;
   }
 
   const { command, prompt } = parseCommand(text);
 
   if (command === "/start" || command === "/menu") {
-    chatModes.delete(String(chatId));
-    await sendTelegramMessage(token, chatId, getBotMenuText(), {
-      reply_markup: getBotMenuMarkup(),
-    });
+    await sendTelegramMessage(token, chatId, getBotMenuText(), { reply_markup: getBotMenuMarkup() });
     return;
   }
-
   if (command === "/reset") {
-    chatModes.delete(String(chatId));
-    await sendTelegramMessage(token, chatId, "Mode cleared.", {
-      reply_markup: getBotMenuMarkup(),
-    });
+    await sendTelegramMessage(token, chatId, "✅ Сброс. Выбери режим:", { reply_markup: getBotMenuMarkup() });
     return;
   }
-
   if (command === "/help") {
-    await sendTelegramMessage(token, chatId, BOT_HELP_TEXT, {
-      reply_markup: getBotMenuMarkup(),
-    });
+    await sendTelegramMessage(token, chatId, BOT_HELP_TEXT, { reply_markup: getBotMenuMarkup() });
     return;
   }
 
-  const commandModeMap = {
-    "/ai": "chat",
-    "/reply": "reply",
-    "/followup": "followup",
-    "/offer": "offer",
-  };
-
+  const commandModeMap = { "/ai": "chat", "/reply": "reply", "/followup": "followup", "/offer": "offer" };
   const commandMode = commandModeMap[command];
+
   if (commandMode) {
     if (!prompt) {
-      await sendTelegramMessage(token, chatId, `Send some context after ${command}.`);
+      await sendTelegramMessage(token, chatId, `Напиши задачу после команды.\nПример: <code>${command} [текст]</code>`, { reply_markup: getBotMenuMarkup() });
+      return;
+    }
+    if (!openRouterApiKey) {
+      await sendTelegramMessage(token, chatId, "❌ OPENROUTER_API_KEY не настроен в переменных окружения Vercel.");
       return;
     }
     await sendAiReply(token, chatId, commandMode, prompt, openRouterApiKey, openRouterModel);
     return;
   }
 
-  const currentMode = chatModes.get(String(chatId));
-  if (currentMode) {
-    await sendAiReply(token, chatId, currentMode, text, openRouterApiKey, openRouterModel);
+  if (command) {
+    await sendTelegramMessage(token, chatId, `Неизвестная команда <code>${command}</code>.`, { reply_markup: getBotMenuMarkup() });
     return;
   }
 
-  await sendTelegramMessage(token, chatId, "Open the menu and choose a mode.", {
-    reply_markup: getBotMenuMarkup(),
-  });
+  // Plain text — prompt to use a command
+  await sendTelegramMessage(token, chatId, "Используй команду или открой меню:", { reply_markup: getBotMenuMarkup() });
 }
 
 export default async function handler(req, res) {
@@ -193,6 +174,7 @@ export default async function handler(req, res) {
       admins: getTelegramAdminChatIds(process.env),
       botReady: Boolean(process.env.TELEGRAM_BOT_TOKEN),
       aiReady: Boolean(process.env.OPENROUTER_API_KEY),
+      model: process.env.OPENROUTER_MODEL || "(not set)",
     });
     return;
   }
@@ -204,39 +186,27 @@ export default async function handler(req, res) {
 
   const token = process.env.TELEGRAM_BOT_TOKEN || "";
   const openRouterApiKey = process.env.OPENROUTER_API_KEY || "";
-  const openRouterModel = process.env.OPENROUTER_MODEL || "openai/gpt-oss-120b:free";
+  const openRouterModel = process.env.OPENROUTER_MODEL || "openai/gpt-4o-mini";
 
   if (!token) {
     sendJson(res, 500, { ok: false, error: "telegram_not_configured" });
     return;
   }
 
-  if (!openRouterApiKey) {
-    sendJson(res, 500, { ok: false, error: "openrouter_not_configured" });
-    return;
-  }
+  // Respond 200 to Telegram IMMEDIATELY — prevents duplicate retries
+  res.status(200).json({ ok: true });
 
   try {
     const update = req.body || {};
-
     if (update.callback_query) {
-      await handleCallback(update, token);
-      sendJson(res, 200, { ok: true });
+      await handleCallback(update, token, openRouterApiKey, openRouterModel);
       return;
     }
-
     if (update.message) {
       await handleMessage(update, token, openRouterApiKey, openRouterModel);
-      sendJson(res, 200, { ok: true });
       return;
     }
-
-    sendJson(res, 200, { ok: true, ignored: true });
   } catch (error) {
-    sendJson(res, 500, {
-      ok: false,
-      error: "telegram_handler_failed",
-      details: error instanceof Error ? error.message : "unknown_error",
-    });
+    console.error("telegram_handler_error:", error?.message || error);
   }
 }
