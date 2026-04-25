@@ -1,12 +1,7 @@
 {
   "functions": {
     "api/leads.js": { "maxDuration": 15 },
-    "api/telegram.js": { "maxDuration": 30 },
+    "api/telegram.js": { "maxDuration": 60 },
     "api/telegram-setup.js": { "maxDuration": 15 }
-  },
-  "rewrites": [
-    { "source": "/api/leads", "destination": "/api/leads.js" },
-    { "source": "/api/telegram", "destination": "/api/telegram.js" },
-    { "source": "/api/telegram-setup", "destination": "/api/telegram-setup.js" }
-  ]
+  }
 }

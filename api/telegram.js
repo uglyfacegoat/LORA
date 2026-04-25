@@ -193,20 +193,22 @@ export default async function handler(req, res) {
     return;
   }
 
-  // Respond 200 to Telegram IMMEDIATELY — prevents duplicate retries
-  res.status(200).json({ ok: true });
-
   try {
     const update = req.body || {};
     if (update.callback_query) {
       await handleCallback(update, token, openRouterApiKey, openRouterModel);
+      sendJson(res, 200, { ok: true });
       return;
     }
     if (update.message) {
       await handleMessage(update, token, openRouterApiKey, openRouterModel);
+      sendJson(res, 200, { ok: true });
       return;
     }
+    sendJson(res, 200, { ok: true, ignored: true });
   } catch (error) {
     console.error("telegram_handler_error:", error?.message || error);
+    // Still return 200 so Telegram doesn't retry
+    if (!res.headersSent) sendJson(res, 200, { ok: true });
   }
 }
