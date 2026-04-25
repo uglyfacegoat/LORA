@@ -11,8 +11,64 @@ import {
   splitTelegramText,
 } from "../lib/telegram.js";
 
-// NOTE: In-memory Map doesn't work on serverless — each request = new instance.
-// All modes are stateless: user must use /command prefix each time.
+// ── Upstash Redis (HTTP, no npm needed) ──────────────────────────────────────
+async function redisCommand(commands) {
+  const url = process.env.UPSTASH_REDIS_REST_URL;
+  const token = process.env.UPSTASH_REDIS_REST_TOKEN;
+  if (!url || !token) return null;
+  try {
+    const res = await fetch(`${url}/pipeline`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+      body: JSON.stringify(commands),
+    });
+    const data = await res.json();
+    return data;
+  } catch {
+    return null;
+  }
+}
+
+async function getMode(chatId) {
+  const url = process.env.UPSTASH_REDIS_REST_URL;
+  const token = process.env.UPSTASH_REDIS_REST_TOKEN;
+  if (!url || !token) return null;
+  try {
+    const res = await fetch(`${url}/get/lora:mode:${chatId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const data = await res.json();
+    return data.result || null;
+  } catch {
+    return null;
+  }
+}
+
+async function setMode(chatId, mode) {
+  const url = process.env.UPSTASH_REDIS_REST_URL;
+  const token = process.env.UPSTASH_REDIS_REST_TOKEN;
+  if (!url || !token) return;
+  try {
+    // TTL 7 days so mode doesn't live forever if forgotten
+    await fetch(`${url}/set/lora:mode:${chatId}/${mode}/ex/604800`, {
+      method: "GET",
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  } catch {}
+}
+
+async function clearMode(chatId) {
+  const url = process.env.UPSTASH_REDIS_REST_URL;
+  const token = process.env.UPSTASH_REDIS_REST_TOKEN;
+  if (!url || !token) return;
+  try {
+    await fetch(`${url}/del/lora:mode:${chatId}`, {
+      method: "GET",
+      headers: { Authorization: `Bearer ${token}` },
+    });
+  } catch {}
+}
+// ─────────────────────────────────────────────────────────────────────────────
 
 const BOT_HELP_TEXT = [
   "<b>LORA bot — команды</b>",
@@ -41,6 +97,14 @@ function getModeIntro(mode) {
     case "offer":    return "📋 <b>Offer Outline</b> — отправь нишу / задачу / контекст клиента.";
     default:         return "🤖 <b>AI Chat</b> — отправь любую задачу.";
   }
+}
+
+function getExitMarkup() {
+  return {
+    inline_keyboard: [[
+      { text: "🔙 Выйти из режима", callback_data: "mode:reset" },
+    ]],
+  };
 }
 
 function parseCommand(text) {
@@ -98,6 +162,7 @@ async function handleCallback(update, token, openRouterApiKey, openRouterModel) 
   }
 
   if (data === "mode:reset") {
+    await clearMode(chatId);
     await answerCallbackQuery(token, callbackId, "Сброс");
     await editTelegramMessage(token, chatId, messageId, getBotMenuText(), getBotMenuMarkup());
     return;
@@ -105,12 +170,13 @@ async function handleCallback(update, token, openRouterApiKey, openRouterModel) 
 
   if (data.startsWith("mode:")) {
     const mode = data.slice("mode:".length);
+    await setMode(chatId, mode);
     const cmdName = mode === "chat" ? "ai" : mode;
     await answerCallbackQuery(token, callbackId, "Режим выбран");
     await editTelegramMessage(
       token, chatId, messageId,
-      `${getModeIntro(mode)}\n\nИспользуй: <code>/${cmdName} [текст]</code>\n\n<code>/menu</code> — вернуться в меню.`,
-      getBotMenuMarkup(),
+      `${getModeIntro(mode)}\n\nПросто пиши — я буду отвечать в этом режиме.\nВыход: <code>/reset</code> или <code>/menu</code>`,
+      getExitMarkup(),
     );
     return;
   }
@@ -129,12 +195,15 @@ async function handleMessage(update, token, openRouterApiKey, openRouterModel) {
 
   const { command, prompt } = parseCommand(text);
 
+  // ── Hard commands — always work regardless of mode ────────────────────────
   if (command === "/start" || command === "/menu") {
+    await clearMode(chatId);
     await sendTelegramMessage(token, chatId, getBotMenuText(), { reply_markup: getBotMenuMarkup() });
     return;
   }
   if (command === "/reset") {
-    await sendTelegramMessage(token, chatId, "✅ Сброс. Выбери режим:", { reply_markup: getBotMenuMarkup() });
+    await clearMode(chatId);
+    await sendTelegramMessage(token, chatId, "✅ Режим сброшен.", { reply_markup: getBotMenuMarkup() });
     return;
   }
   if (command === "/help") {
@@ -142,16 +211,25 @@ async function handleMessage(update, token, openRouterApiKey, openRouterModel) {
     return;
   }
 
+  // ── Explicit /command ─────────────────────────────────────────────────────
   const commandModeMap = { "/ai": "chat", "/reply": "reply", "/followup": "followup", "/offer": "offer" };
   const commandMode = commandModeMap[command];
 
   if (commandMode) {
     if (!prompt) {
-      await sendTelegramMessage(token, chatId, `Напиши задачу после команды.\nПример: <code>${command} [текст]</code>`, { reply_markup: getBotMenuMarkup() });
+      // Switch INTO mode persistently — no inline text needed
+      await setMode(chatId, commandMode);
+      const cmdName = commandMode === "chat" ? "ai" : commandMode;
+      await sendTelegramMessage(
+        token, chatId,
+        `${getModeIntro(commandMode)}\n\nПросто пиши — я буду отвечать в этом режиме.\nВыход: <code>/reset</code> или <code>/menu</code>`,
+        { reply_markup: getExitMarkup() },
+      );
       return;
     }
+    // Has inline text — one-shot, не меняем сохранённый режим
     if (!openRouterApiKey) {
-      await sendTelegramMessage(token, chatId, "❌ OPENROUTER_API_KEY не настроен в переменных окружения Vercel.");
+      await sendTelegramMessage(token, chatId, "❌ OPENROUTER_API_KEY не настроен.");
       return;
     }
     await sendAiReply(token, chatId, commandMode, prompt, openRouterApiKey, openRouterModel);
@@ -163,8 +241,21 @@ async function handleMessage(update, token, openRouterApiKey, openRouterModel) {
     return;
   }
 
-  // Plain text — prompt to use a command
-  await sendTelegramMessage(token, chatId, "Используй команду или открой меню:", { reply_markup: getBotMenuMarkup() });
+  // ── Plain text — check saved mode from Redis ──────────────────────────────
+  const currentMode = await getMode(chatId);
+  if (currentMode) {
+    if (!openRouterApiKey) {
+      await sendTelegramMessage(token, chatId, "❌ OPENROUTER_API_KEY не настроен.");
+      return;
+    }
+    await sendAiReply(token, chatId, currentMode, text, openRouterApiKey, openRouterModel);
+    return;
+  }
+
+  // No mode — show menu
+  await sendTelegramMessage(token, chatId, "Выбери режим в меню или используй команду:", {
+    reply_markup: getBotMenuMarkup(),
+  });
 }
 
 export default async function handler(req, res) {
