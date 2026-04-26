@@ -113,7 +113,7 @@ export function ArticlesSection() {
 
                   {/* Center: title + excerpt */}
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-start gap-3 mb-2">
+                    <div className="flex items-baseline gap-3 flex-wrap mb-2">
                       <h3
                         className="transition-colors duration-300"
                         style={{ fontSize: "clamp(1rem, 2vw, 1.25rem)", fontWeight: 700, lineHeight: 1.25, letterSpacing: "-0.02em", color: isHovered ? "var(--fg-1)" : "var(--fg-2)" }}
@@ -122,8 +122,8 @@ export function ArticlesSection() {
                       </h3>
                       {isNew(article.date) && (
                         <span
-                          className="shrink-0 mt-1 px-2 py-0.5 rounded-full uppercase tracking-[0.15em]"
-                          style={{ fontSize: "0.45rem", fontWeight: 800, background: "var(--fg-1)", color: "var(--app-bg)" }}
+                          className="shrink-0 px-2 py-0.5 rounded-full uppercase tracking-[0.15em]"
+                          style={{ fontSize: "0.45rem", fontWeight: 800, background: "var(--fg-1)", color: "var(--app-bg)", whiteSpace: "nowrap" }}
                         >
                           {t("articles.new")}
                         </span>
