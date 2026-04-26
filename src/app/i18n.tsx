@@ -109,6 +109,13 @@ export const translations: Dict = {
   "why.step.close": { en: "Close", es: "Cerrar", ru: "Закрыть", zh: "成交" },
   "why.step.scale": { en: "Scale", es: "Escalar", ru: "Масштаб", zh: "放大" },
 
+  "process.fastNote": {
+    en: "Fast turnaround. The audit fee is credited toward the project if we move forward.",
+    es: "Trabajamos rápido. El coste de la auditoría se descuenta del proyecto si avanzamos.",
+    ru: "Работаем быстро. Стоимость аудита засчитывается в счёт работы, если идём дальше.",
+    zh: "推进速度很快。如果继续合作，审计费用会直接抵扣项目费用。",
+  },
+
   "live.eyebrow": { en: "Live Preview", es: "Vista previa en vivo", ru: "Живой предпросмотр", zh: "实时预览" },
   "live.title": { en: "See the system", es: "Mira el sistema", ru: "Посмотри, как система", zh: "看看系统" },
   "live.titleAccent": { en: "in action.", es: "en acción.", ru: "работает вживую.", zh: "如何运转。" },

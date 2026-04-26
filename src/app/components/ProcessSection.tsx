@@ -65,7 +65,7 @@ export function ProcessSection() {
               overflowWrap: "anywhere",
             }}
           >
-            {t("sol.fastNote")}
+            {t("process.fastNote")}
           </motion.p>
         </div>
 
