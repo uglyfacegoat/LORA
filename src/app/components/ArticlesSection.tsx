@@ -36,7 +36,6 @@ function ArticleCard({ article, index, inView, lang, t, featured = false }: {
   featured?: boolean;
 }) {
   const [hovered, setHovered] = useState(false);
-  const num = String(index + 1).padStart(2, "0");
 
   return (
     <motion.article
@@ -53,24 +52,6 @@ function ArticleCard({ article, index, inView, lang, t, featured = false }: {
         borderColor: hovered ? "var(--accent-border)" : "var(--surface-border)",
       }}
     >
-      {/* Big number background */}
-      <div
-        className="absolute select-none pointer-events-none"
-        style={{
-          top: featured ? "-0.5rem" : "-0.25rem",
-          right: featured ? "1.5rem" : "1rem",
-          fontSize: featured ? "clamp(5rem, 12vw, 10rem)" : "clamp(4rem, 8vw, 7rem)",
-          fontWeight: 900,
-          lineHeight: 1,
-          letterSpacing: "-0.06em",
-          color: hovered ? "var(--surface-strong)" : "var(--surface-mid)",
-          transition: "color 0.4s ease",
-          userSelect: "none",
-        }}
-      >
-        {num}
-      </div>
-
       <div className={`relative flex flex-col justify-between h-full ${featured ? "p-8 md:p-10 min-h-[280px]" : "p-6 md:p-8 min-h-[220px]"}`}>
         {/* Top row: tag + NEW + date */}
         <div className="flex items-center justify-between mb-6">
