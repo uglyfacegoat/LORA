@@ -1,8 +1,9 @@
+import React from "react";
 import { motion } from "motion/react";
 import { useState } from "react";
 import { useI18n } from "../i18n";
 import { useTheme } from "../theme";
-import { SectionLabel } from "./SectionLabel";
+
 import { useInView } from "./useInView";
 
 function TiltCard({
@@ -53,7 +54,7 @@ export function WhyLora() {
 
   return (
     <section ref={ref} className="relative px-6 py-32 md:px-20 md:py-44">
-      <SectionLabel word={t("label.advantage")} index="03" label="Why LORA" side="right" />
+
 
       <div className="mx-auto max-w-6xl">
         <motion.div

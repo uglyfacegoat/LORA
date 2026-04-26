@@ -13,7 +13,6 @@ import { PricingSection } from "./components/PricingSection";
 import { ArticlesSection } from "./components/ArticlesSection";
 import { Footer } from "./components/Footer";
 import { CursorGlow } from "./components/CursorGlow";
-import { ScrollHUD } from "./components/ScrollHUD";
 import { Preloader } from "./components/Preloader";
 import { LanguageModal } from "./components/LanguageModal";
 import { useEffect, useState, useCallback } from "react";
@@ -143,7 +142,6 @@ function AppInner() {
       {!loaded && <Preloader onComplete={handleLoaded} />}
 
       <CursorGlow />
-      <ScrollHUD />
 
       <LanguageModal open={langOpen} onClose={() => setLangOpen(false)} />
 

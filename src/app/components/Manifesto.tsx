@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { useInView } from "./useInView";
-import { SectionLabel } from "./SectionLabel";
+
 import { useI18n } from "../i18n";
 
 export function Manifesto() {
@@ -17,7 +17,7 @@ export function Manifesto() {
 
   return (
     <section ref={ref} className="relative py-32 md:py-52 px-6 md:px-20">
-      <SectionLabel word={t("label.manifesto")} index="01" label="Manifesto" side="right" />
+
       {/* Large ambient glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] pointer-events-none" style={{ background: "radial-gradient(circle, rgba(255,255,255,0.03), transparent 55%)" }} />
 

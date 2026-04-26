@@ -1,7 +1,7 @@
 import { motion } from "motion/react";
 import { useState } from "react";
 import { useInView } from "./useInView";
-import { SectionLabel } from "./SectionLabel";
+
 import { useI18n } from "../i18n";
 
 const PRODUCTS = ["website", "app", "crm"] as const;
@@ -103,7 +103,7 @@ export function PricingSection() {
         <div style={{ width: 600, height: 400, borderRadius: "50%", background: "radial-gradient(ellipse, rgba(255,255,255,0.03) 0%, transparent 70%)", filter: "blur(40px)" }} />
       </div>
 
-      <SectionLabel word={t("pricing.eyebrow")} index="07" label="Pricing" side="left" />
+
 
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Header */}

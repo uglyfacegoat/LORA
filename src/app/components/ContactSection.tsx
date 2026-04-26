@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useI18n } from "../i18n";
-import { SectionLabel } from "./SectionLabel";
+
 import { useInView } from "./useInView";
 
 type CountryOption = {
@@ -726,7 +726,7 @@ export function ContactSection() {
 
   return (
     <section ref={ref} id="contact" className="relative px-6 py-32 md:px-20 md:py-44">
-      <SectionLabel word={t("label.connect")} />
+
 
       <AlertToast alert={alert} />
 

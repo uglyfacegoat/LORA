@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { useInView } from "./useInView";
-import { SectionLabel } from "./SectionLabel";
+
 import { useI18n } from "../i18n";
 
 export function CtaBreak() {
@@ -10,7 +10,7 @@ export function CtaBreak() {
 
   return (
     <section ref={ref} className="relative py-32 md:py-40 px-6 md:px-20 overflow-hidden">
-      <SectionLabel word={t("label.choice")} />
+
 
       <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 hidden md:block w-[900px] h-[900px] pointer-events-none"

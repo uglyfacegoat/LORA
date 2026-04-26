@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { useInView } from "./useInView";
-import { SectionLabel } from "./SectionLabel";
+
 import { useI18n } from "../i18n";
 
 export function StorySection() {
@@ -22,7 +22,7 @@ export function StorySection() {
 
   return (
     <section ref={ref} className="relative py-32 md:py-44 px-6 md:px-20">
-      <SectionLabel word={t("story.eyebrow")} index="00" label="Origin" side="right" />
+
 
       <div className="max-w-6xl mx-auto">
         {/* Header */}
