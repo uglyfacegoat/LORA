@@ -418,6 +418,15 @@ export const translations: Dict = {
 
   "pricing.reserved.label": { en: "Coming soon", es: "Próximamente", ru: "Скоро", zh: "即将推出" },
   "pricing.reserved.hint": { en: "New service in development. Stay tuned.", es: "Nuevo servicio en desarrollo. Próximamente.", ru: "Новая услуга в разработке. Скоро расскажем.", zh: "新服务开发中，敬请期待。" },
+
+  // ── Articles ──────────────────────────────────────────────────────────────
+  "articles.eyebrow": { en: "Journal", es: "Diario", ru: "Журнал", zh: "专栏" },
+  "articles.title": { en: "We write about", es: "Escribimos sobre", ru: "Мы пишем о том,", zh: "我们写关于" },
+  "articles.titleAccent": { en: "what actually works.", es: "lo que realmente funciona.", ru: "что реально работает.", zh: "真正有效的事。" },
+  "articles.desc": { en: "No fluff. Frameworks, breakdowns and real cases from client work.", es: "Sin relleno. Frameworks, análisis y casos reales de nuestros proyectos.", ru: "Без воды. Фреймворки, разборы и реальные кейсы из работы с клиентами.", zh: "没有废话。框架、拆解和来自客户工作的真实案例。" },
+  "articles.read": { en: "Read", es: "Leer", ru: "Читать", zh: "阅读" },
+  "articles.readTime": { en: "read", es: "lectura", ru: "чтение", zh: "阅读" },
+  "articles.new": { en: "New", es: "Nuevo", ru: "Новое", zh: "新" },
 };
 
 interface Ctx {

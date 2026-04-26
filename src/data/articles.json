@@ -1,0 +1,86 @@
+[
+  {
+    "id": "why-landing-pages-fail",
+    "date": "2026-04-10",
+    "tag": {
+      "en": "Conversion",
+      "ru": "Конверсия",
+      "es": "Conversión",
+      "zh": "转化"
+    },
+    "title": {
+      "en": "Why 90% of landing pages fail before the user even scrolls",
+      "ru": "Почему 90% лендингов проигрывают ещё до того, как пользователь начинает скроллить",
+      "es": "Por qué el 90% de las landing pages fracasan antes de que el usuario haga scroll",
+      "zh": "为什么90%的落地页在用户滚动前就已失败"
+    },
+    "excerpt": {
+      "en": "First screen is not design. It's a sales pitch that lasts 3 seconds. We break down the five elements that kill conversion before the session even starts.",
+      "ru": "Первый экран — это не дизайн. Это коммерческий питч длиной в 3 секунды. Разбираем пять элементов, которые убивают конверсию ещё до начала сессии.",
+      "es": "El primer pantallazo no es diseño. Es un pitch de ventas que dura 3 segundos. Analizamos los cinco elementos que matan la conversión antes de que comience la sesión.",
+      "zh": "首屏不是设计，而是一个持续3秒的销售陈述。我们分析了在会话开始前就扼杀转化率的五个因素。"
+    },
+    "readTime": {
+      "en": "5 min",
+      "ru": "5 мин",
+      "es": "5 min",
+      "zh": "5 分钟"
+    }
+  },
+  {
+    "id": "crm-that-actually-works",
+    "date": "2026-04-18",
+    "tag": {
+      "en": "Automation",
+      "ru": "Автоматизация",
+      "es": "Automatización",
+      "zh": "自动化"
+    },
+    "title": {
+      "en": "CRM that actually works: what most agencies get wrong",
+      "ru": "CRM, которая реально работает: что большинство агентств делают неправильно",
+      "es": "Un CRM que realmente funciona: lo que la mayoría de agencias hacen mal",
+      "zh": "真正有效的CRM：大多数机构哪里出了问题"
+    },
+    "excerpt": {
+      "en": "A CRM is not a spreadsheet on steroids. It's a living system that qualifies, nurtures and closes leads automatically. Here's how we build them.",
+      "ru": "CRM — это не таблица на стероидах. Это живая система, которая квалифицирует, прогревает и закрывает лиды автоматически. Рассказываем, как мы их строим.",
+      "es": "Un CRM no es una hoja de cálculo con esteroides. Es un sistema vivo que califica, nutre y cierra leads de forma automática. Así es como los construimos.",
+      "zh": "CRM不是加了类固醇的电子表格。它是一个能自动筛选、培育和成交线索的活系统。我们是这样构建的。"
+    },
+    "readTime": {
+      "en": "7 min",
+      "ru": "7 мин",
+      "es": "7 min",
+      "zh": "7 分钟"
+    }
+  },
+  {
+    "id": "revenue-machine-blueprint",
+    "date": "2026-04-24",
+    "tag": {
+      "en": "Strategy",
+      "ru": "Стратегия",
+      "es": "Estrategia",
+      "zh": "战略"
+    },
+    "title": {
+      "en": "The revenue machine blueprint: from traffic to predictable income",
+      "ru": "Чертёж машины выручки: от трафика до предсказуемого дохода",
+      "es": "El blueprint de la máquina de ingresos: del tráfico a los ingresos predecibles",
+      "zh": "营收机器蓝图：从流量到可预测收入"
+    },
+    "excerpt": {
+      "en": "Most businesses have traffic. Few have a system. We explain the exact architecture that turns random visits into a repeatable revenue engine.",
+      "ru": "У большинства бизнесов есть трафик. У немногих — система. Объясняем точную архитектуру, которая превращает случайные визиты в повторяемый движок выручки.",
+      "es": "La mayoría de los negocios tienen tráfico. Pocos tienen un sistema. Explicamos la arquitectura exacta que convierte visitas aleatorias en un motor de ingresos repetible.",
+      "zh": "大多数企业有流量，但很少有系统。我们解释将随机访问转化为可重复营收引擎的精确架构。"
+    },
+    "readTime": {
+      "en": "9 min",
+      "ru": "9 мин",
+      "es": "9 min",
+      "zh": "9 分钟"
+    }
+  }
+]

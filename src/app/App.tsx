@@ -11,6 +11,7 @@ import { CasesSection } from "./components/CasesSection";
 import { CtaBreak } from "./components/CtaBreak";
 import { ContactSection } from "./components/ContactSection";
 import { PricingSection } from "./components/PricingSection";
+import { ArticlesSection } from "./components/ArticlesSection";
 import { Footer } from "./components/Footer";
 import { CursorGlow } from "./components/CursorGlow";
 import { ScrollHUD } from "./components/ScrollHUD";
@@ -264,6 +265,7 @@ function AppInner() {
         <Comparison />
         <div id="results"><CasesSection /></div>
         <CtaBreak />
+        <ArticlesSection />
         <PricingSection />
         <ContactSection />
         <Footer />
