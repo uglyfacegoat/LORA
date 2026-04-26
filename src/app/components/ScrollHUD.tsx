@@ -11,7 +11,6 @@ export function ScrollHUD() {
     t("label.manifesto"),
     t("label.diagnosis"),
     t("label.advantage"),
-    t("label.solution"),
     t("label.terminal"),
     t("label.process"),
     t("label.contrast"),
