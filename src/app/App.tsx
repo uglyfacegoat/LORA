@@ -262,9 +262,9 @@ function AppInner() {
         <div id="process"><ProcessSection /></div>
         <Comparison />
         <div id="results"><CasesSection /></div>
-        <CtaBreak />
         <ArticlesSection />
         <PricingSection />
+        <CtaBreak />
         <ContactSection />
         <Footer />
       </div>
