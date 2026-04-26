@@ -3,7 +3,6 @@ import { StorySection } from "./components/StorySection";
 import { Manifesto } from "./components/Manifesto";
 import { PainSection } from "./components/PainSection";
 import { WhyLora } from "./components/WhyLora";
-import { SolutionSection } from "./components/SolutionSection";
 import { LiveSystem } from "./components/LiveSystem";
 import { ProcessSection } from "./components/ProcessSection";
 import { Comparison } from "./components/Comparison";
@@ -259,7 +258,6 @@ function AppInner() {
         <Manifesto />
         <PainSection />
         <WhyLora />
-        <SolutionSection />
         <LiveSystem />
         <div id="process"><ProcessSection /></div>
         <Comparison />
