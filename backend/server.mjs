@@ -31,6 +31,19 @@ const chatModes = new Map();
 function getMode(chatId) { return chatModes.get(String(chatId)) || null; }
 function setMode(chatId, mode) { chatModes.set(String(chatId), mode); }
 function clearMode(chatId) { chatModes.delete(String(chatId)); }
+
+// ── Conversation history (last 20 messages = 10 exchanges) ───────────────────
+const chatHistory = new Map();
+const MAX_HISTORY = 20;
+function getHistory(chatId) { return chatHistory.get(String(chatId)) || []; }
+function addToHistory(chatId, role, content) {
+  const id = String(chatId);
+  const hist = chatHistory.get(id) || [];
+  hist.push({ role, content });
+  if (hist.length > MAX_HISTORY) hist.splice(0, hist.length - MAX_HISTORY);
+  chatHistory.set(id, hist);
+}
+function clearHistory(chatId) { chatHistory.delete(String(chatId)); }
 // ─────────────────────────────────────────────────────────────────────────────
 
 const BOT_HELP_TEXT = [
@@ -48,6 +61,7 @@ const BOT_HELP_TEXT = [
   "<code>/offer контекст</code> — оффер",
   "<code>/menu</code> — главное меню",
   "<code>/reset</code> — сброс режима",
+  "<code>/clear</code> — очистить память диалога",
 ].join("\n");
 
 function getModeIntro(mode) {
@@ -87,7 +101,13 @@ async function sendAiReply(token, chatId, mode, prompt, apiKey, model) {
     });
   } catch {}
 
-  const output = await generateOpenRouterText({ apiKey, model, mode, prompt });
+  const history = getHistory(chatId);
+  const output = await generateOpenRouterText({ apiKey, model, mode, prompt, history });
+
+  // Save exchange to history
+  addToHistory(chatId, "user", prompt);
+  addToHistory(chatId, "assistant", output);
+
   const chunks = splitTelegramText(escapeHtml(output));
   for (const chunk of chunks) {
     await sendTelegramMessage(token, chatId, chunk);
@@ -116,6 +136,7 @@ async function handleTelegramCallback(update, token, apiKey, model) {
   }
   if (data === "mode:reset") {
     clearMode(chatId);
+    clearHistory(chatId);
     await answerCallbackQuery(token, callbackId, "Сброшен");
     await editTelegramMessage(token, chatId, messageId, getBotMenuText(), getBotMenuMarkup());
     return;
@@ -123,6 +144,7 @@ async function handleTelegramCallback(update, token, apiKey, model) {
   if (data.startsWith("mode:")) {
     const mode = data.slice("mode:".length);
     setMode(chatId, mode);
+    clearHistory(chatId);
     await answerCallbackQuery(token, callbackId, "Режим выбран");
     await editTelegramMessage(
       token, chatId, messageId,
@@ -148,12 +170,20 @@ async function handleTelegramMessage(update, token, apiKey, model) {
 
   if (command === "/start" || command === "/menu") {
     clearMode(chatId);
+    clearHistory(chatId);
     await sendTelegramMessage(token, chatId, getBotMenuText(), { reply_markup: getBotMenuMarkup() });
     return;
   }
   if (command === "/reset") {
     clearMode(chatId);
-    await sendTelegramMessage(token, chatId, "✅ Режим сброшен.", { reply_markup: getBotMenuMarkup() });
+    clearHistory(chatId);
+    await sendTelegramMessage(token, chatId, "✅ Режим и память сброшены.", { reply_markup: getBotMenuMarkup() });
+    return;
+  }
+  if (command === "/clear") {
+    clearHistory(chatId);
+    const count = 0;
+    await sendTelegramMessage(token, chatId, "🧹 Память диалога очищена. Начинаем с чистого листа.");
     return;
   }
   if (command === "/help") {
@@ -363,6 +393,17 @@ async function startPolling() {
   // Delete any existing webhook so Telegram switches to getUpdates
   try {
     await telegramApi(token, "deleteWebhook", { drop_pending_updates: false });
+    await telegramApi(token, "setMyCommands", {
+      commands: [
+        { command: "menu",      description: "Главное меню" },
+        { command: "ai",        description: "AI запрос" },
+        { command: "reply",     description: "Ответ клиенту" },
+        { command: "followup",  description: "Фоллоу-ап" },
+        { command: "offer",     description: "Оффер" },
+        { command: "reset",     description: "Сброс режима и памяти" },
+        { command: "clear",     description: "Очистить память диалога" },
+      ],
+    });
     console.log("polling: webhook removed, starting long-poll loop");
   } catch (e) {
     console.warn("polling: could not delete webhook:", e.message);
