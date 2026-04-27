@@ -343,7 +343,47 @@ const server = createServer(async (req, res) => {
 
 server.listen(PORT, HOST, () => {
   console.log(`LORA backend listening on http://${HOST}:${PORT}`);
+  startPolling();
 });
+
+// ── Telegram long-polling (no webhook / no HTTPS required) ────────────────────
+async function startPolling() {
+  const token = process.env.TELEGRAM_BOT_TOKEN;
+  const apiKey = process.env.OPENROUTER_API_KEY || "";
+  const model = process.env.OPENROUTER_MODEL || "openai/gpt-4o-mini";
+  if (!token) { console.warn("polling: TELEGRAM_BOT_TOKEN not set, skipping"); return; }
+
+  // Delete any existing webhook so Telegram switches to getUpdates
+  try {
+    await telegramApi(token, "deleteWebhook", { drop_pending_updates: false });
+    console.log("polling: webhook removed, starting long-poll loop");
+  } catch (e) {
+    console.warn("polling: could not delete webhook:", e.message);
+  }
+
+  let offset = 0;
+  while (true) {
+    try {
+      const data = await telegramApi(token, "getUpdates", { timeout: 30, offset, allowed_updates: ["message", "callback_query"] });
+      const updates = data?.result ?? [];
+      for (const update of updates) {
+        offset = update.update_id + 1;
+        try {
+          if (update.callback_query) {
+            await handleTelegramCallback({ callback_query: update.callback_query }, token, apiKey, model);
+          } else if (update.message) {
+            await handleTelegramMessage({ message: update.message }, token, apiKey, model);
+          }
+        } catch (e) {
+          console.error("polling: update error:", e.message);
+        }
+      }
+    } catch (e) {
+      console.error("polling: getUpdates error:", e.message);
+      await new Promise(r => setTimeout(r, 5000));
+    }
+  }
+}
 
 function setCors(res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
