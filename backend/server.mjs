@@ -1,5 +1,5 @@
 import { createServer } from "node:http";
-import { readFileSync, existsSync } from "node:fs";
+import { readFileSync, existsSync, createReadStream, statSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import {
@@ -296,6 +296,46 @@ const server = createServer(async (req, res) => {
       json(res, 500, { ok: false, error: "setup_failed", details: error?.message || "unknown" });
     }
     return;
+  }
+
+  // ── Static frontend ────────────────────────────────────────────────────
+  const distDir = join(__dirname, "../dist");
+  if (existsSync(distDir)) {
+    // Strip query string, decode URI
+    let filePath = decodeURIComponent(path);
+    // Never serve dotfiles or escape dist
+    if (filePath.includes("..") || filePath.startsWith("/..")) {
+      res.writeHead(403); res.end(); return;
+    }
+    let candidate = join(distDir, filePath);
+    // Directory → index.html
+    if (!existsSync(candidate) || !statSync(candidate).isFile()) {
+      candidate = join(distDir, "index.html");
+    }
+    if (existsSync(candidate) && statSync(candidate).isFile()) {
+      const ext = candidate.split(".").pop();
+      const mime = {
+        html: "text/html; charset=utf-8",
+        js:   "application/javascript",
+        css:  "text/css",
+        svg:  "image/svg+xml",
+        png:  "image/png",
+        jpg:  "image/jpeg",
+        ico:  "image/x-icon",
+        woff2:"font/woff2",
+        woff: "font/woff",
+        ttf:  "font/ttf",
+        json: "application/json",
+        webp: "image/webp",
+      }[ext] || "application/octet-stream";
+      const isAsset = filePath.startsWith("/assets/");
+      res.writeHead(200, {
+        "Content-Type": mime,
+        ...(isAsset ? { "Cache-Control": "public, max-age=31536000, immutable" } : {}),
+      });
+      createReadStream(candidate).pipe(res);
+      return;
+    }
   }
 
   json(res, 404, { ok: false, error: "not_found" });
