@@ -125,7 +125,22 @@ async function sendAiReply(token, chatId, mode, prompt, openRouterApiKey, openRo
     });
   } catch {}
 
-  const output = await generateOpenRouterText({ apiKey: openRouterApiKey, model: openRouterModel, mode, prompt });
+  let output;
+  try {
+    output = await Promise.race([
+      generateOpenRouterText({ apiKey: openRouterApiKey, model: openRouterModel, mode, prompt }),
+      new Promise((_, reject) =>
+        setTimeout(() => reject(new Error("ai_timeout")), 50_000)
+      ),
+    ]);
+  } catch (err) {
+    if (err.message === "ai_timeout") {
+      await sendTelegramMessage(token, chatId, "⏳ ИИ думает дольше обычного. Попробуй запрос покороче или повтори позже.");
+      return;
+    }
+    throw err;
+  }
+
   const chunks = splitTelegramText(output);
   for (const chunk of chunks) {
     await sendTelegramMessage(token, chatId, chunk);
@@ -277,9 +292,6 @@ export default async function handler(req, res) {
     return;
   }
 
-  // Respond 200 IMMEDIATELY — Telegram won't retry even if AI takes long
-  sendJson(res, 200, { ok: true });
-
   try {
     const update = req.body || {};
     if (update.callback_query) {
@@ -287,7 +299,9 @@ export default async function handler(req, res) {
     } else if (update.message) {
       await handleMessage(update, token, openRouterApiKey, openRouterModel);
     }
+    sendJson(res, 200, { ok: true });
   } catch (error) {
     console.error("telegram_handler_error:", error?.message || error);
+    if (!res.headersSent) sendJson(res, 200, { ok: true });
   }
 }
