@@ -71,19 +71,20 @@ async function clearMode(chatId) {
 // ─────────────────────────────────────────────────────────────────────────────
 
 const BOT_HELP_TEXT = [
-  "<b>LORA bot — команды</b>",
+  "<b>LORA Бот — команды</b>",
   "",
-  "• <b>AI Chat</b> — любая задача, продажи, оффер, тексты",
-  "• <b>Client Reply</b> — ответ на лид или сообщение клиента",
-  "• <b>Follow-up</b> — фоллоу-ап после тишины",
-  "• <b>Offer Outline</b> — структура предложения / брифа",
+  "🧠 <b>AI Чат</b> — любые задачи, тексты, идеи",
+  "✉️ <b>Ответ клиенту</b> — ответ на лид или сообщение клиента",
+  "🔄 <b>Фоллоу-ап</b> — повторное касание после тишины",
+  "📋 <b>Оффер</b> — структура предложения или брифа",
   "",
   "<b>Команды:</b>",
-  "<code>/ai текст задачи</code>",
-  "<code>/reply контекст лида</code>",
-  "<code>/followup контекст</code>",
-  "<code>/offer контекст проекта</code>",
+  "<code>/ai задача</code> — быстрый запрос",
+  "<code>/reply контекст</code> — один ответ",
+  "<code>/followup контекст</code> — фоллоу-ап",
+  "<code>/offer контекст</code> — оффер",
   "<code>/menu</code> — главное меню",
+  "<code>/reset</code> — сброс режима",
 ].join("\n");
 
 function sendJson(res, status, payload) {
@@ -92,10 +93,10 @@ function sendJson(res, status, payload) {
 
 function getModeIntro(mode) {
   switch (mode) {
-    case "reply":    return "✉️ <b>Client Reply</b> — отправь контекст лида или сообщение клиента.";
-    case "followup": return "🔄 <b>Follow-up</b> — отправь ситуацию, подготовлю следующий касание.";
-    case "offer":    return "📋 <b>Offer Outline</b> — отправь нишу / задачу / контекст клиента.";
-    default:         return "🤖 <b>AI Chat</b> — отправь любую задачу.";
+    case "reply":    return "✉️ <b>Ответ клиенту</b> — давай контекст лида или сообщение клиента.";
+    case "followup": return "🔄 <b>Фоллоу-ап</b> — опиши ситуацию, подготовлю следующее касание.";
+    case "offer":    return "📋 <b>Оффер</b> — дай нишу, задачу или контекст клиента.";
+    default:         return "🧠 <b>AI Чат</b> — отправь любой запрос.";
   }
 }
 
@@ -155,15 +156,9 @@ async function handleCallback(update, token, openRouterApiKey, openRouterModel) 
     return;
   }
 
-  if (data === "mode:help") {
-    await answerCallbackQuery(token, callbackId, "Help");
-    await editTelegramMessage(token, chatId, messageId, BOT_HELP_TEXT, getBotMenuMarkup());
-    return;
-  }
-
   if (data === "mode:reset") {
     await clearMode(chatId);
-    await answerCallbackQuery(token, callbackId, "Сброс");
+    await answerCallbackQuery(token, callbackId, "Сбросен");
     await editTelegramMessage(token, chatId, messageId, getBotMenuText(), getBotMenuMarkup());
     return;
   }
@@ -175,7 +170,7 @@ async function handleCallback(update, token, openRouterApiKey, openRouterModel) 
     await answerCallbackQuery(token, callbackId, "Режим выбран");
     await editTelegramMessage(
       token, chatId, messageId,
-      `${getModeIntro(mode)}\n\nПросто пиши — я буду отвечать в этом режиме.\nВыход: <code>/reset</code> или <code>/menu</code>`,
+      `${getModeIntro(mode)}\n\nПросто пиши — я буду отвечать в этом режиме.\nСброс: <code>/reset</code> или <code>/menu</code>`,
       getExitMarkup(),
     );
     return;
@@ -217,19 +212,17 @@ async function handleMessage(update, token, openRouterApiKey, openRouterModel) {
 
   if (commandMode) {
     if (!prompt) {
-      // Switch INTO mode persistently — no inline text needed
       await setMode(chatId, commandMode);
-      const cmdName = commandMode === "chat" ? "ai" : commandMode;
       await sendTelegramMessage(
         token, chatId,
-        `${getModeIntro(commandMode)}\n\nПросто пиши — я буду отвечать в этом режиме.\nВыход: <code>/reset</code> или <code>/menu</code>`,
+        `${getModeIntro(commandMode)}\n\nПросто пиши — я буду отвечать в этом режиме.\nСброс: <code>/reset</code> или <code>/menu</code>`,
         { reply_markup: getExitMarkup() },
       );
       return;
     }
     // Has inline text — one-shot, не меняем сохранённый режим
     if (!openRouterApiKey) {
-      await sendTelegramMessage(token, chatId, "❌ OPENROUTER_API_KEY не настроен.");
+      await sendTelegramMessage(token, chatId, "❌ <b>OPENROUTER_API_KEY</b> не настроен. Обратись к Slavik.");
       return;
     }
     await sendAiReply(token, chatId, commandMode, prompt, openRouterApiKey, openRouterModel);
@@ -237,7 +230,7 @@ async function handleMessage(update, token, openRouterApiKey, openRouterModel) {
   }
 
   if (command) {
-    await sendTelegramMessage(token, chatId, `Неизвестная команда <code>${command}</code>.`, { reply_markup: getBotMenuMarkup() });
+    await sendTelegramMessage(token, chatId, `❓ Неизвестная команда <code>${command}</code>. Напиши <code>/menu</code>.`, { reply_markup: getBotMenuMarkup() });
     return;
   }
 
@@ -245,7 +238,7 @@ async function handleMessage(update, token, openRouterApiKey, openRouterModel) {
   const currentMode = await getMode(chatId);
   if (currentMode) {
     if (!openRouterApiKey) {
-      await sendTelegramMessage(token, chatId, "❌ OPENROUTER_API_KEY не настроен.");
+      await sendTelegramMessage(token, chatId, "❌ <b>OPENROUTER_API_KEY</b> не настроен.");
       return;
     }
     await sendAiReply(token, chatId, currentMode, text, openRouterApiKey, openRouterModel);
@@ -253,7 +246,7 @@ async function handleMessage(update, token, openRouterApiKey, openRouterModel) {
   }
 
   // No mode — show menu
-  await sendTelegramMessage(token, chatId, "Выбери режим в меню или используй команду:", {
+  await sendTelegramMessage(token, chatId, getBotMenuText(), {
     reply_markup: getBotMenuMarkup(),
   });
 }
@@ -284,22 +277,17 @@ export default async function handler(req, res) {
     return;
   }
 
+  // Respond 200 IMMEDIATELY — Telegram won't retry even if AI takes long
+  sendJson(res, 200, { ok: true });
+
   try {
     const update = req.body || {};
     if (update.callback_query) {
       await handleCallback(update, token, openRouterApiKey, openRouterModel);
-      sendJson(res, 200, { ok: true });
-      return;
-    }
-    if (update.message) {
+    } else if (update.message) {
       await handleMessage(update, token, openRouterApiKey, openRouterModel);
-      sendJson(res, 200, { ok: true });
-      return;
     }
-    sendJson(res, 200, { ok: true, ignored: true });
   } catch (error) {
     console.error("telegram_handler_error:", error?.message || error);
-    // Still return 200 so Telegram doesn't retry
-    if (!res.headersSent) sendJson(res, 200, { ok: true });
   }
 }
