@@ -6,12 +6,18 @@ WORKDIR /app
 # Install pnpm
 RUN corepack enable && corepack prepare pnpm@latest --activate
 
+# Copy dependency manifests first (better layer caching)
 COPY pnpm-workspace.yaml pnpm-lock.yaml package.json ./
 COPY backend/package.json ./backend/
 
+# Install all deps
 RUN pnpm install --frozen-lockfile
 
-COPY . .
+# Copy source (after install so node_modules layer is cached)
+COPY src ./src
+COPY index.html vite.config.ts postcss.config.mjs ./
+COPY lib ./lib
+
 RUN pnpm build
 
 # ── Stage 2: production server ────────────────────────────────────────────────
@@ -19,18 +25,12 @@ FROM node:22-alpine AS runner
 
 WORKDIR /app
 
-# Copy backend source
+# Copy backend source and lib
 COPY backend/ ./backend/
 COPY lib/ ./lib/
 
-# Copy built frontend (served as static files by nginx or directly)
+# Copy built frontend
 COPY --from=builder /app/dist ./dist
-
-# Install only backend deps (none currently, but future-proof)
-WORKDIR /app/backend
-RUN npm install --omit=dev 2>/dev/null || true
-
-WORKDIR /app
 
 EXPOSE 8787
 
