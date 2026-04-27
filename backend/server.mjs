@@ -71,6 +71,13 @@ function parseCommand(text) {
   return { command: trimmed.slice(0, spaceIdx).toLowerCase(), prompt: trimmed.slice(spaceIdx + 1).trim() };
 }
 
+function escapeHtml(str) {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
 async function sendAiReply(token, chatId, mode, prompt, apiKey, model) {
   try {
     await fetch(`https://api.telegram.org/bot${token}/sendChatAction`, {
@@ -81,7 +88,7 @@ async function sendAiReply(token, chatId, mode, prompt, apiKey, model) {
   } catch {}
 
   const output = await generateOpenRouterText({ apiKey, model, mode, prompt });
-  const chunks = splitTelegramText(output);
+  const chunks = splitTelegramText(escapeHtml(output));
   for (const chunk of chunks) {
     await sendTelegramMessage(token, chatId, chunk);
   }
