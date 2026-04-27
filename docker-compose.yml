@@ -1,0 +1,16 @@
+services:
+  app:
+    build: .
+    container_name: lora-app
+    restart: unless-stopped
+    ports:
+      - "8787:8787"
+    env_file:
+      - ./backend/.env
+    environment:
+      - PORT=8787
+      - HOST=0.0.0.0
+    volumes:
+      # Hot-reload backend in dev (comment out in production)
+      - ./backend:/app/backend
+      - ./lib:/app/lib

@@ -1,7 +1,0 @@
-{
-  "functions": {
-    "api/leads.js": { "maxDuration": 15 },
-    "api/telegram.js": { "maxDuration": 60 },
-    "api/telegram-setup.js": { "maxDuration": 15 }
-  }
-}
