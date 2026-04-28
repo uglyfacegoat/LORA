@@ -115,7 +115,7 @@ export function ProcessSection() {
           >
             <div className="absolute -top-16 -left-16 w-48 h-48 pointer-events-none" style={{ background: "radial-gradient(circle, var(--glow-soft), transparent 60%)" }} />
 
-            <div className="p-8 md:p-14 flex items-start gap-10 md:gap-14">
+            <div className="p-8 md:p-14 flex items-center gap-10 md:gap-14">
               <p className="shrink-0 select-none" style={{ fontSize: "8rem", fontWeight: 900, lineHeight: 0.8, letterSpacing: "-0.06em", color: "var(--glow-mid)" }}>
                 {steps[active].num}
               </p>

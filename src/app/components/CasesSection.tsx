@@ -41,35 +41,44 @@ export function CasesSection() {
     {
       client: t("results.case1.client"),
       tag: t("results.case1.tag"),
-      hero: { value: "+340%", label: t("results.case1.heroLabel") },
+      hero: { value: "+68%", label: t("results.case1.heroLabel") },
       secondary: [
-        { value: "$2.4M", label: t("results.case1.secondary1") },
-        { value: "-52%", label: t("results.case1.secondary2") },
+        { value: "+38%", label: t("results.case1.secondary1") },
+        { value: "-24%", label: t("results.case1.secondary2") },
       ],
       quote: t("results.case1.quote"),
       timeline: t("results.case1.timeline"),
+      before: t("results.case1.before"),
+      implemented: t("results.case1.implemented"),
+      result: t("results.case1.result"),
     },
     {
       client: t("results.case2.client"),
       tag: t("results.case2.tag"),
-      hero: { value: "+95%", label: t("results.case2.heroLabel") },
+      hero: { value: "+44%", label: t("results.case2.heroLabel") },
       secondary: [
-        { value: "+180%", label: t("results.case2.secondary1") },
-        { value: "$890K", label: t("results.case2.secondary2") },
+        { value: "+55%", label: t("results.case2.secondary1") },
+        { value: "+36%", label: t("results.case2.secondary2") },
       ],
       quote: t("results.case2.quote"),
       timeline: t("results.case2.timeline"),
+      before: t("results.case2.before"),
+      implemented: t("results.case2.implemented"),
+      result: t("results.case2.result"),
     },
     {
       client: t("results.case3.client"),
       tag: t("results.case3.tag"),
-      hero: { value: "12x", label: t("results.case3.heroLabel") },
+      hero: { value: "2.8x", label: t("results.case3.heroLabel") },
       secondary: [
-        { value: "+210%", label: t("results.case3.secondary1") },
-        { value: "$5.1M", label: t("results.case3.secondary2") },
+        { value: "+43%", label: t("results.case3.secondary1") },
+        { value: "+62%", label: t("results.case3.secondary2") },
       ],
       quote: t("results.case3.quote"),
       timeline: t("results.case3.timeline"),
+      before: t("results.case3.before"),
+      implemented: t("results.case3.implemented"),
+      result: t("results.case3.result"),
     },
   ];
 
@@ -161,6 +170,22 @@ export function CasesSection() {
             </div>
 
             <div className="grid md:grid-cols-3 gap-6 pt-8" style={{ borderTop: "1px solid var(--surface-border)" }}>
+              {/* Story strip: before → implemented → result */}
+              <div className="md:col-span-3 grid md:grid-cols-3 gap-0 rounded-xl overflow-hidden mb-2" style={{ border: "1px solid var(--surface-border)" }}>
+                {[
+                  { label: t("results.before"), text: c.before, icon: "↓" },
+                  { label: t("results.implemented"), text: c.implemented, icon: "→" },
+                  { label: t("results.after"), text: c.result, icon: "↑" },
+                ].map((item, i) => (
+                  <div key={i} className="p-5 relative" style={{ borderRight: i < 2 ? "1px solid var(--surface-border)" : "none", background: "var(--surface-soft)" }}>
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className="uppercase tracking-[0.2em]" style={{ fontSize: "0.45rem", fontWeight: 700, color: "var(--fg-5)" }}>{item.label}</span>
+                    </div>
+                    <p style={{ fontSize: "0.78rem", lineHeight: 1.6, color: "var(--fg-3)" }}>{item.text}</p>
+                  </div>
+                ))}
+              </div>
+
               {c.secondary.map((m) => (
                 <div key={m.label} className="p-5 rounded-xl" style={{ background: "var(--surface-mid)", border: "1px solid var(--surface-border)" }}>
                   <p style={{ fontSize: "2rem", fontWeight: 800, letterSpacing: "-0.03em", color: "var(--fg-1)" }}>

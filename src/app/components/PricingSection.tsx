@@ -42,12 +42,14 @@ export function PricingSection() {
     { key: "crm", label: t("pricing.product.crm") },
   ];
 
-  const tiers: { key: Tier; label: string; price: string; note: string; features: string[] }[] = [
+  const tiers: { key: Tier; label: string; price: string; note: string; for: string; value: string; features: string[] }[] = [
     {
       key: "min",
       label: t("pricing.tier.min"),
       price: t(`pricing.${activeProduct}.min.price`),
       note: t("pricing.fromNote"),
+      for: t("pricing.tier.min.for"),
+      value: t("pricing.tier.min.value"),
       features: [
         t(`pricing.${activeProduct}.min.f1`),
         t(`pricing.${activeProduct}.min.f2`),
@@ -60,6 +62,8 @@ export function PricingSection() {
       label: t("pricing.tier.mid"),
       price: t(`pricing.${activeProduct}.mid.price`),
       note: t("pricing.fromNote"),
+      for: t("pricing.tier.mid.for"),
+      value: t("pricing.tier.mid.value"),
       features: [
         t(`pricing.${activeProduct}.mid.f1`),
         t(`pricing.${activeProduct}.mid.f2`),
@@ -73,6 +77,8 @@ export function PricingSection() {
       label: t("pricing.tier.max"),
       price: t(`pricing.${activeProduct}.max.price`),
       note: t("pricing.fromNote"),
+      for: t("pricing.tier.max.for"),
+      value: t("pricing.tier.max.value"),
       features: [
         t(`pricing.${activeProduct}.max.f1`),
         t(`pricing.${activeProduct}.max.f2`),
@@ -87,6 +93,8 @@ export function PricingSection() {
       label: t("pricing.tier.custom"),
       price: t("pricing.custom.price"),
       note: t("pricing.custom.note"),
+      for: t("pricing.tier.custom.for"),
+      value: t("pricing.tier.custom.value"),
       features: [
         t("pricing.custom.f1"),
         t("pricing.custom.f2"),
@@ -206,6 +214,16 @@ export function PricingSection() {
               <div className="mb-1" style={{ fontSize: tier.key === "custom" ? "1.3rem" : "clamp(1.5rem, 3vw, 2rem)", fontWeight: 800, letterSpacing: "-0.03em", color: "var(--fg-1)", lineHeight: 1 }}>
                 {tier.price}
               </div>
+
+              {/* For whom */}
+              <p className="mt-2" style={{ fontSize: "0.68rem", lineHeight: 1.5, color: "var(--fg-4)" }}>
+                {tier.for}
+              </p>
+
+              {/* Business value */}
+              <p className="mt-2 pt-2" style={{ fontSize: "0.72rem", lineHeight: 1.55, color: "var(--fg-3)", borderTop: "1px solid var(--surface-border)" }}>
+                {tier.value}
+              </p>
 
               {/* Divider */}
               <div className="my-5" style={{ height: "1px", background: "var(--surface-border)" }} />

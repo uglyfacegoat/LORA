@@ -139,7 +139,7 @@ export function LiveSystem() {
                   <span className="uppercase tracking-[0.2em]" style={{ fontSize: "0.5rem", fontWeight: 700, color: "var(--fg-4)" }}>
                     {m.label}
                   </span>
-                  <span style={{ fontSize: "0.72rem", color: "var(--fg-4)", textDecoration: "line-through", textDecorationColor: "var(--fg-4)", letterSpacing: "0.05em", fontWeight: 600 }}>
+                  <span style={{ fontSize: "1.35rem", color: "var(--fg-2)", textDecoration: "line-through", textDecorationColor: "var(--fg-3)", letterSpacing: "0.05em", fontWeight: 600 }}>
                     {m.prev}{m.suffix}
                   </span>
                 </div>

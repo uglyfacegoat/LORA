@@ -182,18 +182,21 @@ export function WhyLora() {
                   {t("why.roi")}
                 </p>
 
-                <p
-                  style={{
-                    fontSize: "4rem",
-                    fontWeight: 900,
-                    letterSpacing: "-0.05em",
-                    lineHeight: 0.9,
-                    textShadow: "0 0 40px var(--shadow-soft)",
-                    color: "var(--fg-1)",
-                  }}
-                >
-                  11.2x
-                </p>
+                <div className="flex flex-col">
+                  <span style={{ fontSize: "0.75rem", fontWeight: 600, color: "var(--fg-4)", letterSpacing: "0.05em", textTransform: "uppercase", marginBottom: "0.25rem" }}>{t("why.roi.prefix")}</span>
+                  <p
+                    style={{
+                      fontSize: "4rem",
+                      fontWeight: 900,
+                      letterSpacing: "-0.05em",
+                      lineHeight: 0.9,
+                      textShadow: "0 0 40px var(--shadow-soft)",
+                      color: "var(--fg-1)",
+                    }}
+                  >
+                    11.2x
+                  </p>
+                </div>
 
                 <p className="mt-2" style={{ fontSize: "0.78rem", lineHeight: 1.6, color: "var(--fg-4)" }}>
                   {t("why.roi.desc")}

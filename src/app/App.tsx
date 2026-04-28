@@ -168,23 +168,24 @@ function AppInner() {
           </span>
         </div>
 
-        <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
-          <div className="hidden md:flex items-center gap-5">
+        <div className="hidden md:absolute md:left-1/2 md:-translate-x-1/2 md:flex items-center gap-7">
             {[
-              { id: "process", key: "nav.process" },
               { id: "results", key: "nav.results" },
+              { id: "process", key: "nav.services" },
               { id: "contact", key: "nav.contact" },
             ].map((item) => (
               <a
                 key={item.id}
                 href={`#${item.id}`}
                 className="transition-colors duration-300 uppercase tracking-[0.15em]"
-                style={{ fontSize: "0.55rem", fontWeight: 600, color: "var(--fg-4)" }}
+                style={{ fontSize: "0.7rem", fontWeight: 600, color: item.key === "nav.services" ? "var(--fg-1)" : "var(--fg-3)" }}
               >
                 {t(item.key)}
               </a>
             ))}
           </div>
+
+        <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
 
           {/* Language button */}
           <button
@@ -251,8 +252,6 @@ function AppInner() {
           </div>
         </div>
 
-        <StorySection />
-
         <Manifesto />
         <PainSection />
         <WhyLora />
@@ -260,8 +259,9 @@ function AppInner() {
         <div id="process"><ProcessSection /></div>
         <Comparison />
         <div id="results"><CasesSection /></div>
-        <ArticlesSection />
+        {/* <ArticlesSection /> */}
         <PricingSection />
+        <StorySection />
         <CtaBreak />
         <ContactSection />
         <Footer />

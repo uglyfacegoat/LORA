@@ -342,7 +342,7 @@ export function HeroSection() {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.4, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-        className="relative z-10 flex w-full max-w-4xl flex-col items-center"
+        className="relative z-10 flex w-full max-w-4xl flex-col items-center mt-24 sm:mt-28"
       >
         <img
           src={heroLogo}
@@ -356,8 +356,8 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 1.2, ease: [0.16, 1, 0.3, 1] }}
-          className="text-center max-w-[34rem] mt-8 sm:mt-10 mb-12 sm:mb-16 px-2"
-          style={{ fontSize: "1rem", lineHeight: 1.85, letterSpacing: "0.01em", color: "var(--fg-3)" }}
+          className="text-center max-w-[34rem] mt-3 sm:mt-4 mb-12 sm:mb-16 px-2"
+          style={{ fontSize: "1.05rem", lineHeight: 1.72, letterSpacing: "0.01em", color: "var(--fg-3)" }}
         >
           {t("hero.tagline")}
         </motion.p>
@@ -381,8 +381,8 @@ export function HeroSection() {
           >
             <span className="relative z-10 flex items-center gap-2.5">
               {t("hero.cta.primary")}
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="transition-transform duration-300 group-hover:translate-x-1">
-                <path d="M1 6H11M11 6L7 2M11 6L7 10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="transition-transform duration-300 group-hover:translate-y-1">
+                <path d="M6 1V11M6 11L2 7M6 11L10 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </span>
           </button>

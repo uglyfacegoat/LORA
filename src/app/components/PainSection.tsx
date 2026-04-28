@@ -6,10 +6,10 @@ import { useI18n } from "../i18n";
 export function PainSection() {
   const { t } = useI18n();
   const pains = [
-    { id: "01", text: t("pain.01.t"), sub: t("pain.01.s"), percent: "73%", percentLabel: t("pain.01.l"), color: "var(--surface-mid)" },
-    { id: "02", text: t("pain.02.t"), sub: t("pain.02.s"), percent: "4.2x", percentLabel: t("pain.02.l"), color: "var(--surface-soft)" },
-    { id: "03", text: t("pain.03.t"), sub: t("pain.03.s"), percent: "89%", percentLabel: t("pain.03.l"), color: "var(--surface-mid)" },
-    { id: "04", text: t("pain.04.t"), sub: t("pain.04.s"), percent: "0%", percentLabel: t("pain.04.l"), color: "var(--surface-soft)" },
+    { id: "01", text: t("pain.01.t"), sub: t("pain.01.s"), percent: "73%", percentLabel: t("pain.01.l"), src: t("pain.01.src"), color: "var(--surface-mid)" },
+    { id: "02", text: t("pain.02.t"), sub: t("pain.02.s"), percent: "4.2x", percentLabel: t("pain.02.l"), src: t("pain.02.src"), color: "var(--surface-soft)" },
+    { id: "03", text: t("pain.03.t"), sub: t("pain.03.s"), percent: "89%", percentLabel: t("pain.03.l"), src: t("pain.03.src"), color: "var(--surface-mid)" },
+    { id: "04", text: t("pain.04.t"), sub: t("pain.04.s"), percent: "0%", percentLabel: t("pain.04.l"), src: t("pain.04.src"), color: "var(--surface-soft)" },
   ];
 
   const sectionRef = useRef<HTMLElement>(null);
@@ -67,6 +67,7 @@ export function PainSection() {
             </motion.h2>
 
             <div className="grid md:grid-cols-[1.3fr_1fr] gap-8 md:gap-16 mt-12 sm:mt-16">
+              <div className="relative">
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 animate={inView ? { opacity: 1, x: 0 } : {}}
@@ -102,7 +103,7 @@ export function PainSection() {
                     {current.text}
                   </h3>
                   <p style={{ fontSize: "0.9rem", lineHeight: 1.7, maxWidth: 380, color: "var(--fg-3)", overflowWrap: "anywhere" }}>
-                    {current.sub}
+                    {current.sub} <span style={{ color: "var(--fg-4)" }}>{current.src}.</span>
                   </p>
                 </motion.div>
 
@@ -120,6 +121,7 @@ export function PainSection() {
                   ))}
                 </div>
               </motion.div>
+              </div>
 
               <motion.div
                 initial={{ opacity: 0, x: 30 }}

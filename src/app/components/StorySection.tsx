@@ -49,28 +49,38 @@ export function StorySection() {
             <span style={{ color: "var(--fg-3)" }}>{t("story.titleAccent")}</span>
           </motion.h2>
 
-          {/* Stats row */}
+          {/* Stats row + NDA */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="flex items-center gap-0"
+            className="flex flex-col items-end gap-4"
           >
-            {stats.map((s, i) => (
-              <div key={i} className="flex items-center">
-                <div className="px-6 py-3 text-center">
-                  <p style={{ fontSize: "1.6rem", fontWeight: 800, letterSpacing: "-0.04em", color: "var(--fg-1)", lineHeight: 1 }}>
-                    {s.value}
-                  </p>
-                  <p className="uppercase tracking-[0.15em] mt-1" style={{ fontSize: "0.48rem", fontWeight: 700, color: "var(--fg-4)" }}>
-                    {s.label}
-                  </p>
+            <div className="flex items-center gap-0">
+              {stats.map((s, i) => (
+                <div key={i} className="flex items-center">
+                  <div className="px-6 py-3 text-center">
+                    <p style={{ fontSize: "1.6rem", fontWeight: 800, letterSpacing: "-0.04em", color: "var(--fg-1)", lineHeight: 1 }}>
+                      {s.value}
+                    </p>
+                    <p className="uppercase tracking-[0.15em] mt-1" style={{ fontSize: "0.48rem", fontWeight: 700, color: "var(--fg-4)" }}>
+                      {s.label}
+                    </p>
+                  </div>
+                  {i < stats.length - 1 && (
+                    <div className="w-px h-8" style={{ background: "var(--surface-border)" }} />
+                  )}
                 </div>
-                {i < stats.length - 1 && (
-                  <div className="w-px h-8" style={{ background: "var(--surface-border)" }} />
-                )}
-              </div>
-            ))}
+              ))}
+            </div>
+            <div className="text-right" style={{ maxWidth: "22rem" }}>
+              <p className="uppercase tracking-[0.3em] mb-1" style={{ fontSize: "0.85rem", fontWeight: 700, color: "rgba(255,255,255,0.35)" }}>
+                {t("results.nda.label")}
+              </p>
+              <p style={{ fontSize: "0.62rem", lineHeight: 1.6, color: "rgba(255,255,255,0.35)" }}>
+                {t("results.nda.text")}
+              </p>
+            </div>
           </motion.div>
         </div>
 
@@ -124,6 +134,7 @@ export function StorySection() {
             {t("story.closing")}
           </p>
         </motion.div>
+
       </div>
     </section>
   );
