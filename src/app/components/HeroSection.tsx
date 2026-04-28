@@ -287,7 +287,7 @@ export function HeroSection() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 overflow-hidden">
+    <section className="relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 overflow-hidden pb-16 sm:pb-20">
       <div className="absolute inset-0 z-0" style={{ background: "var(--app-bg)" }} />
       <div className="absolute inset-0 z-0 pointer-events-none select-none overflow-hidden">
         {HERO_STARS.map((star, index) => (
@@ -342,7 +342,7 @@ export function HeroSection() {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.4, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-        className="relative z-10 flex w-full max-w-4xl flex-col items-center mt-[136px] sm:mt-[152px]"
+        className="relative z-10 flex w-full max-w-4xl flex-col items-center mt-24 sm:mt-28"
       >
         <img
           src={heroLogo}
