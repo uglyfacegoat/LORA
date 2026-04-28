@@ -366,7 +366,7 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.5 }}
-          className="flex w-full max-w-[34rem] flex-col sm:flex-row gap-3 sm:gap-4 px-2"
+          className="flex w-full max-w-[34rem] flex-col sm:flex-row justify-center gap-3 sm:gap-4 px-2 mx-auto"
         >
           <button
             onClick={() => {
@@ -395,7 +395,7 @@ export function HeroSection() {
               }
             }}
             className="group relative flex w-full sm:w-auto justify-center px-8 sm:px-14 py-4.5 uppercase tracking-[0.22em] cursor-pointer overflow-hidden transition-all duration-500 rounded-xl"
-            style={{ fontSize: "0.68rem", fontWeight: 500, border: "1px solid var(--surface-border)", color: "var(--fg-2)", background: "transparent" }}
+            style={{ fontSize: "0.68rem", fontWeight: 500, border: "1px solid var(--accent-border)", color: "var(--fg-2)", background: "transparent" }}
           >
             <span className="relative z-10">{t("hero.cta.secondary")}</span>
           </button>
