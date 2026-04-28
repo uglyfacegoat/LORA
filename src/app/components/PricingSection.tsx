@@ -373,7 +373,7 @@ export function PricingSection() {
 
           {/* Reserved */}
           <div
-            className="rounded-2xl p-6 flex flex-col gap-4 relative overflow-hidden"
+            className="rounded-2xl p-6 flex flex-col gap-4 relative overflow-hidden min-h-[180px]"
             style={{ background: "var(--surface-soft)", border: "1px solid var(--surface-border)" }}
           >
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none" style={{ opacity: 0.04 }}>
