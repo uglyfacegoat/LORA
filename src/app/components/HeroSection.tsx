@@ -287,7 +287,7 @@ export function HeroSection() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 overflow-hidden pb-24 sm:pb-0">
+    <section className="relative min-h-screen flex flex-col items-center px-4 sm:px-6 overflow-hidden">
       <div className="absolute inset-0 z-0" style={{ background: "var(--app-bg)" }} />
       <div className="absolute inset-0 z-0 pointer-events-none select-none overflow-hidden">
         {HERO_STARS.map((star, index) => (
@@ -342,7 +342,7 @@ export function HeroSection() {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.4, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-        className="relative z-10 flex w-full max-w-4xl flex-col items-center mt-24 sm:mt-28"
+        className="relative z-10 flex w-full max-w-4xl flex-col items-center mt-24 sm:mt-28 flex-1 justify-center"
       >
         <img
           src={heroLogo}
@@ -406,7 +406,7 @@ export function HeroSection() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2.5, duration: 1.5 }}
-        className="absolute bottom-8 sm:bottom-10 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 uppercase"
+        className="relative z-10 self-center flex flex-col items-center gap-2 uppercase pb-8 sm:pb-10"
         style={{ fontSize: "0.5rem", letterSpacing: "0.3em", fontWeight: 600, color: "var(--fg-4)" }}
       >
         <span>{t("hero.scroll")}</span>
