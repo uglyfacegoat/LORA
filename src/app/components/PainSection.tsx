@@ -127,7 +127,7 @@ export function PainSection() {
                 initial={{ opacity: 0, x: 30 }}
                 animate={inView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.8, delay: 0.3 }}
-                className="flex flex-col justify-center gap-3"
+                className="hidden md:flex flex-col justify-center gap-3"
               >
                 {pains.map((pain, i) => {
                   const isActive = i === active;

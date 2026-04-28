@@ -74,10 +74,10 @@ export function StorySection() {
               ))}
             </div>
             <div className="text-right" style={{ maxWidth: "22rem" }}>
-              <p className="uppercase tracking-[0.3em] mb-1" style={{ fontSize: "0.85rem", fontWeight: 700, color: "rgba(255,255,255,0.35)" }}>
+              <p className="uppercase tracking-[0.3em] mb-1" style={{ fontSize: "0.85rem", fontWeight: 700, color: "var(--fg-4)" }}>
                 {t("results.nda.label")}
               </p>
-              <p style={{ fontSize: "0.62rem", lineHeight: 1.6, color: "rgba(255,255,255,0.35)" }}>
+              <p style={{ fontSize: "0.62rem", lineHeight: 1.6, color: "var(--fg-4)" }}>
                 {t("results.nda.text")}
               </p>
             </div>

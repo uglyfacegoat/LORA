@@ -11,17 +11,17 @@ const TIERS = ["min", "mid", "max", "custom"] as const;
 type Tier = typeof TIERS[number];
 
 const TIER_COLORS: Record<Tier, string> = {
-  min: "rgba(255,255,255,0.04)",
-  mid: "rgba(255,255,255,0.06)",
-  max: "rgba(255,255,255,0.09)",
-  custom: "rgba(255,255,255,0.03)",
+  min: "var(--surface-soft)",
+  mid: "var(--surface-mid)",
+  max: "var(--surface-strong)",
+  custom: "var(--surface-soft)",
 };
 
 const TIER_BORDER: Record<Tier, string> = {
-  min: "rgba(255,255,255,0.07)",
-  mid: "rgba(255,255,255,0.12)",
-  max: "rgba(255,255,255,0.22)",
-  custom: "rgba(255,255,255,0.07)",
+  min: "var(--surface-border)",
+  mid: "var(--surface-border)",
+  max: "var(--accent-border)",
+  custom: "var(--surface-border)",
 };
 
 const TIER_BADGE: Record<Tier, string> = {
