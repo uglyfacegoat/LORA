@@ -287,7 +287,7 @@ export function HeroSection() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center px-4 sm:px-6 overflow-hidden">
+    <section className="relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 overflow-hidden">
       <div className="absolute inset-0 z-0" style={{ background: "var(--app-bg)" }} />
       <div className="absolute inset-0 z-0 pointer-events-none select-none overflow-hidden">
         {HERO_STARS.map((star, index) => (
@@ -342,7 +342,7 @@ export function HeroSection() {
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.4, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-        className="relative z-10 flex w-full max-w-4xl flex-col items-center mt-24 sm:mt-28 flex-1 justify-center"
+        className="relative z-10 flex w-full max-w-4xl flex-col items-center mt-24 sm:mt-28"
       >
         <img
           src={heroLogo}
@@ -366,7 +366,7 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.5 }}
-          className="flex w-full max-w-[34rem] flex-col sm:flex-row gap-3 sm:gap-4 px-2 mb-16 sm:mb-12"
+          className="flex w-full max-w-[34rem] flex-col sm:flex-row gap-3 sm:gap-4 px-2"
         >
           <button
             onClick={() => {
@@ -402,20 +402,7 @@ export function HeroSection() {
         </motion.div>
       </motion.div>
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2.5, duration: 1.5 }}
-        className="relative z-10 self-center flex flex-col items-center gap-2 uppercase pb-8 sm:pb-10"
-        style={{ fontSize: "0.5rem", letterSpacing: "0.3em", fontWeight: 600, color: "var(--fg-4)" }}
-      >
-        <span>{t("hero.scroll")}</span>
-        <motion.div animate={{ y: [0, 4, 0] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}>
-          <svg width="10" height="14" viewBox="0 0 10 14" fill="none">
-            <path d="M5 1V13M5 13L1 9M5 13L9 9" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
-          </svg>
-        </motion.div>
-      </motion.div>
+
     </section>
   );
 }
