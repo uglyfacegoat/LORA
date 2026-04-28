@@ -366,7 +366,7 @@ export function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.5 }}
-          className="flex w-full max-w-[34rem] flex-col sm:flex-row gap-3 sm:gap-4 px-2"
+          className="flex w-full max-w-[34rem] flex-col sm:flex-row gap-3 sm:gap-4 px-2 mb-16 sm:mb-12"
         >
           <button
             onClick={() => {
