@@ -2,6 +2,8 @@ import { motion } from "motion/react";
 import { useEffect, useState } from "react";
 import logoLargeDark from "../../assets/logo-large-dark.svg";
 import logoLargeLight from "../../assets/logo-large-light.svg";
+import logoLargeMobileDark from "../../assets/logo-large-mobile-dark.svg";
+import logoLargeMobileLight from "../../assets/logo-large-mobile-light.svg";
 import { useI18n } from "../i18n";
 import { useTheme } from "../theme";
 
@@ -265,6 +267,7 @@ export function HeroSection() {
   const { t } = useI18n();
   const { theme } = useTheme();
   const heroLogo = theme === "dark" ? logoLargeDark : logoLargeLight;
+  const heroLogoMobile = theme === "dark" ? logoLargeMobileDark : logoLargeMobileLight;
   const starColor = theme === "dark" ? "255,255,255" : "10,10,10";
 
   const [clock, setClock] = useState("");
@@ -344,13 +347,16 @@ export function HeroSection() {
         transition={{ duration: 1.4, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
         className="relative z-10 flex w-full max-w-4xl flex-col items-center mt-24 sm:mt-28"
       >
-        <img
-          src={heroLogo}
-          alt="LORA"
-          className="w-[min(84vw,420px)] sm:w-[clamp(280px,58vw,720px)] h-auto pointer-events-none select-none"
-          draggable={false}
-          style={{ WebkitUserDrag: "none" }}
-        />
+        <picture className="pointer-events-none select-none">
+          <source media="(max-width: 639px)" srcSet={heroLogoMobile} />
+          <img
+            src={heroLogo}
+            alt="LORA"
+            className="w-[min(84vw,420px)] sm:w-[clamp(280px,58vw,720px)] h-auto pointer-events-none select-none"
+            draggable={false}
+            style={{ WebkitUserDrag: "none" }}
+          />
+        </picture>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
