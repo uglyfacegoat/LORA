@@ -352,7 +352,7 @@ export function HeroSection() {
           <img
             src={heroLogo}
             alt="LORA"
-            className="w-[min(84vw,420px)] sm:w-[clamp(280px,58vw,720px)] h-auto pointer-events-none select-none"
+            className="w-[min(108vw,520px)] sm:w-[clamp(280px,58vw,720px)] h-auto pointer-events-none select-none"
             draggable={false}
             style={{ WebkitUserDrag: "none" }}
           />
