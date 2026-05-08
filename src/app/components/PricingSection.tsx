@@ -91,7 +91,7 @@ export function PricingSection() {
     {
       key: "custom",
       label: t("pricing.tier.custom"),
-      price: t("pricing.custom.price"),
+      price: t(`pricing.${activeProduct}.custom.price`),
       note: t("pricing.custom.note"),
       for: t("pricing.tier.custom.for"),
       value: t("pricing.tier.custom.value"),
@@ -265,6 +265,16 @@ export function PricingSection() {
             </motion.div>
           ))}
         </div>
+
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.68 }}
+          className="mb-10 max-w-3xl"
+          style={{ fontSize: "0.72rem", lineHeight: 1.7, color: "var(--fg-4)" }}
+        >
+          {t("pricing.footnote")}
+        </motion.p>
 
         {/* Static extra cards */}
         <motion.div

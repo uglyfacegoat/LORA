@@ -19,8 +19,11 @@ export function Footer() {
               <div className="flex items-center gap-3 mb-3">
                 <img src={smallLogo} alt="LORA" className="w-8 h-8 object-contain" />
                 <p style={{ fontSize: "1.4rem", fontWeight: 800, letterSpacing: "-0.03em", color: "var(--fg-1)" }}>LORA</p>
-                <div className="px-2.5 py-1 rounded-md" style={{ background: "var(--surface-mid)", border: "1px solid var(--surface-border)" }}>
-                  <span className="uppercase tracking-[0.15em]" style={{ fontSize: "0.45rem", fontWeight: 700, color: "var(--fg-4)" }}>EST. 2024</span>
+                <div className="hidden sm:flex h-8 items-center gap-3 pl-1">
+                  <div className="h-full w-px" style={{ background: "var(--surface-border)" }} />
+                  <span className="uppercase tracking-[0.2em]" style={{ fontSize: "0.5rem", fontWeight: 700, color: "var(--fg-4)", lineHeight: 1 }}>
+                    Since 2026
+                  </span>
                 </div>
               </div>
               <p className="uppercase tracking-[0.2em] flex items-center gap-2" style={{ fontSize: "0.6rem", color: "var(--fg-4)" }}>

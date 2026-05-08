@@ -15,9 +15,10 @@ export function PainSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const [inView, setInView] = useState(false);
   const [active, setActive] = useState(0);
+  const [progress, setProgress] = useState(0);
   const current = pains[active];
 
-  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start center", "end center"] });
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end end"] });
 
   useEffect(() => {
     const el = sectionRef.current;
@@ -30,8 +31,9 @@ export function PainSection() {
   }, []);
 
   useMotionValueEvent(scrollYProgress, "change", (value) => {
-    const normalized = Math.min(0.9999, Math.max(0, value));
-    const next = Math.min(pains.length - 1, Math.floor(normalized * pains.length));
+    const normalized = Math.min(1, Math.max(0, value));
+    const next = Math.min(pains.length - 1, Math.floor(Math.min(0.9999, normalized) * pains.length));
+    setProgress(normalized);
     setActive((prev) => (prev === next ? prev : next));
   });
 
@@ -107,18 +109,16 @@ export function PainSection() {
                   </p>
                 </motion.div>
 
-                <div className="flex gap-1.5 mt-10">
-                  {pains.map((_, i) => (
-                    <div key={i} className="h-[3px] rounded-full overflow-hidden flex-1" style={{ background: "var(--surface-strong)" }}>
-                      <motion.div
-                        className="h-full rounded-full"
-                        style={{ background: "var(--line-strong)" }}
-                        initial={{ width: "0%" }}
-                        animate={{ width: i === active ? "100%" : i < active ? "100%" : "0%" }}
-                        transition={{ duration: 0.3, ease: "linear" }}
-                      />
-                    </div>
-                  ))}
+                <div className="mt-10">
+                  <div className="relative h-[3px] overflow-hidden rounded-full" style={{ background: "var(--surface-strong)" }}>
+                    <motion.div
+                      className="absolute inset-y-0 left-0 rounded-full"
+                      style={{ background: "var(--fg-2)" }}
+                      initial={{ width: "0%" }}
+                      animate={{ width: `${progress * 100}%` }}
+                      transition={{ duration: 0.18, ease: "linear" }}
+                    />
+                  </div>
                 </div>
               </motion.div>
               </div>

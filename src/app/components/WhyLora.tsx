@@ -89,11 +89,12 @@ export function WhyLora() {
           <span style={{ color: "var(--fg-4)" }}>{t("why.titleAccent")}</span>
         </motion.h2>
 
-        <div className="grid auto-rows-auto gap-4 md:grid-cols-3">
+        <div className="grid auto-rows-auto gap-4 md:grid-cols-[repeat(24,minmax(0,1fr))]">
           <motion.div
             initial={{ opacity: 0, y: 25 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
+            className="md:col-span-8"
           >
             <TiltCard
               className="relative h-full cursor-default overflow-hidden rounded-2xl p-8 md:col-span-2 md:p-10"
@@ -169,6 +170,7 @@ export function WhyLora() {
             initial={{ opacity: 0, y: 25 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.3 }}
+            className="md:col-span-7"
           >
             <TiltCard
               className="relative flex h-full cursor-default flex-col justify-between overflow-hidden rounded-2xl p-8"
@@ -227,6 +229,7 @@ export function WhyLora() {
             initial={{ opacity: 0, y: 25 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.4 }}
+            className="md:col-span-9"
           >
             <TiltCard
               className="relative flex h-full cursor-default flex-col justify-center overflow-hidden rounded-2xl p-8"
@@ -258,6 +261,7 @@ export function WhyLora() {
             initial={{ opacity: 0, y: 25 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.5 }}
+            className="md:col-span-7"
           >
             <TiltCard
               className="h-full cursor-default rounded-2xl p-8"
@@ -283,6 +287,7 @@ export function WhyLora() {
             initial={{ opacity: 0, y: 25 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.55 }}
+            className="md:col-span-9"
           >
             <TiltCard
               className="h-full cursor-default rounded-2xl p-8"
@@ -309,6 +314,7 @@ export function WhyLora() {
             initial={{ opacity: 0, y: 25 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.6 }}
+            className="md:col-span-8"
           >
             <TiltCard
               className="h-full cursor-default rounded-2xl p-8"

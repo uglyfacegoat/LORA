@@ -23,6 +23,19 @@ export const translations: Dict = {
   "nav.languageAria": { en: "Change language", es: "Cambiar idioma", ru: "Сменить язык", zh: "切换语言" },
   "nav.themeAria": { en: "Toggle theme", es: "Cambiar tema", ru: "Сменить тему", zh: "切换主题" },
 
+  "hero.eyebrow": { en: "Revenue Engineering", es: "Ingeniería de ingresos", ru: "Инжиниринг выручки", zh: "营收工程" },
+  "hero.title": {
+    en: "We build\nsystems that\nscale revenue.",
+    es: "Creamos sistemas\nque escalan\ningresos.",
+    ru: "Мы строим\nсистемы для роста\nвыручки.",
+    zh: "我们构建\n可扩展营收的\n系统。",
+  },
+  "hero.subline": {
+    en: "From traffic to transaction. Engineered for compounding growth.",
+    es: "Del tráfico a la transacción. Diseñado para crecimiento compuesto.",
+    ru: "От трафика до сделки. Спроектировано для накопительного роста.",
+    zh: "从流量到交易。为复利增长而设计。",
+  },
   "hero.tagline": {
     en: "We engineer conversion systems: entry points, landing pages, apps, CRM systems, analytics tools and digital products that turn your traffic into predictable, scalable revenue.",
     es: "Diseñamos sistemas de conversión: puntos de entrada, landing pages, apps, CRM, herramientas de analítica y productos digitales que convierten tu tráfico en ingresos previsibles y escalables.",
@@ -285,14 +298,15 @@ export const translations: Dict = {
   "pricing.eyebrow": { en: "Pricing", es: "Precios", ru: "Стоимость", zh: "定价" },
   "pricing.title": { en: "Transparent pricing.", es: "Precios transparentes.", ru: "Прозрачные цены.", zh: "透明定价。" },
   "pricing.titleSub": { en: "No hidden fees.", es: "Sin costes ocultos.", ru: "Без скрытых платежей.", zh: "无隐藏费用。" },
-  "pricing.desc": { en: "Choose a product, pick a tier. Prices shown are the minimum starting point — final cost depends on scope.", es: "Elige un producto y un nivel. Los precios indicados son el mínimo de entrada — el coste final depende del alcance.", ru: "Выберите продукт и тариф. Цена — это минимальная точка входа. Итоговая стоимость зависит от объёма задач.", zh: "选择产品和套餐。所示价格为最低起步价，最终费用取决于项目范围。" },
+  "pricing.desc": { en: "Choose a product, pick a tier. We begin with an audit and briefing, then define scope and final cost.", es: "Elige un producto y un nivel. Empezamos con una auditoría y un briefing, luego definimos el alcance y el coste final.", ru: "Выберите продукт и тариф. Сначала проводим аудит и брифинг, затем фиксируем состав работ и финальную стоимость.", zh: "选择产品和套餐。我们先进行审核与需求沟通，然后明确范围和最终费用。" },
+  "pricing.footnote": { en: "Prices start from the basic package. Before the project begins, we run an audit and briefing, define the task, scope of work, timeline, and final project cost.", es: "Los precios parten del paquete básico. Antes de comenzar, realizamos una auditoría y un briefing, definimos la tarea, el alcance del trabajo, los plazos y el coste final del proyecto.", ru: "Цены указаны от базовой комплектации. Перед стартом мы проводим аудит и брифинг, фиксируем задачу, состав работ, сроки и финальную стоимость проекта.", zh: "价格为基础配置起价。项目开始前，我们会进行审核与需求沟通，明确任务、工作范围、周期和最终项目费用。" },
   "pricing.fromNote": { en: "from", es: "desde", ru: "от", zh: "起" },
   "pricing.fixed": { en: "Fixed price", es: "Precio fijo", ru: "Фиксировано", zh: "固定价格" },
   "pricing.monthly": { en: "/ month", es: "/ mes", ru: "/ мес", zh: "/ 月" },
 
   "pricing.product.website": { en: "Entry Point", es: "Punto de entrada", ru: "Точка входа", zh: "入口载体" },
   "pricing.product.app": { en: "Digital Product", es: "Producto digital", ru: "Цифровой продукт", zh: "数字产品" },
-  "pricing.product.crm": { en: "Revenue System", es: "Sistema de ingresos", ru: "Система роста", zh: "增长系统" },
+  "pricing.product.crm": { en: "Growth System", es: "Sistema de crecimiento", ru: "Система роста", zh: "增长系统" },
 
   "pricing.tier.min": { en: "Start", es: "Inicio", ru: "Старт", zh: "起步" },
   "pricing.tier.mid": { en: "Growth", es: "Crecimiento", ru: "Рост", zh: "成长" },
@@ -313,20 +327,20 @@ export const translations: Dict = {
   "pricing.cta.custom": { en: "Get a quote", es: "Solicitar presupuesto", ru: "Обсудить", zh: "获取报价" },
 
   // Website tiers
-  "pricing.website.min.price": { en: "$800", es: "$800", ru: "от 60 000 ₽", zh: "$800" },
+  "pricing.website.min.price": { en: "45,000 ₽", es: "45 000 ₽", ru: "45 000 ₽", zh: "45 000 ₽" },
   "pricing.website.min.f1": { en: "Landing page (up to 5 sections)", es: "Página de destino (hasta 5 secciones)", ru: "Лендинг до 5 секций", zh: "落地页（最多5个区块）" },
   "pricing.website.min.f2": { en: "Mobile-responsive layout", es: "Diseño responsive móvil", ru: "Адаптивный дизайн", zh: "移动端响应式布局" },
   "pricing.website.min.f3": { en: "Contact form + CRM hook", es: "Formulario de contacto + integración CRM", ru: "Форма заявки + интеграция CRM", zh: "联系表单 + CRM 接入" },
   "pricing.website.min.f4": { en: "2-week delivery", es: "Entrega en 2 semanas", ru: "Срок 2 недели", zh: "2周交付" },
 
-  "pricing.website.mid.price": { en: "$2 500", es: "$2 500", ru: "от 190 000 ₽", zh: "$2 500" },
+  "pricing.website.mid.price": { en: "120,000 ₽", es: "120 000 ₽", ru: "120 000 ₽", zh: "120 000 ₽" },
   "pricing.website.mid.f1": { en: "Multi-page website (up to 12 pages)", es: "Sitio multipágina (hasta 12 páginas)", ru: "Многостраничный сайт до 12 страниц", zh: "多页网站（最多12页）" },
   "pricing.website.mid.f2": { en: "Custom UI/UX design", es: "Diseño UI/UX personalizado", ru: "Дизайн UI/UX под ключ", zh: "定制 UI/UX 设计" },
   "pricing.website.mid.f3": { en: "CMS integration (admin panel)", es: "Integración CMS (panel admin)", ru: "CMS + панель управления", zh: "CMS 集成（管理后台）" },
   "pricing.website.mid.f4": { en: "Analytics & pixel setup", es: "Configuración de analítica y pixel", ru: "Аналитика и пиксели", zh: "数据分析与像素配置" },
   "pricing.website.mid.f5": { en: "4-week delivery", es: "Entrega en 4 semanas", ru: "Срок 4 недели", zh: "4周交付" },
 
-  "pricing.website.max.price": { en: "$6 000", es: "$6 000", ru: "от 450 000 ₽", zh: "$6 000" },
+  "pricing.website.max.price": { en: "240,000 ₽", es: "240 000 ₽", ru: "240 000 ₽", zh: "240 000 ₽" },
   "pricing.website.max.f1": { en: "Full-scale web platform", es: "Plataforma web completa", ru: "Полноценная веб-платформа", zh: "完整网络平台" },
   "pricing.website.max.f2": { en: "Custom animations & motion design", es: "Animaciones y motion design personalizados", ru: "Кастомные анимации и motion-дизайн", zh: "自定义动画与动效设计" },
   "pricing.website.max.f3": { en: "E-commerce or catalogue module", es: "Módulo e-commerce o catálogo", ru: "Каталог / e-commerce модуль", zh: "电商或产品目录模块" },
@@ -335,20 +349,20 @@ export const translations: Dict = {
   "pricing.website.max.f6": { en: "6-week delivery", es: "Entrega en 6 semanas", ru: "Срок 6 недель", zh: "6周交付" },
 
   // App tiers
-  "pricing.app.min.price": { en: "$3 000", es: "$3 000", ru: "от 220 000 ₽", zh: "$3 000" },
+  "pricing.app.min.price": { en: "150,000 ₽", es: "150 000 ₽", ru: "150 000 ₽", zh: "150 000 ₽" },
   "pricing.app.min.f1": { en: "MVP / prototype (1 platform)", es: "MVP / prototipo (1 plataforma)", ru: "MVP / прототип (1 платформа)", zh: "MVP / 原型（单平台）" },
   "pricing.app.min.f2": { en: "Core feature set only", es: "Solo funciones básicas", ru: "Только основные функции", zh: "仅核心功能集" },
   "pricing.app.min.f3": { en: "REST API + auth", es: "REST API + autenticación", ru: "REST API + авторизация", zh: "REST API + 身份验证" },
   "pricing.app.min.f4": { en: "6-week delivery", es: "Entrega en 6 semanas", ru: "Срок 6 недель", zh: "6周交付" },
 
-  "pricing.app.mid.price": { en: "$8 000", es: "$8 000", ru: "от 600 000 ₽", zh: "$8 000" },
+  "pricing.app.mid.price": { en: "320,000 ₽", es: "320 000 ₽", ru: "320 000 ₽", zh: "320 000 ₽" },
   "pricing.app.mid.f1": { en: "Cross-platform app (iOS + Android)", es: "App multiplataforma (iOS + Android)", ru: "Кросс-платформенное приложение (iOS + Android)", zh: "跨平台应用（iOS + Android）" },
   "pricing.app.mid.f2": { en: "Push notifications & deep links", es: "Notificaciones push y deep links", ru: "Push-уведомления и диплинки", zh: "推送通知与深度链接" },
   "pricing.app.mid.f3": { en: "Payment gateway integration", es: "Integración de pasarela de pago", ru: "Интеграция платёжного шлюза", zh: "支付网关集成" },
   "pricing.app.mid.f4": { en: "Admin dashboard", es: "Panel de administración", ru: "Панель администратора", zh: "管理员仪表板" },
   "pricing.app.mid.f5": { en: "10-week delivery", es: "Entrega en 10 semanas", ru: "Срок 10 недель", zh: "10周交付" },
 
-  "pricing.app.max.price": { en: "$18 000", es: "$18 000", ru: "от 1 350 000 ₽", zh: "$18 000" },
+  "pricing.app.max.price": { en: "650,000 ₽", es: "650 000 ₽", ru: "650 000 ₽", zh: "650 000 ₽" },
   "pricing.app.max.f1": { en: "Full-featured product (iOS + Android + Web)", es: "Producto completo (iOS + Android + Web)", ru: "Полноценный продукт (iOS + Android + Web)", zh: "完整产品（iOS + Android + Web）" },
   "pricing.app.max.f2": { en: "Custom UI design system", es: "Sistema de diseño UI personalizado", ru: "Кастомная UI дизайн-система", zh: "自定义 UI 设计体系" },
   "pricing.app.max.f3": { en: "Analytics, A/B testing module", es: "Analítica, módulo de A/B testing", ru: "Аналитика, модуль A/B-тестов", zh: "数据分析、A/B测试模块" },
@@ -357,20 +371,20 @@ export const translations: Dict = {
   "pricing.app.max.f6": { en: "16-week delivery", es: "Entrega en 16 semanas", ru: "Срок 16 недель", zh: "16周交付" },
 
   // CRM tiers
-  "pricing.crm.min.price": { en: "$1 500", es: "$1 500", ru: "от 110 000 ₽", zh: "$1 500" },
+  "pricing.crm.min.price": { en: "65,000 ₽", es: "65 000 ₽", ru: "65 000 ₽", zh: "65 000 ₽" },
   "pricing.crm.min.f1": { en: "CRM setup & pipeline config", es: "Configuración CRM y pipeline", ru: "Настройка CRM и воронки", zh: "CRM配置与销售管道" },
   "pricing.crm.min.f2": { en: "Basic automations (3–5 triggers)", es: "Automatizaciones básicas (3–5 triggers)", ru: "Базовые автоматизации (3–5 триггеров)", zh: "基础自动化（3-5个触发器）" },
   "pricing.crm.min.f3": { en: "Email / messenger integration", es: "Integración email / mensajería", ru: "Интеграция email / мессенджеры", zh: "邮件/即时通讯集成" },
   "pricing.crm.min.f4": { en: "2-week delivery", es: "Entrega en 2 semanas", ru: "Срок 2 недели", zh: "2周交付" },
 
-  "pricing.crm.mid.price": { en: "$4 000", es: "$4 000", ru: "от 300 000 ₽", zh: "$4 000" },
+  "pricing.crm.mid.price": { en: "180,000 ₽", es: "180 000 ₽", ru: "180 000 ₽", zh: "180 000 ₽" },
   "pricing.crm.mid.f1": { en: "Custom CRM / internal tool", es: "CRM personalizado / herramienta interna", ru: "Кастомная CRM / внутренний инструмент", zh: "自定义CRM/内部工具" },
   "pricing.crm.mid.f2": { en: "Role-based access & permissions", es: "Acceso basado en roles y permisos", ru: "Роли и права доступа", zh: "基于角色的访问权限" },
   "pricing.crm.mid.f3": { en: "Integration with existing services", es: "Integración con servicios existentes", ru: "Интеграция с текущими сервисами", zh: "现有服务集成" },
   "pricing.crm.mid.f4": { en: "Reporting & analytics dashboard", es: "Dashboard de reportes y analítica", ru: "Дашборд отчётов и аналитики", zh: "报告与数据分析仪表板" },
   "pricing.crm.mid.f5": { en: "5-week delivery", es: "Entrega en 5 semanas", ru: "Срок 5 недель", zh: "5周交付" },
 
-  "pricing.crm.max.price": { en: "$12 000", es: "$12 000", ru: "от 900 000 ₽", zh: "$12 000" },
+  "pricing.crm.max.price": { en: "420,000 ₽", es: "420 000 ₽", ru: "420 000 ₽", zh: "420 000 ₽" },
   "pricing.crm.max.f1": { en: "Full custom business automation platform", es: "Plataforma completa de automatización empresarial", ru: "Полная кастомная платформа автоматизации бизнеса", zh: "完整定制业务自动化平台" },
   "pricing.crm.max.f2": { en: "AI-powered lead scoring", es: "Scoring de leads con IA", ru: "AI-скоринг лидов", zh: "AI驱动的线索评分" },
   "pricing.crm.max.f3": { en: "Multi-channel communication hub", es: "Hub de comunicación multicanal", ru: "Мультиканальный коммуникационный хаб", zh: "多渠道通信中心" },
@@ -379,7 +393,9 @@ export const translations: Dict = {
   "pricing.crm.max.f6": { en: "10-week delivery", es: "Entrega en 10 semanas", ru: "Срок 10 недель", zh: "10周交付" },
 
   // Individual
-  "pricing.custom.price": { en: "On request", es: "A consultar", ru: "По запросу", zh: "按需报价" },
+  "pricing.website.custom.price": { en: "from 350,000 ₽", es: "desde 350 000 ₽", ru: "от 350 000 ₽", zh: "350 000 ₽ 起" },
+  "pricing.app.custom.price": { en: "from 900,000 ₽", es: "desde 900 000 ₽", ru: "от 900 000 ₽", zh: "900 000 ₽ 起" },
+  "pricing.crm.custom.price": { en: "from 600,000 ₽", es: "desde 600 000 ₽", ru: "от 600 000 ₽", zh: "600 000 ₽ 起" },
   "pricing.custom.note": { en: "fully tailored", es: "totalmente personalizado", ru: "полностью под задачи", zh: "完全定制" },
   "pricing.custom.f1": { en: "Full consultation & discovery session", es: "Consulta completa y sesión de descubrimiento", ru: "Полная консультация и разбор задачи", zh: "完整咨询与需求发现会" },
   "pricing.custom.f2": { en: "Technical specification & roadmap", es: "Especificación técnica y hoja de ruta", ru: "Техническое задание и роадмап", zh: "技术规格与路线图" },
