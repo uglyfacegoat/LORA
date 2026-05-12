@@ -1,0 +1,573 @@
+- generic [ref=e3]:
+  - img "LORA" [ref=e5]
+  - navigation [ref=e6]:
+    - generic [ref=e7]:
+      - img "LORA" [ref=e8]
+      - generic [ref=e9]: LORA
+      - generic [ref=e11]: Systems Agency
+    - generic [ref=e12]:
+      - link "Results" [ref=e13] [cursor=pointer]:
+        - /url: "#results"
+      - link "Services" [ref=e14] [cursor=pointer]:
+        - /url: "#process"
+      - link "Contact" [ref=e15] [cursor=pointer]:
+        - /url: "#contact"
+    - generic [ref=e16]:
+      - button "Change language" [ref=e17]:
+        - img [ref=e18]
+        - generic [ref=e21]: EN
+      - button "Toggle theme" [ref=e22]:
+        - img [ref=e23]
+      - button "Get in touch" [ref=e25] [cursor=pointer]
+  - generic [ref=e26]:
+    - generic [ref=e27]:
+      - generic [ref=e29]: 17:36:12 GMT+03:00
+      - generic [ref=e30]:
+        - generic [ref=e31]: LORA_v04.26
+        - generic [ref=e32]: N 40.7128 / W 74.0060
+      - generic [ref=e33]:
+        - img "LORA"
+        - paragraph [ref=e34]: "We engineer conversion systems: entry points, landing pages, apps, CRM systems, analytics tools and digital products that turn your traffic into predictable, scalable revenue."
+        - generic [ref=e35]:
+          - button "Get Breakdown" [ref=e36] [cursor=pointer]:
+            - generic [ref=e37]:
+              - text: Get Breakdown
+              - img [ref=e38]
+          - button "Contact Us" [ref=e40] [cursor=pointer]:
+            - generic [ref=e41]: Contact Us
+    - generic [ref=e47]:
+      - generic:
+        - img
+      - img [ref=e48]
+      - generic [ref=e50]:
+        - paragraph [ref=e52]: We don't experiment.
+        - paragraph [ref=e54]: We don't try.
+        - paragraph [ref=e56]: We don't guess.
+        - paragraph [ref=e59]: We build modern
+        - paragraph [ref=e61]: revenue machines.
+    - generic [ref=e65]:
+      - heading "You know what the problem is." [level=2] [ref=e68]:
+        - text: You know
+        - text: what the problem is.
+      - generic [ref=e69]:
+        - generic [ref=e71]:
+          - generic [ref=e75]:
+            - paragraph [ref=e76]: 73%
+            - paragraph [ref=e77]: OF LEADS LOST
+          - generic [ref=e78]:
+            - heading "Leads vanish before converting" [level=3] [ref=e79]
+            - paragraph [ref=e80]:
+              - text: Your traffic costs money, but your funnel gives nothing back.
+              - generic [ref=e81]: Based on 12 e-commerce audits.
+        - generic [ref=e88]:
+          - generic [ref=e89] [cursor=pointer]:
+            - generic [ref=e90]:
+              - generic [ref=e92]: "01"
+              - paragraph [ref=e93]: Leads vanish before converting
+            - paragraph [ref=e94]: Your traffic costs money, but your funnel gives nothing back.
+          - generic [ref=e96] [cursor=pointer]:
+            - generic [ref=e98]: "02"
+            - paragraph [ref=e99]: Revenue leaks at every stage
+          - generic [ref=e101] [cursor=pointer]:
+            - generic [ref=e103]: "03"
+            - paragraph [ref=e104]: No system, just chaos
+          - generic [ref=e106] [cursor=pointer]:
+            - generic [ref=e108]: "04"
+            - paragraph [ref=e109]: Growth never compounds
+    - generic [ref=e111]:
+      - generic [ref=e112]:
+        - generic [ref=e115]: Why Us
+        - heading "We connect the path from visitor to sale." [level=2] [ref=e116]:
+          - text: We connect the path
+          - text: from visitor to sale.
+      - generic [ref=e121]:
+        - generic [ref=e123]:
+          - paragraph [ref=e124]: 01 / Visitor
+          - heading "They arrive" [level=3] [ref=e125]
+          - paragraph [ref=e126]: The first screen must match why they clicked.
+        - generic [ref=e128]:
+          - paragraph [ref=e129]: 02 / Trust
+          - heading "They believe" [level=3] [ref=e130]
+          - paragraph [ref=e131]: Proof, offer and structure remove hesitation.
+        - generic [ref=e133]:
+          - paragraph [ref=e134]: 03 / Lead
+          - heading "They act" [level=3] [ref=e135]
+          - paragraph [ref=e136]: The form feels easy, timely and worth completing.
+        - generic [ref=e138]:
+          - paragraph [ref=e139]: 04 / Sale
+          - heading "You follow up" [level=3] [ref=e140]
+          - paragraph [ref=e141]: CRM and follow-up keep the lead from going cold.
+      - generic [ref=e142]:
+        - generic [ref=e143]:
+          - paragraph [ref=e144]: instead of a prettier page
+          - paragraph [ref=e145]: You get a page, CRM logic, analytics and follow-up working as one route.
+        - generic [ref=e146]:
+          - generic [ref=e147]:
+            - paragraph [ref=e148]: 11.2x
+            - paragraph [ref=e149]: AVG. ROI
+          - generic [ref=e150]:
+            - paragraph [ref=e151]: "4"
+            - paragraph [ref=e152]: steps connected
+          - generic [ref=e153]:
+            - paragraph [ref=e154]: "1"
+            - paragraph [ref=e155]: system to own
+    - generic [ref=e157]:
+      - generic [ref=e160]: Live Preview
+      - heading "See the system in action." [level=2] [ref=e161]:
+        - text: See the system
+        - text: in action.
+      - paragraph [ref=e162]: This is what happens when we plug into your funnel. Real diagnostics. Real fixes. Real growth.
+      - generic [ref=e163]:
+        - generic [ref=e164]:
+          - generic [ref=e165]:
+            - generic [ref=e170]: LORA TERMINAL
+            - generic [ref=e175]: LIVE
+          - generic [ref=e178]: $ lora diagnose --target funnel
+        - generic [ref=e180]:
+          - generic [ref=e181]:
+            - generic [ref=e182]:
+              - generic [ref=e183]: Funnel Health
+              - generic [ref=e184]: 31%
+            - paragraph [ref=e185]: 94%
+          - generic [ref=e188]:
+            - generic [ref=e189]:
+              - generic [ref=e190]: Conv. Rate
+              - generic [ref=e191]: 1.9%
+            - paragraph [ref=e192]: 8.4%
+          - generic [ref=e195]:
+            - generic [ref=e196]:
+              - generic [ref=e197]: Revenue / Visit
+              - generic [ref=e198]: 0.8x
+            - paragraph [ref=e199]: 4.2x
+          - generic [ref=e202]:
+            - generic [ref=e203]:
+              - generic [ref=e204]: Lead Quality
+              - generic [ref=e205]: 34%
+            - paragraph [ref=e206]: 92%
+    - generic [ref=e211]:
+      - generic [ref=e214]: Process
+      - generic [ref=e215]:
+        - generic [ref=e216]:
+          - heading "Five steps. Zero guesswork." [level=2] [ref=e217]:
+            - text: Five steps.
+            - text: Zero guesswork.
+          - paragraph [ref=e218]: A repeatable workflow that has already proven itself. Every step builds on the previous one.
+        - paragraph [ref=e219]: Fast turnaround. The audit fee is credited toward the project if we move forward.
+      - generic [ref=e220]:
+        - generic [ref=e221]:
+          - button "01 3-4 DAYS AUDIT" [ref=e222] [cursor=pointer]:
+            - generic [ref=e223]:
+              - generic [ref=e224]: "01"
+              - generic [ref=e225]: 3-4 DAYS
+            - paragraph [ref=e226]: AUDIT
+          - button "02 1 WK STRATEGY" [ref=e229] [cursor=pointer]:
+            - generic [ref=e230]:
+              - generic [ref=e231]: "02"
+              - generic [ref=e232]: 1 WK
+            - paragraph [ref=e233]: STRATEGY
+          - button "03 2-4 WKS BUILD" [ref=e235] [cursor=pointer]:
+            - generic [ref=e236]:
+              - generic [ref=e237]: "03"
+              - generic [ref=e238]: 2-4 WKS
+            - paragraph [ref=e239]: BUILD
+          - button "04 ONGOING OPTIMIZE" [ref=e241] [cursor=pointer]:
+            - generic [ref=e242]:
+              - generic [ref=e243]: "04"
+              - generic [ref=e244]: ONGOING
+            - paragraph [ref=e245]: OPTIMIZE
+          - button "05 ONGOING SCALE" [ref=e247] [cursor=pointer]:
+            - generic [ref=e248]:
+              - generic [ref=e249]: "05"
+              - generic [ref=e250]: ONGOING
+            - paragraph [ref=e251]: SCALE
+        - generic [ref=e254]:
+          - paragraph [ref=e255]: "01"
+          - generic [ref=e256]:
+            - heading "AUDIT" [level=3] [ref=e257]
+            - paragraph [ref=e258]: "Full diagnostic of funnels, UX, traffic and data. We document every friction point and revenue leak. Output: loss map, critical issues list and a prioritised implementation plan."
+            - generic [ref=e259]:
+              - generic [ref=e261]: "Duration: 3-4 DAYS"
+              - generic [ref=e263]: Step 1 of 5
+    - generic [ref=e265]:
+      - generic [ref=e268]: Comparison
+      - heading "Not your typical agency experience." [level=2] [ref=e269]:
+        - text: Not your typical
+        - text: agency experience.
+      - generic [ref=e270]:
+        - generic [ref=e271]:
+          - generic [ref=e272]:
+            - img [ref=e274]
+            - generic [ref=e276]: STANDARD APPROACH
+          - list [ref=e277]:
+            - listitem [ref=e278]:
+              - img [ref=e279]
+              - generic [ref=e281]:
+                - paragraph [ref=e282]: Approach
+                - paragraph [ref=e283]: Campaign-based
+            - listitem [ref=e284]:
+              - img [ref=e285]
+              - generic [ref=e287]:
+                - paragraph [ref=e288]: Timeline
+                - paragraph [ref=e289]: Months of planning
+            - listitem [ref=e290]:
+              - img [ref=e291]
+              - generic [ref=e293]:
+                - paragraph [ref=e294]: Decisions
+                - paragraph [ref=e295]: Gut feeling
+            - listitem [ref=e296]:
+              - img [ref=e297]
+              - generic [ref=e299]:
+                - paragraph [ref=e300]: Ownership
+                - paragraph [ref=e301]: Locked contracts
+            - listitem [ref=e302]:
+              - img [ref=e303]
+              - generic [ref=e305]:
+                - paragraph [ref=e306]: Growth
+                - paragraph [ref=e307]: Linear at best
+            - listitem [ref=e308]:
+              - img [ref=e309]
+              - generic [ref=e311]:
+                - paragraph [ref=e312]: Reporting
+                - paragraph [ref=e313]: Vanity metrics
+            - listitem [ref=e314]:
+              - img [ref=e315]
+              - generic [ref=e317]:
+                - paragraph [ref=e318]: Focus
+                - paragraph [ref=e319]: Clicks and impressions
+        - generic [ref=e320]:
+          - generic [ref=e322]:
+            - generic [ref=e323]:
+              - img [ref=e325]
+              - generic [ref=e327]: LORA
+            - generic [ref=e328]: OUR WAY
+          - list [ref=e329]:
+            - listitem [ref=e330]:
+              - img [ref=e331]
+              - generic [ref=e333]:
+                - paragraph [ref=e334]: Approach
+                - paragraph [ref=e335]: System-based
+            - listitem [ref=e336]:
+              - img [ref=e337]
+              - generic [ref=e339]:
+                - paragraph [ref=e340]: Timeline
+                - paragraph [ref=e341]: Weeks to results
+            - listitem [ref=e342]:
+              - img [ref=e343]
+              - generic [ref=e345]:
+                - paragraph [ref=e346]: Decisions
+                - paragraph [ref=e347]: Data-driven
+            - listitem [ref=e348]:
+              - img [ref=e349]
+              - generic [ref=e351]:
+                - paragraph [ref=e352]: Ownership
+                - paragraph [ref=e353]: You own it all
+            - listitem [ref=e354]:
+              - img [ref=e355]
+              - generic [ref=e357]:
+                - paragraph [ref=e358]: Growth
+                - paragraph [ref=e359]: Compounding
+            - listitem [ref=e360]:
+              - img [ref=e361]
+              - generic [ref=e363]:
+                - paragraph [ref=e364]: Reporting
+                - paragraph [ref=e365]: Revenue metrics
+            - listitem [ref=e366]:
+              - img [ref=e367]
+              - generic [ref=e369]:
+                - paragraph [ref=e370]: Focus
+                - paragraph [ref=e371]: Conversions and revenue
+    - generic [ref=e374]:
+      - generic [ref=e377]: Z52#M7A * 60JI84LS
+      - heading "Real outcomes. Not promises." [level=2] [ref=e378]:
+        - text: Real outcomes.
+        - text: Not promises.
+      - generic [ref=e379]:
+        - button "E-commerce Brand" [ref=e380] [cursor=pointer]
+        - button "SaaS Platform" [ref=e381] [cursor=pointer]
+        - button "Fintech Product" [ref=e382] [cursor=pointer]
+      - generic [ref=e384]:
+        - generic [ref=e386]:
+          - generic [ref=e387]: RETAIL
+          - generic [ref=e388]: 12 weeks engagement
+        - generic [ref=e389]:
+          - paragraph [ref=e390]: +29%
+          - paragraph [ref=e391]: CONVERSION RATE GROWTH
+        - generic [ref=e392]:
+          - generic [ref=e393]:
+            - generic [ref=e394]:
+              - generic [ref=e396]: BEFORE
+              - paragraph [ref=e397]: 0.9% site conversion, 68% cart abandonment, no retargeting
+            - generic [ref=e398]:
+              - generic [ref=e400]: IMPLEMENTED
+              - paragraph [ref=e401]: Checkout redesign, offer A/B testing, retargeting flows, CTA overhaul
+            - generic [ref=e402]:
+              - generic [ref=e404]: RESULT
+              - paragraph [ref=e405]: Conversion to 1.5%, revenue +38%, CAC down 24% — in 12 weeks
+          - generic [ref=e406]:
+            - paragraph [ref=e407]: +16%
+            - paragraph [ref=e408]: Revenue Growth
+          - generic [ref=e409]:
+            - paragraph [ref=e410]: "-10%"
+            - paragraph [ref=e411]: CAC Reduction
+          - generic [ref=e413]:
+            - img [ref=e414]
+            - paragraph [ref=e416]: We didn't expect the audit to uncover that many leaks.
+    - generic [ref=e418]:
+      - generic [ref=e421]: Pricing
+      - generic [ref=e422]:
+        - heading "Transparent pricing. No hidden fees." [level=2] [ref=e423]:
+          - text: Transparent pricing.
+          - text: No hidden fees.
+        - paragraph [ref=e424]: Choose a product, pick a tier. Prices shown are the minimum starting point — final cost depends on scope.
+      - generic [ref=e425]:
+        - button "Entry Point" [ref=e426]
+        - button "Digital Product" [ref=e427]
+        - button "Revenue System" [ref=e428]
+      - generic [ref=e429]:
+        - generic [ref=e430]:
+          - generic [ref=e431]:
+            - generic [ref=e432]: Start
+            - generic [ref=e433]: from
+          - generic [ref=e434]: $800
+          - paragraph [ref=e435]: For those testing a hypothesis or launching fast
+          - paragraph [ref=e436]: Get to market quickly and validate demand without burning budget
+          - list [ref=e438]:
+            - listitem [ref=e439]:
+              - img [ref=e441]
+              - generic [ref=e443]: Landing page (up to 5 sections)
+            - listitem [ref=e444]:
+              - img [ref=e446]
+              - generic [ref=e448]: Mobile-responsive layout
+            - listitem [ref=e449]:
+              - img [ref=e451]
+              - generic [ref=e453]: Contact form + CRM hook
+            - listitem [ref=e454]:
+              - img [ref=e456]
+              - generic [ref=e458]: 2-week delivery
+          - button "Get started" [ref=e459]
+        - generic [ref=e460]:
+          - generic [ref=e461]:
+            - generic [ref=e462]: Growth
+            - generic [ref=e463]: from
+          - generic [ref=e464]: $2 500
+          - paragraph [ref=e465]: For growing businesses that need a real sales tool
+          - paragraph [ref=e466]: Turn your online presence into a conversion tool that works while you sleep
+          - list [ref=e468]:
+            - listitem [ref=e469]:
+              - img [ref=e471]
+              - generic [ref=e473]: Multi-page website (up to 12 pages)
+            - listitem [ref=e474]:
+              - img [ref=e476]
+              - generic [ref=e478]: Custom UI/UX design
+            - listitem [ref=e479]:
+              - img [ref=e481]
+              - generic [ref=e483]: CMS integration (admin panel)
+            - listitem [ref=e484]:
+              - img [ref=e486]
+              - generic [ref=e488]: Analytics & pixel setup
+            - listitem [ref=e489]:
+              - img [ref=e491]
+              - generic [ref=e493]: 4-week delivery
+          - button "Get started" [ref=e494]
+        - generic [ref=e495]:
+          - generic [ref=e496]: POPULAR
+          - generic [ref=e497]:
+            - generic [ref=e498]: Scale
+            - generic [ref=e499]: from
+          - generic [ref=e500]: $6 000
+          - paragraph [ref=e501]: For companies ready to compete at scale
+          - paragraph [ref=e502]: "A full-stack growth machine: optimised entry, conversion funnel, and retention"
+          - list [ref=e504]:
+            - listitem [ref=e505]:
+              - img [ref=e507]
+              - generic [ref=e509]: Full-scale web platform
+            - listitem [ref=e510]:
+              - img [ref=e512]
+              - generic [ref=e514]: Custom animations & motion design
+            - listitem [ref=e515]:
+              - img [ref=e517]
+              - generic [ref=e519]: E-commerce or catalogue module
+            - listitem [ref=e520]:
+              - img [ref=e522]
+              - generic [ref=e524]: SEO & performance optimization
+            - listitem [ref=e525]:
+              - img [ref=e527]
+              - generic [ref=e529]: Conversion funnel audit included
+            - listitem [ref=e530]:
+              - img [ref=e532]
+              - generic [ref=e534]: 6-week delivery
+          - button "Get started" [ref=e535]
+        - generic [ref=e536]:
+          - generic [ref=e538]: Custom
+          - generic [ref=e539]: On request
+          - paragraph [ref=e540]: For non-standard tasks that don't fit a template
+          - paragraph [ref=e541]: Exact solution for your exact problem — no padding, no wasted budget
+          - list [ref=e543]:
+            - listitem [ref=e544]:
+              - img [ref=e546]
+              - generic [ref=e548]: Full consultation & discovery session
+            - listitem [ref=e549]:
+              - img [ref=e551]
+              - generic [ref=e553]: Technical specification & roadmap
+            - listitem [ref=e554]:
+              - img [ref=e556]
+              - generic [ref=e558]: Flexible timeline & payment schedule
+            - listitem [ref=e559]:
+              - img [ref=e561]
+              - generic [ref=e563]: Dedicated project manager
+          - button "Get a quote" [ref=e564]
+      - generic [ref=e565]:
+        - generic [ref=e566]:
+          - generic [ref=e567]:
+            - generic [ref=e568]: Marketing Audit
+            - generic [ref=e569]: Fixed price
+          - generic [ref=e570]: $300
+          - list [ref=e572]:
+            - listitem [ref=e573]:
+              - img [ref=e574]
+              - generic [ref=e576]: Full funnel & conversion analysis
+            - listitem [ref=e577]:
+              - img [ref=e578]
+              - generic [ref=e580]: Traffic channels & ad spend review
+            - listitem [ref=e581]:
+              - img [ref=e582]
+              - generic [ref=e584]: Written report + recommendations
+          - button "Get started" [ref=e585]
+        - generic [ref=e586]:
+          - generic [ref=e587]:
+            - generic [ref=e588]: Server Hosting
+            - generic [ref=e589]: / month
+          - generic [ref=e590]: from $30 / mo
+          - list [ref=e592]:
+            - listitem [ref=e593]:
+              - img [ref=e594]
+              - generic [ref=e596]: Dedicated VPS or cloud server
+            - listitem [ref=e597]:
+              - img [ref=e598]
+              - generic [ref=e600]: Daily backups & uptime monitoring
+            - listitem [ref=e601]:
+              - img [ref=e602]
+              - generic [ref=e604]: SSL + CDN + security patches
+          - button "Get started" [ref=e605]
+        - generic [ref=e606]:
+          - generic:
+            - generic: "?"
+          - generic [ref=e607]: Coming soon
+          - paragraph [ref=e609]: New service in development. Stay tuned.
+    - generic [ref=e611]:
+      - generic [ref=e614]: Our Story
+      - generic [ref=e615]:
+        - heading "Four people. One orbit." [level=2] [ref=e616]:
+          - text: Four people.
+          - text: One orbit.
+        - generic [ref=e617]:
+          - generic [ref=e618]:
+            - generic [ref=e620]:
+              - paragraph [ref=e621]: "4"
+              - paragraph [ref=e622]: Founders
+            - generic [ref=e625]:
+              - paragraph [ref=e626]: 40+
+              - paragraph [ref=e627]: Cases
+            - generic [ref=e630]:
+              - paragraph [ref=e631]: "3"
+              - paragraph [ref=e632]: Continents
+          - generic [ref=e633]:
+            - paragraph [ref=e634]: NDA
+            - paragraph [ref=e635]: All 40+ cases are covered by NDA. Client names, metrics and details shown here are anonymised or shared with written permission.
+      - generic [ref=e636]:
+        - generic [ref=e637]:
+          - generic [ref=e638]: "01"
+          - paragraph [ref=e639]: EARLY DAYS
+          - paragraph [ref=e640]: Each of us came to IT and marketing on our own path. Someone was writing code since their first year, someone was launching ads and learning from mistakes. Years of late nights, closed projects, iterations — separately and in small teams.
+        - generic [ref=e641]:
+          - generic [ref=e642]: "02"
+          - paragraph [ref=e643]: FIRST TEAM
+          - paragraph [ref=e644]: "Then we met. First freelance together, then a permanent team. We took everything: sites, CRM, integrations, automation. At some point we realized: we weren't just doing technical work — we were genuinely impacting clients' businesses."
+        - generic [ref=e645]:
+          - generic [ref=e646]: "03"
+          - paragraph [ref=e647]: GLOBAL SCALE
+          - paragraph [ref=e648]: "We grew. Foreign clients appeared — Europe, Asia. Dozens of cases. And every time the result was the same: deep diagnostics plus the right technological solution brought millions in additional revenue."
+        - generic [ref=e649]:
+          - generic [ref=e650]: "04"
+          - paragraph [ref=e651]: THE NAME
+          - paragraph [ref=e652]: That evening we gathered to discuss the future. Someone suggested 'Lora' — the word sounded right and stuck. A few hours later, a lunar eclipse happened. Just a coincidence, but it felt like it marked the moment.
+      - paragraph [ref=e654]: Today Lora is a team combining marketing diagnostics with strong development. We don't speak in big words. We show numbers, calculations and ready solutions.
+    - generic [ref=e656]:
+      - paragraph [ref=e657]: STILL SCROLLING?
+      - heading "If you're here, your competitors are already behind" [level=2] [ref=e658]:
+        - generic [ref=e659]: If you're here,
+        - generic [ref=e660]: your competitors are already behind
+      - generic [ref=e663]: LEAVE OLD RULES AHEAD
+    - generic [ref=e666]:
+      - generic [ref=e669]: Start
+      - heading "Ready to grow?" [level=2] [ref=e670]
+      - paragraph [ref=e671]: Get a free brief on your current funnel. We'll show you exactly where revenue is being lost.
+      - generic [ref=e672]:
+        - generic [ref=e674]:
+          - generic [ref=e679]: Next brief slot
+          - generic [ref=e680]: 3 spots left this month
+        - generic [ref=e681]:
+          - generic [ref=e682]:
+            - generic [ref=e684]:
+              - img [ref=e686]
+              - textbox "Your name" [ref=e689]
+            - generic [ref=e691]:
+              - button "RU +7" [ref=e692]:
+                - generic [ref=e693]: RU
+                - generic [ref=e694]: "+7"
+                - img [ref=e695]
+              - textbox "999 123-45-67" [ref=e698]
+          - generic [ref=e699]:
+            - generic [ref=e700]:
+              - button "Brief date" [ref=e701]:
+                - img [ref=e703]
+                - generic [ref=e706]: Brief date
+                - img [ref=e707]
+              - button "Brief time" [ref=e709]:
+                - img [ref=e711]
+                - generic [ref=e714]: Brief time
+                - img [ref=e715]
+            - generic [ref=e718]:
+              - img [ref=e720]
+              - textbox "you@company.com" [ref=e723]
+            - generic [ref=e725]:
+              - img [ref=e727]
+              - textbox "Company and site (optional)" [ref=e730]
+          - button "Request Free Brief" [ref=e731] [cursor=pointer]:
+            - generic [ref=e732]:
+              - text: Request Free Brief
+              - img [ref=e733]
+    - contentinfo [ref=e735]:
+      - generic [ref=e738]:
+        - generic [ref=e739]:
+          - generic [ref=e740]:
+            - generic [ref=e741]:
+              - img "LORA" [ref=e742]
+              - paragraph [ref=e743]: LORA
+              - generic [ref=e744]: EST. 2024
+            - paragraph [ref=e745]:
+              - img [ref=e746]
+              - text: Leave Old Rules Ahead
+            - paragraph [ref=e748]: High-performance conversion systems for companies that refuse to settle.
+          - generic [ref=e749]:
+            - generic [ref=e750]:
+              - paragraph [ref=e751]: Contact
+              - link "hello@lora.agency" [ref=e752] [cursor=pointer]:
+                - /url: mailto:hello@lora.agency
+            - generic [ref=e753]:
+              - paragraph [ref=e754]: Social
+              - generic [ref=e755]:
+                - link "Telegram" [ref=e756] [cursor=pointer]:
+                  - /url: "#"
+                - link "LinkedIn" [ref=e757] [cursor=pointer]:
+                  - /url: "#"
+                - link "X / Twitter" [ref=e758] [cursor=pointer]:
+                  - /url: "#"
+        - generic [ref=e759]:
+          - paragraph [ref=e760]: © 2026 LORA. All rights reserved.
+          - generic [ref=e761]:
+            - link "PRIVACY" [ref=e762] [cursor=pointer]:
+              - /url: "#"
+            - generic [ref=e763]: ·
+            - link "TERMS" [ref=e764] [cursor=pointer]:
+              - /url: "#"

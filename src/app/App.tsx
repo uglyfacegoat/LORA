@@ -1,4 +1,5 @@
 import { HeroSection } from "./components/HeroSection";
+import { HeroSectionReference } from "./components/HeroSectionReference";
 import { StorySection } from "./components/StorySection";
 import { Manifesto } from "./components/Manifesto";
 import { PainSection } from "./components/PainSection";
@@ -21,10 +22,16 @@ import logoSmallLight from "../assets/logo-small-light.svg";
 import { I18nProvider, useI18n, LANGS } from "./i18n";
 import { ThemeProvider, useTheme } from "./theme";
 
+function isReferenceHeroPreview() {
+  if (typeof window === "undefined") return false;
+  return new URLSearchParams(window.location.search).get("hero") === "reference";
+}
+
 function AppInner() {
   const [scrolled, setScrolled] = useState(false);
-  const [loaded, setLoaded] = useState(false);
+  const [loaded, setLoaded] = useState(() => isReferenceHeroPreview());
   const [langOpen, setLangOpen] = useState(false);
+  const [heroReferencePreview, setHeroReferencePreview] = useState(() => isReferenceHeroPreview());
   const { lang, t } = useI18n();
   const { theme, toggle } = useTheme();
 
@@ -34,6 +41,18 @@ function AppInner() {
     const onScroll = () => setScrolled(window.scrollY > 60);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const syncPreviewMode = () => {
+      const isPreview = isReferenceHeroPreview();
+      setHeroReferencePreview(isPreview);
+      if (isPreview) setLoaded(true);
+    };
+
+    syncPreviewMode();
+    window.addEventListener("popstate", syncPreviewMode);
+    return () => window.removeEventListener("popstate", syncPreviewMode);
   }, []);
 
   const currentLang = LANGS.find((l) => l.code === lang)!;
@@ -146,7 +165,7 @@ function AppInner() {
       <LanguageModal open={langOpen} onClose={() => setLangOpen(false)} />
 
       {/* Nav */}
-      <nav
+      {!heroReferencePreview && <nav
         className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 sm:px-6 md:px-10 transition-all duration-700"
         style={{
           backdropFilter: scrolled ? "blur(20px)" : "none",
@@ -239,10 +258,10 @@ function AppInner() {
             {t("nav.cta")}
           </button>
         </div>
-      </nav>
+      </nav>}
 
       <div className="relative z-10" style={{ opacity: loaded ? 1 : 0, transition: "opacity 0.8s ease 0.3s" }}>
-        <HeroSection />
+        {heroReferencePreview ? <HeroSectionReference /> : <HeroSection />}
 
         {/* Divider */}
         <div className="max-w-6xl mx-auto px-6 md:px-20">
