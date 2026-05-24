@@ -88,15 +88,15 @@ export function WhyLora() {
           <span style={{ color: "var(--fg-4)" }}>{t("why.titleAccent")}</span>
         </motion.h2>
 
-        <div className="grid auto-rows-auto gap-4 md:grid-cols-[repeat(24,minmax(0,1fr))]">
+        <div className="grid auto-rows-auto gap-4 min-[900px]:grid-cols-[repeat(24,minmax(0,1fr))]">
           <motion.div
             initial={{ opacity: 0, y: 25 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="md:col-span-8"
+            className="min-[900px]:col-span-8"
           >
             <TiltCard
-              className="relative h-full cursor-default overflow-hidden rounded-2xl p-8 md:col-span-2 md:p-10"
+              className="relative h-full cursor-default overflow-hidden rounded-2xl p-8 md:p-10 min-[900px]:col-span-2"
               style={{ background: "var(--surface-soft)", border: "1px solid var(--surface-border)" }}
             >
               <div
@@ -169,7 +169,7 @@ export function WhyLora() {
             initial={{ opacity: 0, y: 25 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="md:col-span-7"
+            className="min-[900px]:col-span-7"
           >
             <TiltCard
               className="relative flex h-full cursor-default flex-col justify-between overflow-hidden rounded-2xl p-8"
@@ -228,7 +228,7 @@ export function WhyLora() {
             initial={{ opacity: 0, y: 25 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="md:col-span-9"
+            className="min-[900px]:col-span-9"
           >
             <TiltCard
               className="relative flex h-full cursor-default flex-col justify-center overflow-hidden rounded-2xl p-8"
@@ -238,7 +238,7 @@ export function WhyLora() {
                 src={quoteCardThreads}
                 alt=""
                 aria-hidden="true"
-                className="pointer-events-none absolute -bottom-8 -right-8 h-[72%] w-[72%] max-w-none opacity-80"
+                className="pointer-events-none absolute -bottom-8 -right-8 hidden h-[72%] w-[72%] max-w-none opacity-80 min-[900px]:block"
               />
 
               <div className="relative z-10 -translate-y-3">
@@ -269,7 +269,7 @@ export function WhyLora() {
             initial={{ opacity: 0, y: 25 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.5 }}
-            className="md:col-span-7"
+            className="min-[900px]:col-span-7"
           >
             <TiltCard
               className="relative h-full min-h-[16.25rem] cursor-default overflow-hidden rounded-2xl"
@@ -293,7 +293,7 @@ export function WhyLora() {
                 </p>
               </div>
 
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[36%] overflow-hidden">
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 hidden h-[36%] overflow-hidden min-[900px]:block">
                 <div
                   className="absolute inset-x-0 bottom-0 h-px"
                   style={{ background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.1) 12%, rgba(255,255,255,0.1) 88%, transparent 100%)" }}
@@ -367,7 +367,7 @@ export function WhyLora() {
             initial={{ opacity: 0, y: 25 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.55 }}
-            className="md:col-span-9"
+            className="min-[900px]:col-span-9"
           >
             <TiltCard
               className="relative h-full min-h-[16.25rem] cursor-default overflow-hidden rounded-2xl p-8"
@@ -388,7 +388,7 @@ export function WhyLora() {
               </h4>
               <p style={{ fontSize: "0.8rem", lineHeight: 1.6, color: "var(--fg-4)" }}>{t("why.fast.s")}</p>
 
-              <div className="pointer-events-none absolute inset-x-8 bottom-8 h-14 overflow-hidden">
+              <div className="pointer-events-none absolute inset-x-8 bottom-8 hidden h-14 overflow-hidden min-[900px]:block">
                 <div
                   className="absolute inset-x-0 bottom-0 h-px"
                   style={{
@@ -426,7 +426,7 @@ export function WhyLora() {
             initial={{ opacity: 0, y: 25 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.6 }}
-            className="md:col-span-8"
+            className="min-[900px]:col-span-8"
           >
             <TiltCard
               className="relative h-full min-h-[16.25rem] cursor-default overflow-hidden rounded-2xl p-8"
@@ -447,7 +447,7 @@ export function WhyLora() {
               </h4>
               <p style={{ fontSize: "0.8rem", lineHeight: 1.6, color: "var(--fg-4)" }}>{t("why.own.s")}</p>
 
-              <div className="pointer-events-none absolute inset-x-8 bottom-1 h-24 overflow-hidden">
+              <div className="pointer-events-none absolute inset-x-6 -bottom-5 hidden h-20 overflow-hidden sm:inset-x-8 min-[900px]:block xl:bottom-1 xl:h-24">
                 {[
                   {
                     bottom: "0px",
@@ -472,10 +472,11 @@ export function WhyLora() {
                     key={index}
                     viewBox="0 0 520 120"
                     preserveAspectRatio="none"
-                    className="absolute left-0 right-0"
+                    className="absolute right-0"
                     style={{
                       bottom: sheet.bottom,
-                      height: "64px",
+                      width: "min(100%, 320px)",
+                      height: "56px",
                       opacity: sheet.opacity,
                       filter: index === 2 ? "drop-shadow(0 10px 26px rgba(0,0,0,0.16))" : "none",
                     }}
