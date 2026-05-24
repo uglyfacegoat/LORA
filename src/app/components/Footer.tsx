@@ -40,8 +40,8 @@ export function Footer() {
             <div className="flex gap-16">
               <div>
                 <p className="uppercase tracking-[0.25em] mb-4" style={{ fontSize: "0.55rem", fontWeight: 700, color: "var(--fg-4)" }}>{t("footer.contact")}</p>
-                <a href="mailto:hello@lora.agency" className="transition-colors duration-400 block" style={{ fontSize: "0.82rem", color: "var(--fg-3)" }}>
-                  hello@lora.agency
+                <a href="mailto:support@loragroup.space" className="transition-colors duration-400 block" style={{ fontSize: "0.82rem", color: "var(--fg-3)" }}>
+                  support@loragroup.space
                 </a>
               </div>
               <div>
