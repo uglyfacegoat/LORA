@@ -37,6 +37,20 @@ export function PainSection() {
     setActive((prev) => (prev === next ? prev : next));
   });
 
+  const jumpToPain = (index: number) => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const targetProgress = index / pains.length;
+    const sectionTop = el.getBoundingClientRect().top + window.scrollY;
+    const scrollableDistance = Math.max(0, el.offsetHeight - window.innerHeight);
+    const top = sectionTop + scrollableDistance * targetProgress;
+
+    setActive(index);
+    setProgress(targetProgress);
+    window.scrollTo({ top, behavior: "instant" });
+  };
+
   return (
     <section ref={sectionRef} className="relative px-6 md:px-20">
       <div className="h-[360vh]">
@@ -134,7 +148,7 @@ export function PainSection() {
                   return (
                     <div
                       key={pain.id}
-                      onClick={() => setActive(i)}
+                      onClick={() => jumpToPain(i)}
                       className="relative cursor-pointer transition-all duration-500 py-5 px-6 rounded-xl group"
                       style={{
                         background: isActive ? "var(--surface-mid)" : "transparent",

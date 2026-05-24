@@ -38,6 +38,13 @@ function AppInner() {
 
   const currentLang = LANGS.find((l) => l.code === lang)!;
   const navLogo = theme === "dark" ? logoSmallDark : logoSmallLight;
+  const jumpTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    const top = el.getBoundingClientRect().top + window.scrollY - 80;
+    window.scrollTo({ top, behavior: "instant" });
+  };
 
   return (
     <div className="min-h-screen relative" style={{ fontFamily: "'Inter', sans-serif", background: "var(--app-bg)", color: "var(--fg-1)" }}>
@@ -168,15 +175,19 @@ function AppInner() {
           </span>
         </div>
 
-        <div className="hidden md:absolute md:left-1/2 md:-translate-x-1/2 md:flex items-center gap-7">
+        <div className="hidden">
             {[
-              { id: "results", key: "nav.results" },
-              { id: "process", key: "nav.services" },
-              { id: "contact", key: "nav.contact" },
+              { id: "results", targetId: "results", key: "nav.results" },
+              { id: "process", targetId: "process", key: "nav.services" },
+              { id: "contact", targetId: "contact-form", key: "nav.contact" },
             ].map((item) => (
               <a
                 key={item.id}
                 href={`#${item.id}`}
+                onClick={(event) => {
+                  event.preventDefault();
+                  jumpTo(item.targetId);
+                }}
                 className="transition-colors duration-300 uppercase tracking-[0.15em]"
                 style={{ fontSize: "0.7rem", fontWeight: 600, color: item.key === "nav.services" ? "var(--fg-1)" : "var(--fg-3)" }}
               >
@@ -227,11 +238,7 @@ function AppInner() {
 
           <button
             onClick={() => {
-              const el = document.getElementById("contact-form");
-              if (el) {
-                const top = el.getBoundingClientRect().top + window.scrollY - 80;
-                window.scrollTo({ top, behavior: "instant" });
-              }
+              jumpTo("contact-form");
             }}
             className="group px-3 sm:px-4 md:px-6 py-2.5 uppercase tracking-[0.18em] transition-all duration-500 cursor-pointer rounded-lg whitespace-nowrap text-center"
             style={{ fontSize: "0.6rem", fontWeight: 600, background: "var(--surface-strong)", border: "1px solid var(--surface-border)", color: "var(--fg-2)" }}
@@ -257,7 +264,7 @@ function AppInner() {
         <WhyLora />
         <LiveSystem />
         <div id="process"><ProcessSection /></div>
-        <Comparison />
+        <div id="results"><Comparison /></div>
         {/* <div id="results"><CasesSection /></div> */}
         {/* <ArticlesSection /> */}
         <PricingSection />

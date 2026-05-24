@@ -270,10 +270,20 @@ export function PricingSection() {
           initial={{ opacity: 0, y: 10 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.68 }}
-          className="mb-10 max-w-3xl"
+          className="mb-3 max-w-3xl"
           style={{ fontSize: "0.72rem", lineHeight: 1.7, color: "var(--fg-4)" }}
         >
           {t("pricing.footnote")}
+        </motion.p>
+
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.72 }}
+          className="mb-10 max-w-4xl"
+          style={{ fontSize: "0.7rem", lineHeight: 1.7, color: "var(--fg-4)" }}
+        >
+          {t("pricing.offerDisclaimer")}
         </motion.p>
 
         {/* Static extra cards */}

@@ -322,7 +322,7 @@ export function HeroSection() {
         aria-hidden="true"
         initial={{ opacity: 0, x: 14, y: 0, rotate: -0.2 }}
         animate={{
-          opacity: theme === "dark" ? 1 : 0.42,
+          opacity: 1,
           x: [0, -18, -6, 0],
           y: [0, -10, 7, 0],
           rotate: [-0.2, 0.35, 0.08, -0.2],
@@ -339,7 +339,7 @@ export function HeroSection() {
           width: "clamp(805px, 67.6vw, 1378px)",
           right: "clamp(-620px, -27vw, -430px)",
           top: "clamp(-48px, -1vw, 8px)",
-          filter: theme === "dark" ? "none" : "invert(1) contrast(1.05) opacity(0.32)",
+          filter: "none",
           WebkitUserDrag: "none",
         }}
       />

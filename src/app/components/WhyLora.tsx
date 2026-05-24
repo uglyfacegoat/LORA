@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useI18n } from "../i18n";
 import { useTheme } from "../theme";
 import quoteCardThreads from "../../assets/quote-card-threads.svg";
+import quoteCardThreadsDark from "../../assets/quote-card-threads-dark.svg";
 
 import { useInView } from "./useInView";
 
@@ -52,6 +53,7 @@ export function WhyLora() {
   const [ref, inView] = useInView(0.08);
   const { t } = useI18n();
   const { theme } = useTheme();
+  const isDark = theme === "dark";
 
   return (
     <section ref={ref} className="relative px-6 py-32 md:px-20 md:py-44">
@@ -235,7 +237,7 @@ export function WhyLora() {
               style={{ background: "var(--surface-soft)", border: "1px solid var(--surface-border)" }}
             >
               <img
-                src={quoteCardThreads}
+                src={isDark ? quoteCardThreads : quoteCardThreadsDark}
                 alt=""
                 aria-hidden="true"
                 className="pointer-events-none absolute -bottom-8 -right-8 hidden h-[72%] w-[72%] max-w-none opacity-80 min-[900px]:block"
@@ -296,7 +298,11 @@ export function WhyLora() {
               <div className="pointer-events-none absolute inset-x-0 bottom-0 hidden h-[36%] overflow-hidden min-[900px]:block">
                 <div
                   className="absolute inset-x-0 bottom-0 h-px"
-                  style={{ background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.1) 12%, rgba(255,255,255,0.1) 88%, transparent 100%)" }}
+                  style={{
+                    background: `linear-gradient(90deg, transparent 0%, ${
+                      isDark ? "rgba(255,255,255,0.1)" : "rgba(10,10,10,0.1)"
+                    } 12%, ${isDark ? "rgba(255,255,255,0.1)" : "rgba(10,10,10,0.1)"} 88%, transparent 100%)`,
+                  }}
                 />
 
                 <svg
@@ -307,15 +313,15 @@ export function WhyLora() {
                 >
                   <defs>
                     <linearGradient id="whyDataArea" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="#ffffff" stopOpacity="0.14" />
-                      <stop offset="58%" stopColor="#ffffff" stopOpacity="0.06" />
-                      <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
+                      <stop offset="0%" stopColor={isDark ? "#ffffff" : "#0a0a0a"} stopOpacity={isDark ? "0.14" : "0.1"} />
+                      <stop offset="58%" stopColor={isDark ? "#ffffff" : "#0a0a0a"} stopOpacity={isDark ? "0.06" : "0.04"} />
+                      <stop offset="100%" stopColor={isDark ? "#ffffff" : "#0a0a0a"} stopOpacity="0" />
                     </linearGradient>
                     <radialGradient id="whyDataDot" cx="50%" cy="50%" r="50%">
-                      <stop offset="0%" stopColor="#ffffff" stopOpacity="1" />
-                      <stop offset="42%" stopColor="#ffffff" stopOpacity="0.92" />
-                      <stop offset="72%" stopColor="#ffffff" stopOpacity="0.22" />
-                      <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
+                      <stop offset="0%" stopColor={isDark ? "#ffffff" : "#0a0a0a"} stopOpacity={isDark ? "1" : "0.55"} />
+                      <stop offset="42%" stopColor={isDark ? "#ffffff" : "#0a0a0a"} stopOpacity={isDark ? "0.92" : "0.32"} />
+                      <stop offset="72%" stopColor={isDark ? "#ffffff" : "#0a0a0a"} stopOpacity={isDark ? "0.22" : "0.12"} />
+                      <stop offset="100%" stopColor={isDark ? "#ffffff" : "#0a0a0a"} stopOpacity="0" />
                     </radialGradient>
                   </defs>
 
@@ -326,7 +332,7 @@ export function WhyLora() {
                   <path
                     d="M0 118 L28 120 L58 108 L92 92 L128 116 L164 124 L198 112 L230 118 L264 104 L296 108 L332 82 L364 64 L398 78 L438 56 L480 62"
                     fill="none"
-                    stroke="rgba(255,255,255,0.22)"
+                    stroke={isDark ? "rgba(255,255,255,0.22)" : "rgba(10,10,10,0.22)"}
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -347,15 +353,15 @@ export function WhyLora() {
                       cx="348"
                       cy="72"
                       r="4.3"
-                      fill="rgba(255,255,255,0.18)"
-                      stroke="rgba(255,255,255,0.62)"
+                      fill={isDark ? "rgba(255,255,255,0.18)" : "rgba(10,10,10,0.12)"}
+                      stroke={isDark ? "rgba(255,255,255,0.62)" : "rgba(10,10,10,0.34)"}
                       strokeWidth="1"
                     />
                     <motion.circle
                       cx="348"
                       cy="72"
                       r="2.4"
-                      fill="#ffffff"
+                      fill={isDark ? "#ffffff" : "#0a0a0a"}
                     />
                   </motion.g>
                 </svg>
@@ -393,7 +399,11 @@ export function WhyLora() {
                   className="absolute inset-x-0 bottom-0 h-px"
                   style={{
                     background:
-                      "linear-gradient(90deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.08) 14%, rgba(255,255,255,0.08) 86%, rgba(255,255,255,0.02) 100%)",
+                      `linear-gradient(90deg, ${
+                        isDark ? "rgba(255,255,255,0.02)" : "rgba(10,10,10,0.02)"
+                      } 0%, ${isDark ? "rgba(255,255,255,0.08)" : "rgba(10,10,10,0.1)"} 14%, ${
+                        isDark ? "rgba(255,255,255,0.08)" : "rgba(10,10,10,0.1)"
+                      } 86%, ${isDark ? "rgba(255,255,255,0.02)" : "rgba(10,10,10,0.02)"} 100%)`,
                   }}
                 />
                 {[0.16, 0.37, 0.58, 0.82].map((position, index) => (
@@ -403,7 +413,9 @@ export function WhyLora() {
                     style={{
                       left: `${position * 100}%`,
                       height: index === 2 ? "12px" : index % 2 === 0 ? "8px" : "6px",
-                      background: "linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.03))",
+                      background: `linear-gradient(180deg, ${
+                        isDark ? "rgba(255,255,255,0.16)" : "rgba(10,10,10,0.18)"
+                      }, ${isDark ? "rgba(255,255,255,0.03)" : "rgba(10,10,10,0.04)"})`,
                       opacity: index === 2 ? 0.9 : 0.6,
                     }}
                   />
@@ -414,7 +426,9 @@ export function WhyLora() {
                     left: "0%",
                     width: "100%",
                     background:
-                      "linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.006) 58%, rgba(255,255,255,0.016) 100%)",
+                      `linear-gradient(180deg, ${isDark ? "rgba(255,255,255,0)" : "rgba(10,10,10,0)"} 0%, ${
+                        isDark ? "rgba(255,255,255,0.006)" : "rgba(10,10,10,0.012)"
+                      } 58%, ${isDark ? "rgba(255,255,255,0.016)" : "rgba(10,10,10,0.026)"} 100%)`,
                     maskImage: "linear-gradient(90deg, transparent 0%, black 12%, black 88%, transparent 100%)",
                   }}
                 />
@@ -452,20 +466,20 @@ export function WhyLora() {
                   {
                     bottom: "0px",
                     opacity: 0.34,
-                    border: "rgba(255,255,255,0.11)",
-                    fill: "rgba(255,255,255,0.012)",
+                    border: isDark ? "rgba(255,255,255,0.11)" : "rgba(10,10,10,0.11)",
+                    fill: isDark ? "rgba(255,255,255,0.012)" : "rgba(10,10,10,0.012)",
                   },
                   {
                     bottom: "16px",
                     opacity: 0.5,
-                    border: "rgba(255,255,255,0.145)",
-                    fill: "rgba(255,255,255,0.016)",
+                    border: isDark ? "rgba(255,255,255,0.145)" : "rgba(10,10,10,0.145)",
+                    fill: isDark ? "rgba(255,255,255,0.016)" : "rgba(10,10,10,0.016)",
                   },
                   {
                     bottom: "32px",
                     opacity: 0.92,
-                    border: "rgba(255,255,255,0.28)",
-                    fill: "rgba(255,255,255,0.022)",
+                    border: isDark ? "rgba(255,255,255,0.28)" : "rgba(10,10,10,0.22)",
+                    fill: isDark ? "rgba(255,255,255,0.022)" : "rgba(10,10,10,0.018)",
                   },
                 ].map((sheet, index) => (
                   <svg
@@ -478,7 +492,7 @@ export function WhyLora() {
                       width: "min(100%, 320px)",
                       height: "56px",
                       opacity: sheet.opacity,
-                      filter: index === 2 ? "drop-shadow(0 10px 26px rgba(0,0,0,0.16))" : "none",
+                      filter: index === 2 ? `drop-shadow(0 10px 26px ${isDark ? "rgba(0,0,0,0.16)" : "rgba(10,10,10,0.08)"})` : "none",
                     }}
                     aria-hidden="true"
                   >
