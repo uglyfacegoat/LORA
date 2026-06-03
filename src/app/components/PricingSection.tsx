@@ -2,6 +2,7 @@ import { motion } from "motion/react";
 import { useState } from "react";
 import { useInView } from "./useInView";
 
+import { trackEvent } from "../analytics";
 import { useI18n } from "../i18n";
 
 const PRODUCTS = ["website", "app", "crm"] as const;
@@ -159,7 +160,10 @@ export function PricingSection() {
           {products.map((p) => (
             <button
               key={p.key}
-              onClick={() => setActiveProduct(p.key)}
+              onClick={() => {
+                trackEvent("pricing_click", { action: "switch_product", product: p.key });
+                setActiveProduct(p.key);
+              }}
               className="relative px-5 py-2 rounded-lg transition-all duration-300 uppercase tracking-[0.15em]"
               style={{
                 fontSize: "0.6rem",
@@ -245,6 +249,7 @@ export function PricingSection() {
               {/* CTA */}
               <button
                 onClick={() => {
+                  trackEvent("pricing_click", { action: "tier_cta", product: activeProduct });
                   const el = document.getElementById("contact-form");
                   if (el) {
                     const top = el.getBoundingClientRect().top + window.scrollY - 80;
@@ -329,6 +334,7 @@ export function PricingSection() {
             </ul>
             <button
               onClick={() => {
+                trackEvent("pricing_click", { action: "audit_cta", product: activeProduct });
                 const el = document.getElementById("contact-form");
                 if (el) {
                   const top = el.getBoundingClientRect().top + window.scrollY - 80;
@@ -378,6 +384,7 @@ export function PricingSection() {
             </ul>
             <button
               onClick={() => {
+                trackEvent("pricing_click", { action: "individual_cta", product: activeProduct });
                 const el = document.getElementById("contact-form");
                 if (el) {
                   const top = el.getBoundingClientRect().top + window.scrollY - 80;

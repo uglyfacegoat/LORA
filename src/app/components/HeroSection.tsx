@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import { useEffect, useState } from "react";
 import heroMoon from "../../assets/hero-moon.png";
+import { trackEvent } from "../analytics";
 import { useI18n } from "../i18n";
 import { useTheme } from "../theme";
 
@@ -484,6 +485,7 @@ export function HeroSection() {
         >
           <button
             onClick={() => {
+              trackEvent("open_brief", { location: "hero_primary" });
               const el = document.getElementById("contact-form");
               if (el) {
                 const top = el.getBoundingClientRect().top + window.scrollY - 80;
@@ -502,6 +504,7 @@ export function HeroSection() {
           </button>
           <button
             onClick={() => {
+              trackEvent("click_cta", { location: "hero_secondary" });
               const el = document.getElementById("contact-form");
               if (el) {
                 const top = el.getBoundingClientRect().top + window.scrollY - 80;

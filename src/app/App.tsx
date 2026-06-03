@@ -15,16 +15,28 @@ import { Footer } from "./components/Footer";
 import { CursorGlow } from "./components/CursorGlow";
 import { Preloader } from "./components/Preloader";
 import { LanguageModal } from "./components/LanguageModal";
+import { NotFoundPage } from "./components/NotFoundPage";
+import { SeoDetailPage } from "./components/SeoDetailPage";
+import { SeoHead } from "./components/SeoHead";
+import { SeoListingPage } from "./components/SeoListingPage";
+import { SimplePage } from "./components/SimplePage";
+import { DesktopNavigation, MobileNavigation } from "./components/SiteNavigation";
 import { useEffect, useState, useCallback } from "react";
 import logoSmallDark from "../assets/logo-small-dark.svg";
 import logoSmallLight from "../assets/logo-small-light.svg";
 import { I18nProvider, useI18n, LANGS } from "./i18n";
 import { ThemeProvider, useTheme } from "./theme";
+import { getLangFromPath, getPathWithoutLang, localizedPath } from "./seo/site";
+import { isDetailRoute } from "./seo/structuredData";
+import { resolveRoute } from "./seo/routes";
+import { trackEvent } from "./analytics";
 
 function AppInner() {
   const [scrolled, setScrolled] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const [pathname, setPathname] = useState(() => window.location.pathname);
   const { lang, t } = useI18n();
   const { theme, toggle } = useTheme();
 
@@ -36,15 +48,27 @@ function AppInner() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    const onPopState = () => setPathname(window.location.pathname);
+    window.addEventListener("popstate", onPopState);
+    return () => window.removeEventListener("popstate", onPopState);
+  }, []);
+
+  useEffect(() => {
+    setMobileNavOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    const urlLang = getLangFromPath(pathname);
+    if (urlLang) return;
+    const target = localizedPath(getPathWithoutLang(pathname), lang);
+    window.history.replaceState(null, "", `${target}${window.location.search}${window.location.hash}`);
+    setPathname(window.location.pathname);
+  }, [lang, pathname]);
+
   const currentLang = LANGS.find((l) => l.code === lang)!;
   const navLogo = theme === "dark" ? logoSmallDark : logoSmallLight;
-  const jumpTo = (id: string) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-
-    const top = el.getBoundingClientRect().top + window.scrollY - 80;
-    window.scrollTo({ top, behavior: "instant" });
-  };
+  const route = resolveRoute(getPathWithoutLang(pathname));
 
   return (
     <div className="min-h-screen relative" style={{ fontFamily: "'Inter', sans-serif", background: "var(--app-bg)", color: "var(--fg-1)" }}>
@@ -151,6 +175,7 @@ function AppInner() {
       <CursorGlow />
 
       <LanguageModal open={langOpen} onClose={() => setLangOpen(false)} />
+      <MobileNavigation open={mobileNavOpen} onClose={() => setMobileNavOpen(false)} pathname={getPathWithoutLang(pathname)} />
 
       {/* Nav */}
       <nav
@@ -166,37 +191,34 @@ function AppInner() {
           transition: "all 0.7s ease",
         }}
       >
-        <div className="flex items-center gap-2 sm:gap-4 min-w-0">
+        <a href={localizedPath("/", lang)} className="flex items-center gap-2 sm:gap-4 min-w-0" aria-label="LORA home">
           <img src={navLogo} alt="LORA" className="w-6 h-6 object-contain" />
           <span className="truncate" style={{ fontSize: "1.05rem", fontWeight: 800, letterSpacing: "-0.03em", color: "var(--fg-1)" }}>LORA</span>
           <div className="hidden md:block w-px h-4" style={{ background: "var(--surface-border)" }} />
           <span className="hidden md:block uppercase tracking-[0.2em]" style={{ fontSize: "0.5rem", fontWeight: 600, color: "var(--fg-4)" }}>
             {t("nav.tagline")}
           </span>
-        </div>
+        </a>
 
-        <div className="hidden">
-            {[
-              { id: "results", targetId: "results", key: "nav.results" },
-              { id: "process", targetId: "process", key: "nav.services" },
-              { id: "contact", targetId: "contact-form", key: "nav.contact" },
-            ].map((item) => (
-              <a
-                key={item.id}
-                href={`#${item.id}`}
-                onClick={(event) => {
-                  event.preventDefault();
-                  jumpTo(item.targetId);
-                }}
-                className="transition-colors duration-300 uppercase tracking-[0.15em]"
-                style={{ fontSize: "0.7rem", fontWeight: 600, color: item.key === "nav.services" ? "var(--fg-1)" : "var(--fg-3)" }}
-              >
-                {t(item.key)}
-              </a>
-            ))}
-          </div>
+        <DesktopNavigation pathname={getPathWithoutLang(pathname)} />
 
         <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
+          <button
+            type="button"
+            onClick={() => setMobileNavOpen((open) => !open)}
+            className="flex h-9 w-9 items-center justify-center rounded-lg transition-all duration-300 lg:hidden"
+            style={{ background: "var(--surface-soft)", border: "1px solid var(--surface-border)", color: "var(--fg-3)" }}
+            aria-label={mobileNavOpen ? "Close navigation" : "Open navigation"}
+            aria-expanded={mobileNavOpen}
+          >
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true">
+              {mobileNavOpen ? (
+                <path d="M3 3L12 12M12 3L3 12" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+              ) : (
+                <path d="M2 4H13M2 7.5H13M2 11H13" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+              )}
+            </svg>
+          </button>
 
           {/* Language button */}
           <button
@@ -236,41 +258,55 @@ function AppInner() {
             )}
           </button>
 
-          <button
+          <a
+            href={localizedPath("/contacts", lang)}
             onClick={() => {
-              jumpTo("contact-form");
+              trackEvent("click_cta", { location: "nav" });
             }}
             className="group px-3 sm:px-4 md:px-6 py-2.5 uppercase tracking-[0.18em] transition-all duration-500 cursor-pointer rounded-lg whitespace-nowrap text-center"
             style={{ fontSize: "0.6rem", fontWeight: 600, background: "var(--surface-strong)", border: "1px solid var(--surface-border)", color: "var(--fg-2)" }}
           >
             {t("nav.cta")}
-          </button>
+          </a>
         </div>
       </nav>
 
       <div className="relative z-10" style={{ opacity: loaded ? 1 : 0, transition: "opacity 0.8s ease 0.3s" }}>
-        <HeroSection />
+        <SeoHead route={route} />
+        {route.kind === "home" ? (
+          <>
+            <HeroSection />
 
-        {/* Divider */}
-        <div className="max-w-6xl mx-auto px-6 md:px-20">
-          <div className="relative h-px">
-            <div className="absolute inset-0" style={{ background: "var(--surface-border)" }} />
-            <div className="absolute left-1/2 -translate-x-1/2 -top-4 w-32 h-8" style={{ background: "radial-gradient(ellipse, var(--surface-mid), transparent)" }} />
-          </div>
-        </div>
+            {/* Divider */}
+            <div className="max-w-6xl mx-auto px-6 md:px-20">
+              <div className="relative h-px">
+                <div className="absolute inset-0" style={{ background: "var(--surface-border)" }} />
+                <div className="absolute left-1/2 -translate-x-1/2 -top-4 w-32 h-8" style={{ background: "radial-gradient(ellipse, var(--surface-mid), transparent)" }} />
+              </div>
+            </div>
 
-        <Manifesto />
-        <PainSection />
-        <WhyLora />
-        <LiveSystem />
-        <div id="process"><ProcessSection /></div>
-        <div id="results"><Comparison /></div>
-        {/* <div id="results"><CasesSection /></div> */}
-        {/* <ArticlesSection /> */}
-        <PricingSection />
-        {/* <StorySection /> */}
-        <CtaBreak />
-        <ContactSection />
+            <Manifesto />
+            <PainSection />
+            <WhyLora />
+            <LiveSystem />
+            <div id="process"><ProcessSection /></div>
+            <div id="results"><Comparison /></div>
+            {/* <div id="results"><CasesSection /></div> */}
+            {/* <ArticlesSection /> */}
+            <PricingSection />
+            {/* <StorySection /> */}
+            <CtaBreak />
+            <ContactSection />
+          </>
+        ) : route.kind === "listing" ? (
+          <SeoListingPage route={route} />
+        ) : isDetailRoute(route) ? (
+          <SeoDetailPage route={route} />
+        ) : route.kind === "not-found" ? (
+          <NotFoundPage route={route} />
+        ) : (
+          <SimplePage route={route} />
+        )}
         <Footer />
       </div>
     </div>

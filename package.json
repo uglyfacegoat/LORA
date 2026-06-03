@@ -7,7 +7,8 @@
     "dev": "vite",
     "backend:dev": "node --watch backend/server.mjs",
     "backend:start": "node backend/server.mjs",
-    "build": "vite build",
+    "seo:sitemap": "node scripts/generate-sitemap.mjs",
+    "build": "node scripts/generate-sitemap.mjs && vite build",
     "preview": "vite preview"
   },
   "dependencies": {

@@ -15,6 +15,8 @@ RUN pnpm install --frozen-lockfile
 
 # Copy source (after install so node_modules layer is cached)
 COPY src ./src
+COPY public ./public
+COPY scripts ./scripts
 COPY index.html vite.config.ts postcss.config.mjs ./
 COPY lib ./lib
 

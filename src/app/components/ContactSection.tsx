@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useI18n } from "../i18n";
+import { trackEvent } from "../analytics";
 
 import { useInView } from "./useInView";
 
@@ -693,6 +694,12 @@ export function ContactSection() {
       }
 
       setAlert({ tone: "success", text: copy.success });
+      trackEvent("submit_lead_form", {
+        countryIso: selectedCountry.iso,
+        hasCompany: Boolean(values.company.trim()),
+        briefDate: values.briefDate.trim(),
+        briefTime: values.briefTime.trim(),
+      });
       setSubmitted(true);
     } catch {
       setAlert({ tone: "error", text: "Could not send the request." });
@@ -709,6 +716,7 @@ export function ContactSection() {
   };
 
   const handleOpenBriefDatePicker = () => {
+    trackEvent("open_brief", { field: "date" });
     if (briefDateTriggerRef.current) {
       setBriefDateAnchorRect(briefDateTriggerRef.current.getBoundingClientRect());
     }
@@ -717,6 +725,7 @@ export function ContactSection() {
   };
 
   const handleOpenBriefTimePicker = () => {
+    trackEvent("open_brief", { field: "time" });
     if (briefTimeTriggerRef.current) {
       setBriefTimeAnchorRect(briefTimeTriggerRef.current.getBoundingClientRect());
     }

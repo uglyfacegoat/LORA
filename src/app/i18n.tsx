@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { getLangFromPath, getPathWithoutLang, localizedPath } from "./seo/site";
 
 export type Lang = "en" | "es" | "ru" | "zh";
 
@@ -445,13 +446,28 @@ interface Ctx {
 const I18nContext = createContext<Ctx>({ lang: "en", setLang: () => {}, t: (k) => k });
 
 export function I18nProvider({ children }: { children: React.ReactNode }) {
-  const [lang, setLangState] = useState<Lang>("en");
+  const [lang, setLangState] = useState<Lang>(() => getLangFromPath(window.location.pathname) ?? "en");
 
   useEffect(() => {
+    const urlLang = getLangFromPath(window.location.pathname);
+    if (urlLang) {
+      setLangState(urlLang);
+      return;
+    }
+
     const saved = localStorage.getItem("lora.lang") as Lang | null;
     if (saved && ["en", "es", "ru", "zh"].includes(saved)) {
       setLangState(saved);
     }
+  }, []);
+
+  useEffect(() => {
+    const onPopState = () => {
+      const urlLang = getLangFromPath(window.location.pathname);
+      if (urlLang) setLangState(urlLang);
+    };
+    window.addEventListener("popstate", onPopState);
+    return () => window.removeEventListener("popstate", onPopState);
   }, []);
 
   useEffect(() => {
@@ -463,6 +479,10 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
     try {
       localStorage.setItem("lora.lang", l);
     } catch {}
+
+    const nextPath = localizedPath(getPathWithoutLang(window.location.pathname), l);
+    window.history.pushState(null, "", `${nextPath}${window.location.search}${window.location.hash}`);
+    window.dispatchEvent(new PopStateEvent("popstate"));
   };
 
   const t = (key: string) => translations[key]?.[lang] ?? translations[key]?.en ?? key;

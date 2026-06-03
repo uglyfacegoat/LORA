@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="LORA">
+  <rect width="1200" height="630" fill="#000"/>
+  <circle cx="230" cy="315" r="96" fill="none" stroke="#fff" stroke-width="18"/>
+  <path d="M230 190v250M105 315h250" stroke="#fff" stroke-width="14" stroke-linecap="round" opacity=".72"/>
+  <text x="390" y="300" fill="#fff" font-family="Inter, Arial, sans-serif" font-size="112" font-weight="900" letter-spacing="-4">LORA</text>
+  <text x="396" y="374" fill="rgba(255,255,255,.72)" font-family="Inter, Arial, sans-serif" font-size="32" font-weight="700" letter-spacing="7">REVENUE ENGINEERING</text>
+</svg>
