@@ -17,9 +17,11 @@ export function Manifesto() {
 
   return (
     <section ref={ref} className="relative py-32 md:py-52 px-6 md:px-20">
-
       {/* Large ambient glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] pointer-events-none" style={{ background: "radial-gradient(circle, rgba(255,255,255,0.03), transparent 55%)" }} />
+      <div
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] pointer-events-none"
+        style={{ background: "radial-gradient(circle, rgba(255,255,255,0.03), transparent 55%)" }}
+      />
 
       <div className="max-w-5xl mx-auto relative">
         {/* Decorative quotes */}
@@ -36,7 +38,10 @@ export function Manifesto() {
 
         {/* Sparkle decoration */}
         <motion.svg
-          width="16" height="16" viewBox="0 0 16 16" fill="white"
+          width="16"
+          height="16"
+          viewBox="0 0 16 16"
+          fill="white"
           className="absolute -top-4 right-8 md:right-20"
           animate={{ opacity: [0.05, 0.2, 0.05], scale: [0.9, 1.1, 0.9], rotate: [0, 45, 0] }}
           transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}

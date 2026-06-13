@@ -2,5 +2,9 @@ User-agent: *
 Allow: /
 Disallow: /*?preview=
 Disallow: /thank-you/
+Disallow: /en/thank-you/
+Disallow: /es/thank-you/
+Disallow: /ru/thank-you/
+Disallow: /zh/thank-you/
 
 Sitemap: https://loragroup.space/sitemap.xml

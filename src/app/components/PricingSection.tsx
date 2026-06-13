@@ -1,138 +1,84 @@
 import { motion } from "motion/react";
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import { trackEvent } from "../analytics";
+import {
+  getPricingProducts,
+  getPricingTiers,
+  getStandaloneProducts,
+  getWebsiteTiers,
+  type PricingVariant,
+  type Product,
+  type Tier,
+} from "../data/pricing";
+import { useI18n } from "../i18n";
+import { localizedPath } from "../seo/site";
+import { ExpandedPricingCard } from "./ExpandedPricingCard";
+import { PricingMiniCard, HomePricingCard } from "./PricingCards";
+import { StandaloneProductsGrid } from "./PricingStandaloneProducts";
 import { useInView } from "./useInView";
 
-import { trackEvent } from "../analytics";
-import { useI18n } from "../i18n";
+function scrollToContact(fallbackHref: string) {
+  const el = document.getElementById("contact-form");
+  if (!el) {
+    window.location.href = fallbackHref;
+    return;
+  }
+  const top = el.getBoundingClientRect().top + window.scrollY - 80;
+  window.scrollTo({ top, behavior: "instant" });
+}
 
-const PRODUCTS = ["website", "app", "crm"] as const;
-type Product = typeof PRODUCTS[number];
+export function PricingSection({ variant = "home" }: { variant?: PricingVariant }) {
+  return variant === "page" ? <PricingPageSection /> : <HomePricingSection />;
+}
 
-const TIERS = ["min", "mid", "max", "custom"] as const;
-type Tier = typeof TIERS[number];
-
-const TIER_COLORS: Record<Tier, string> = {
-  min: "var(--surface-soft)",
-  mid: "var(--surface-mid)",
-  max: "var(--surface-strong)",
-  custom: "var(--surface-soft)",
-};
-
-const TIER_BORDER: Record<Tier, string> = {
-  min: "var(--surface-border)",
-  mid: "var(--surface-border)",
-  max: "var(--accent-border)",
-  custom: "var(--surface-border)",
-};
-
-const TIER_BADGE: Record<Tier, string> = {
-  min: "",
-  mid: "",
-  max: "POPULAR",
-  custom: "",
-};
-
-export function PricingSection() {
+function HomePricingSection() {
   const [ref, inView] = useInView(0.06);
-  const { t } = useI18n();
-  const [activeProduct, setActiveProduct] = useState<Product>("website");
+  const { t, lang } = useI18n();
 
-  const products: { key: Product; label: string }[] = [
-    { key: "website", label: t("pricing.product.website") },
-    { key: "app", label: t("pricing.product.app") },
-    { key: "crm", label: t("pricing.product.crm") },
-  ];
-
-  const tiers: { key: Tier; label: string; price: string; note: string; for: string; value: string; features: string[] }[] = [
-    {
-      key: "min",
-      label: t("pricing.tier.min"),
-      price: t(`pricing.${activeProduct}.min.price`),
-      note: t("pricing.fromNote"),
-      for: t("pricing.tier.min.for"),
-      value: t("pricing.tier.min.value"),
-      features: [
-        t(`pricing.${activeProduct}.min.f1`),
-        t(`pricing.${activeProduct}.min.f2`),
-        t(`pricing.${activeProduct}.min.f3`),
-        t(`pricing.${activeProduct}.min.f4`),
-      ],
-    },
-    {
-      key: "mid",
-      label: t("pricing.tier.mid"),
-      price: t(`pricing.${activeProduct}.mid.price`),
-      note: t("pricing.fromNote"),
-      for: t("pricing.tier.mid.for"),
-      value: t("pricing.tier.mid.value"),
-      features: [
-        t(`pricing.${activeProduct}.mid.f1`),
-        t(`pricing.${activeProduct}.mid.f2`),
-        t(`pricing.${activeProduct}.mid.f3`),
-        t(`pricing.${activeProduct}.mid.f4`),
-        t(`pricing.${activeProduct}.mid.f5`),
-      ],
-    },
-    {
-      key: "max",
-      label: t("pricing.tier.max"),
-      price: t(`pricing.${activeProduct}.max.price`),
-      note: t("pricing.fromNote"),
-      for: t("pricing.tier.max.for"),
-      value: t("pricing.tier.max.value"),
-      features: [
-        t(`pricing.${activeProduct}.max.f1`),
-        t(`pricing.${activeProduct}.max.f2`),
-        t(`pricing.${activeProduct}.max.f3`),
-        t(`pricing.${activeProduct}.max.f4`),
-        t(`pricing.${activeProduct}.max.f5`),
-        t(`pricing.${activeProduct}.max.f6`),
-      ],
-    },
-    {
-      key: "custom",
-      label: t("pricing.tier.custom"),
-      price: t(`pricing.${activeProduct}.custom.price`),
-      note: t("pricing.custom.note"),
-      for: t("pricing.tier.custom.for"),
-      value: t("pricing.tier.custom.value"),
-      features: [
-        t("pricing.custom.f1"),
-        t("pricing.custom.f2"),
-        t("pricing.custom.f3"),
-        t("pricing.custom.f4"),
-      ],
-    },
-  ];
+  const tiers = useMemo(() => getWebsiteTiers(t), [t]);
+  const standaloneProducts = useMemo(() => getStandaloneProducts(t), [t]);
 
   return (
-    <section ref={ref} className="relative py-32 md:py-44 px-6 md:px-20 overflow-hidden">
-      {/* Subtle bg glow */}
-      <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-        <div style={{ width: 600, height: 400, borderRadius: "50%", background: "radial-gradient(ellipse, rgba(255,255,255,0.03) 0%, transparent 70%)", filter: "blur(40px)" }} />
+    <section ref={ref} className="relative overflow-hidden px-6 py-32 md:px-20 md:py-44">
+      <div className="pointer-events-none absolute inset-0 flex items-center justify-center" aria-hidden="true">
+        <div
+          style={{
+            width: 680,
+            height: 420,
+            borderRadius: "50%",
+            background: "radial-gradient(ellipse, color-mix(in srgb, var(--fg-1) 4%, transparent) 0%, transparent 70%)",
+            filter: "blur(44px)",
+          }}
+        />
       </div>
 
-
-
-      <div className="max-w-6xl mx-auto relative z-10">
-        {/* Header */}
+      <div className="relative z-10 mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
-          className="flex items-center gap-4 mb-6"
+          className="mb-6 flex items-center gap-4"
         >
-          <div className="w-8 h-px" style={{ background: "var(--line-soft)" }} />
-          <span className="uppercase tracking-[0.35em]" style={{ fontSize: "0.65rem", fontWeight: 600, color: "var(--fg-3)" }}>
+          <div className="h-px w-8" style={{ background: "var(--line-soft)" }} />
+          <span
+            className="uppercase tracking-[0.35em]"
+            style={{ fontSize: "0.65rem", fontWeight: 600, color: "var(--fg-3)" }}
+          >
             {t("pricing.eyebrow")}
           </span>
         </motion.div>
 
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+        <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.1 }}
-            style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)", fontWeight: 700, lineHeight: 1.1, letterSpacing: "-0.03em", color: "var(--fg-1)" }}
+            style={{
+              fontSize: "clamp(1.8rem, 4vw, 3rem)",
+              fontWeight: 700,
+              lineHeight: 1.1,
+              letterSpacing: "-0.03em",
+              color: "var(--fg-1)",
+            }}
           >
             {t("pricing.title")}
             <br />
@@ -149,272 +95,215 @@ export function PricingSection() {
           </motion.p>
         </div>
 
-        {/* Product switcher */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="flex gap-2 mb-10 p-1 rounded-xl w-fit"
-          style={{ background: "var(--surface-soft)", border: "1px solid var(--surface-border)" }}
-        >
-          {products.map((p) => (
-            <button
-              key={p.key}
-              onClick={() => {
-                trackEvent("pricing_click", { action: "switch_product", product: p.key });
-                setActiveProduct(p.key);
-              }}
-              className="relative px-5 py-2 rounded-lg transition-all duration-300 uppercase tracking-[0.15em]"
-              style={{
-                fontSize: "0.6rem",
-                fontWeight: 700,
-                color: activeProduct === p.key ? "var(--fg-1)" : "var(--fg-3)",
-                background: activeProduct === p.key ? "var(--surface-strong)" : "transparent",
-                border: activeProduct === p.key ? "1px solid var(--surface-border)" : "1px solid transparent",
-              }}
-            >
-              {p.label}
-            </button>
-          ))}
-        </motion.div>
-
-        {/* Tier cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mb-6">
-          {tiers.map((tier, i) => (
-            <motion.div
-              key={`${activeProduct}-${tier.key}`}
-              initial={{ opacity: 0, y: 24 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.35 + i * 0.08 }}
-              className="relative flex flex-col rounded-2xl p-6"
-              style={{ background: TIER_COLORS[tier.key], border: `1px solid ${TIER_BORDER[tier.key]}` }}
-            >
-              {/* Popular badge */}
-              {TIER_BADGE[tier.key] && (
-                <div
-                  className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full uppercase tracking-[0.2em]"
-                  style={{ fontSize: "0.5rem", fontWeight: 800, background: "var(--fg-1)", color: "var(--app-bg)", whiteSpace: "nowrap" }}
-                >
-                  {TIER_BADGE[tier.key]}
-                </div>
-              )}
-
-              {/* Tier label */}
-              <div className="mb-4 flex items-center justify-between">
-                <span
-                  className="uppercase tracking-[0.2em]"
-                  style={{ fontSize: "0.58rem", fontWeight: 700, color: tier.key === "max" ? "var(--fg-2)" : "var(--fg-3)" }}
-                >
-                  {tier.label}
-                </span>
-                {tier.key !== "custom" && (
-                  <span style={{ fontSize: "0.5rem", color: "var(--fg-4)", fontWeight: 500 }}>
-                    {tier.note}
-                  </span>
-                )}
-              </div>
-
-              {/* Price */}
-              <div className="mb-1" style={{ fontSize: tier.key === "custom" ? "1.3rem" : "clamp(1.5rem, 3vw, 2rem)", fontWeight: 800, letterSpacing: "-0.03em", color: "var(--fg-1)", lineHeight: 1 }}>
-                {tier.price}
-              </div>
-
-              {/* For whom */}
-              <p className="mt-2" style={{ fontSize: "0.68rem", lineHeight: 1.5, color: "var(--fg-4)" }}>
-                {tier.for}
-              </p>
-
-              {/* Business value */}
-              <p className="mt-2 pt-2" style={{ fontSize: "0.72rem", lineHeight: 1.55, color: "var(--fg-3)", borderTop: "1px solid var(--surface-border)" }}>
-                {tier.value}
-              </p>
-
-              {/* Divider */}
-              <div className="my-5" style={{ height: "1px", background: "var(--surface-border)" }} />
-
-              {/* Features */}
-              <ul className="flex flex-col gap-2.5 flex-1">
-                {tier.features.map((f, fi) => (
-                  <li key={fi} className="flex items-start gap-2.5">
-                    <span style={{ marginTop: "0.15em", flexShrink: 0 }}>
-                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-                        <path d="M2 5L4.2 7.5L8 2.5" stroke="var(--fg-2)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </span>
-                    <span style={{ fontSize: "0.75rem", lineHeight: 1.5, color: "var(--fg-3)" }}>{f}</span>
-                  </li>
-                ))}
-              </ul>
-
-              {/* CTA */}
-              <button
-                onClick={() => {
-                  trackEvent("pricing_click", { action: "tier_cta", product: activeProduct });
-                  const el = document.getElementById("contact-form");
-                  if (el) {
-                    const top = el.getBoundingClientRect().top + window.scrollY - 80;
-                    window.scrollTo({ top, behavior: "instant" });
-                  }
-                }}
-                className="mt-6 w-full py-3 rounded-xl uppercase tracking-[0.18em] transition-all duration-300"
-                style={{
-                  fontSize: "0.58rem",
-                  fontWeight: 700,
-                  background: tier.key === "max" ? "var(--fg-1)" : "var(--surface-strong)",
-                  color: tier.key === "max" ? "var(--app-bg)" : "var(--fg-2)",
-                  border: tier.key === "max" ? "none" : "1px solid var(--surface-border)",
-                }}
-              >
-                {tier.key === "custom" ? t("pricing.cta.custom") : t("pricing.cta.default")}
-              </button>
-            </motion.div>
-          ))}
-        </div>
-
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.68 }}
-          className="mb-3 max-w-3xl"
-          style={{ fontSize: "0.72rem", lineHeight: 1.7, color: "var(--fg-4)" }}
-        >
-          {t("pricing.footnote")}
-        </motion.p>
-
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.72 }}
-          className="mb-10 max-w-4xl"
-          style={{ fontSize: "0.7rem", lineHeight: 1.7, color: "var(--fg-4)" }}
-        >
-          {t("pricing.offerDisclaimer")}
-        </motion.p>
-
-        {/* Static extra cards */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.7 }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-4"
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="grid grid-cols-1 items-start gap-4 sm:grid-cols-2 xl:grid-cols-4"
         >
-          {/* Audit */}
-          <div
-            className="rounded-2xl p-6 flex flex-col gap-4"
-            style={{ background: "var(--surface-soft)", border: "1px solid var(--surface-border)" }}
-          >
-            <div className="flex items-center justify-between">
-              <span className="uppercase tracking-[0.2em]" style={{ fontSize: "0.58rem", fontWeight: 700, color: "var(--fg-3)" }}>
-                {t("pricing.audit.label")}
-              </span>
-              <span
-                className="px-2 py-0.5 rounded-md uppercase tracking-[0.15em]"
-                style={{ fontSize: "0.48rem", fontWeight: 700, background: "var(--surface-strong)", color: "var(--fg-2)", border: "1px solid var(--surface-border)" }}
-              >
-                {t("pricing.fixed")}
-              </span>
-            </div>
-            <div style={{ fontSize: "1.8rem", fontWeight: 800, letterSpacing: "-0.03em", color: "var(--fg-1)", lineHeight: 1 }}>
-              {t("pricing.audit.price")}
-            </div>
-            <div style={{ height: "1px", background: "var(--surface-border)" }} />
-            <ul className="flex flex-col gap-2">
-              {[
-                t("pricing.audit.f1"),
-                t("pricing.audit.f2"),
-                t("pricing.audit.f3"),
-              ].map((f, i) => (
-                <li key={i} className="flex items-start gap-2">
-                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none" style={{ marginTop: "0.15em", flexShrink: 0 }}>
-                    <path d="M2 5L4.2 7.5L8 2.5" stroke="var(--fg-2)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                  <span style={{ fontSize: "0.75rem", lineHeight: 1.5, color: "var(--fg-3)" }}>{f}</span>
-                </li>
-              ))}
-            </ul>
-            <button
+          {tiers.map((tier) => (
+            <HomePricingCard
+              key={tier.key}
+              tier={tier}
               onClick={() => {
-                trackEvent("pricing_click", { action: "audit_cta", product: activeProduct });
-                const el = document.getElementById("contact-form");
-                if (el) {
-                  const top = el.getBoundingClientRect().top + window.scrollY - 80;
-                  window.scrollTo({ top, behavior: "instant" });
-                }
+                trackEvent("pricing_click", { action: "home_cta", tier: tier.key });
+                scrollToContact(localizedPath("/audit", lang));
               }}
-              className="mt-auto w-full py-2.5 rounded-xl uppercase tracking-[0.18em] transition-all duration-300"
-              style={{ fontSize: "0.58rem", fontWeight: 700, background: "var(--surface-strong)", color: "var(--fg-2)", border: "1px solid var(--surface-border)" }}
-            >
-              {t("pricing.cta.default")}
-            </button>
-          </div>
-
-          {/* Hosting */}
-          <div
-            className="rounded-2xl p-6 flex flex-col gap-4"
-            style={{ background: "var(--surface-soft)", border: "1px solid var(--surface-border)" }}
-          >
-            <div className="flex items-center justify-between">
-              <span className="uppercase tracking-[0.2em]" style={{ fontSize: "0.58rem", fontWeight: 700, color: "var(--fg-3)" }}>
-                {t("pricing.hosting.label")}
-              </span>
-              <span
-                className="px-2 py-0.5 rounded-md uppercase tracking-[0.15em]"
-                style={{ fontSize: "0.48rem", fontWeight: 700, background: "var(--surface-strong)", color: "var(--fg-2)", border: "1px solid var(--surface-border)" }}
-              >
-                {t("pricing.monthly")}
-              </span>
-            </div>
-            <div style={{ fontSize: "1.8rem", fontWeight: 800, letterSpacing: "-0.03em", color: "var(--fg-1)", lineHeight: 1 }}>
-              {t("pricing.hosting.price")}
-            </div>
-            <div style={{ height: "1px", background: "var(--surface-border)" }} />
-            <ul className="flex flex-col gap-2">
-              {[
-                t("pricing.hosting.f1"),
-                t("pricing.hosting.f2"),
-                t("pricing.hosting.f3"),
-              ].map((f, i) => (
-                <li key={i} className="flex items-start gap-2">
-                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none" style={{ marginTop: "0.15em", flexShrink: 0 }}>
-                    <path d="M2 5L4.2 7.5L8 2.5" stroke="var(--fg-2)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                  <span style={{ fontSize: "0.75rem", lineHeight: 1.5, color: "var(--fg-3)" }}>{f}</span>
-                </li>
-              ))}
-            </ul>
-            <button
-              onClick={() => {
-                trackEvent("pricing_click", { action: "individual_cta", product: activeProduct });
-                const el = document.getElementById("contact-form");
-                if (el) {
-                  const top = el.getBoundingClientRect().top + window.scrollY - 80;
-                  window.scrollTo({ top, behavior: "instant" });
-                }
-              }}
-              className="mt-auto w-full py-2.5 rounded-xl uppercase tracking-[0.18em] transition-all duration-300"
-              style={{ fontSize: "0.58rem", fontWeight: 700, background: "var(--surface-strong)", color: "var(--fg-2)", border: "1px solid var(--surface-border)" }}
-            >
-              {t("pricing.cta.default")}
-            </button>
-          </div>
-
-          {/* Reserved */}
-          <div
-            className="rounded-2xl p-6 flex flex-col gap-4 relative overflow-hidden min-h-[180px]"
-            style={{ background: "var(--surface-soft)", border: "1px solid var(--surface-border)" }}
-          >
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none" style={{ opacity: 0.04 }}>
-              <span style={{ fontSize: "4rem", fontWeight: 900, color: "var(--fg-1)", userSelect: "none" }}>?</span>
-            </div>
-            <span className="uppercase tracking-[0.2em]" style={{ fontSize: "0.58rem", fontWeight: 700, color: "var(--fg-4)" }}>
-              {t("pricing.reserved.label")}
-            </span>
-            <div style={{ flex: 1 }} />
-            <p style={{ fontSize: "0.75rem", lineHeight: 1.6, color: "var(--fg-4)", fontStyle: "italic" }}>
-              {t("pricing.reserved.hint")}
-            </p>
-          </div>
+            />
+          ))}
         </motion.div>
+
+        <p className="mt-8 max-w-3xl" style={{ fontSize: "0.72rem", lineHeight: 1.7, color: "var(--fg-4)" }}>
+          {t("pricing.footnote")}
+        </p>
+
+        <StandaloneProductsGrid title={t("pricing.extra.title")} products={standaloneProducts} />
+      </div>
+    </section>
+  );
+}
+
+function PricingPageSection() {
+  const [ref] = useInView(0.06);
+  const { t, lang } = useI18n();
+  const [activeProduct, setActiveProduct] = useState<Product>("website");
+  const [activeTier, setActiveTier] = useState<Tier | null>(null);
+
+  const products = useMemo(() => getPricingProducts(t), [t]);
+  const tiers = useMemo(() => getPricingTiers(t, activeProduct), [activeProduct, t]);
+
+  const selectedProduct = products.find((product) => product.key === activeProduct) ?? products[0];
+  const isPage = true;
+  const selectedTier = tiers.find((tier) => tier.key === activeTier) ?? null;
+  const standaloneProducts = useMemo(() => getStandaloneProducts(t), [t]);
+
+  return (
+    <section ref={ref} className="relative overflow-hidden px-6 pb-24 pt-12 md:px-20 md:pb-32 md:pt-16">
+      <div className="pointer-events-none absolute inset-0 flex items-center justify-center" aria-hidden="true">
+        <div
+          style={{
+            width: 680,
+            height: 420,
+            borderRadius: "50%",
+            background: "radial-gradient(ellipse, color-mix(in srgb, var(--fg-1) 4%, transparent) 0%, transparent 70%)",
+            filter: "blur(44px)",
+          }}
+        />
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-6xl">
+        <div className="mb-12 grid gap-8 md:grid-cols-[minmax(0,0.48fr)_minmax(0,0.52fr)] md:items-end">
+          <div>
+            <span
+              className="uppercase"
+              style={{ fontSize: "0.58rem", letterSpacing: "0.28em", fontWeight: 800, color: "var(--fg-4)" }}
+            >
+              {t("pricing.eyebrow")}
+            </span>
+            <h1
+              className="mt-7 max-w-2xl"
+              style={{
+                fontSize: "clamp(2.6rem, 6vw, 5rem)",
+                lineHeight: 1.02,
+                fontWeight: 900,
+                letterSpacing: "0",
+                color: "var(--fg-1)",
+              }}
+            >
+              {t("pricing.page.title")}
+            </h1>
+          </div>
+          <p
+            className="max-w-xl md:justify-self-end"
+            style={{ fontSize: "0.98rem", lineHeight: 1.75, color: "var(--fg-3)" }}
+          >
+            {t("pricing.page.text")}
+          </p>
+        </div>
+
+        <div
+          className="mb-10 flex w-fit max-w-full flex-wrap gap-2 rounded-xl p-1"
+          style={{ background: "var(--surface-soft)", border: "1px solid var(--surface-border)" }}
+        >
+          {products.map((product) => {
+            const active = activeProduct === product.key;
+            return (
+              <button
+                key={product.key}
+                onClick={() => {
+                  trackEvent("pricing_click", { action: "switch_product", product: product.key });
+                  setActiveProduct(product.key);
+                  setActiveTier(null);
+                }}
+                className="group rounded-lg px-5 py-2.5 text-left transition-all duration-300"
+                style={{
+                  background: active ? "var(--surface-strong)" : "transparent",
+                  border: active ? "1px solid var(--surface-border)" : "1px solid transparent",
+                }}
+              >
+                <span
+                  className="uppercase"
+                  style={{
+                    fontSize: "0.6rem",
+                    letterSpacing: "0.16em",
+                    fontWeight: 800,
+                    color: active ? "var(--fg-1)" : "var(--fg-3)",
+                  }}
+                >
+                  {product.label}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+
+        <p className="mb-8 max-w-2xl" style={{ fontSize: "0.9rem", lineHeight: 1.7, color: "var(--fg-3)" }}>
+          {selectedProduct.summary}
+        </p>
+
+        {!isPage || !selectedTier ? (
+          <motion.div
+            key="pricing-grid"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.28, ease: "easeOut" }}
+            className="grid grid-cols-1 items-start gap-4 sm:grid-cols-2 xl:grid-cols-4"
+          >
+            {tiers.map((tier) => (
+              <PricingMiniCard
+                key={`${activeProduct}-${tier.key}`}
+                tier={tier}
+                isPage={isPage}
+                onClick={() => {
+                  trackEvent("pricing_click", { action: "open_tier", product: activeProduct, tier: tier.key });
+                  if (isPage) {
+                    setActiveTier(tier.key);
+                    return;
+                  }
+                  scrollToContact(localizedPath("/audit", lang));
+                }}
+              />
+            ))}
+          </motion.div>
+        ) : (
+          <ExpandedPricingCard
+            key={`${activeProduct}-${selectedTier.key}-expanded`}
+            tier={selectedTier}
+            productLabel={selectedProduct.label}
+            onBack={() => setActiveTier(null)}
+          />
+        )}
+
+        {isPage && !activeTier && (
+          <StandaloneProductsGrid title={t("pricing.extra.title")} products={standaloneProducts} />
+        )}
+
+        {isPage && (
+          <div className="mt-12" style={{ borderTop: "1px solid var(--surface-border)", paddingTop: "2rem" }}>
+            <p className="max-w-4xl" style={{ fontSize: "0.74rem", lineHeight: 1.7, color: "var(--fg-4)" }}>
+              {t("pricing.offerDisclaimer")}
+            </p>
+            <a
+              href={localizedPath("/audit", lang)}
+              onClick={() => trackEvent("pricing_click", { action: "page_brief", product: activeProduct })}
+              className="group mt-9 grid gap-6 py-7 md:grid-cols-[minmax(0,1fr)_auto] md:items-center"
+              style={{
+                borderTop: "1px solid var(--surface-border)",
+                borderBottom: "1px solid var(--surface-border)",
+                color: "var(--fg-1)",
+              }}
+            >
+              <span>
+                <span
+                  className="block uppercase"
+                  style={{ fontSize: "0.56rem", letterSpacing: "0.28em", fontWeight: 900, color: "var(--fg-4)" }}
+                >
+                  {t("pricing.cta.kicker")}
+                </span>
+                <span
+                  className="mt-3 block"
+                  style={{
+                    fontSize: "clamp(1.8rem, 4.5vw, 3.6rem)",
+                    lineHeight: 1,
+                    fontWeight: 850,
+                    letterSpacing: "-0.025em",
+                    color: "var(--fg-2)",
+                  }}
+                >
+                  {t("pricing.cta.big")}
+                </span>
+              </span>
+              <span
+                className="flex items-center justify-start gap-4 uppercase transition-transform duration-300 group-hover:translate-x-1 md:justify-end"
+                style={{ fontSize: "0.62rem", letterSpacing: "0.24em", fontWeight: 900, color: "var(--fg-2)" }}
+                aria-hidden="true"
+              >
+                <span>{t("pricing.cta.default")}</span>
+                <span style={{ fontSize: "1.6rem", lineHeight: 1 }}>→</span>
+              </span>
+            </a>
+          </div>
+        )}
       </div>
     </section>
   );

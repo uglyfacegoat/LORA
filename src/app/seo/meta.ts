@@ -1,4 +1,5 @@
-import { LANGS, OG_IMAGE, SITE_NAME, SITE_URL, type Lang, absoluteUrl, localizedPath, localize } from "./site";
+import { buildAlternateLinks, type AlternateLink } from "./alternateLinks";
+import { OG_IMAGE, SITE_NAME, SITE_URL, type Lang, absoluteUrl, localize } from "./site";
 import type { SeoRoute } from "./routes";
 
 export type PageMeta = {
@@ -6,7 +7,7 @@ export type PageMeta = {
   description: string;
   canonical: string;
   robots: string;
-  alternates: { lang: string; href: string }[];
+  alternates: AlternateLink[];
   ogImage: string;
 };
 
@@ -17,10 +18,7 @@ export function buildMeta(route: SeoRoute, lang: Lang): PageMeta {
     description: localize(route.description, lang),
     canonical,
     robots: route.noindex ? "noindex, nofollow" : "index, follow",
-    alternates: [
-      ...LANGS.map((code) => ({ lang: code, href: `${SITE_URL}${localizedPath(route.path, code)}` })),
-      { lang: "x-default", href: `${SITE_URL}${localizedPath(route.path, "en")}` },
-    ],
+    alternates: buildAlternateLinks(route.path),
     ogImage: `${SITE_URL}${OG_IMAGE}`,
   };
 }
@@ -55,7 +53,10 @@ export function applyPageMeta(route: SeoRoute, lang: Lang) {
   setMetaTag('meta[property="og:title"]', { property: "og:title", content: meta.title });
   setMetaTag('meta[property="og:description"]', { property: "og:description", content: meta.description });
   setMetaTag('meta[property="og:url"]', { property: "og:url", content: meta.canonical });
-  setMetaTag('meta[property="og:type"]', { property: "og:type", content: route.kind === "article" ? "article" : "website" });
+  setMetaTag('meta[property="og:type"]', {
+    property: "og:type",
+    content: route.kind === "article" ? "article" : "website",
+  });
   setMetaTag('meta[property="og:image"]', { property: "og:image", content: meta.ogImage });
   setMetaTag('meta[name="twitter:card"]', { name: "twitter:card", content: "summary_large_image" });
   setMetaTag('meta[name="twitter:title"]', { name: "twitter:title", content: meta.title });

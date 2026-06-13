@@ -1,743 +1,100 @@
-import { AnimatePresence, motion } from "motion/react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { motion } from "motion/react";
 import { useI18n } from "../i18n";
-import { trackEvent } from "../analytics";
 
+import { ContactAlertToast } from "./ContactAlertToast";
+import { ContactBriefButton } from "./ContactBriefButton";
+import { ContactPhoneField } from "./ContactPhoneField";
+import { BriefSelectModal, CountryPickerModal } from "./ContactPickerModals";
+import {
+  ContactCompanyIcon,
+  ContactEmailIcon,
+  ContactTextField,
+  ContactUserIcon,
+  type ContactTextFieldConfig,
+} from "./ContactTextField";
+import { useContactFormController } from "./useContactFormController";
 import { useInView } from "./useInView";
-
-type CountryOption = {
-  iso: string;
-  flag: string;
-  dialCode: string;
-  nationalPlaceholder: string;
-  label: string;
-  search: string[];
-};
-
-type AlertState = {
-  tone: "success" | "error";
-  text: string;
-} | null;
-
-const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || "").replace(/\/$/, "");
-const LEADS_API_URL = `${API_BASE_URL}/api/leads`;
-
-const COUNTRY_OPTIONS: CountryOption[] = [
-  { iso: "AR", flag: "AR", dialCode: "+54", nationalPlaceholder: "11 2345-6789", label: "Argentina", search: ["argentina", "ar", "+54"] },
-  { iso: "AU", flag: "AU", dialCode: "+61", nationalPlaceholder: "412 345 678", label: "Australia", search: ["australia", "au", "+61"] },
-  { iso: "AT", flag: "AT", dialCode: "+43", nationalPlaceholder: "664 1234567", label: "Austria", search: ["austria", "at", "+43"] },
-  { iso: "BE", flag: "BE", dialCode: "+32", nationalPlaceholder: "470 12 34 56", label: "Belgium", search: ["belgium", "be", "+32"] },
-  { iso: "BR", flag: "BR", dialCode: "+55", nationalPlaceholder: "11 91234-5678", label: "Brazil", search: ["brazil", "br", "+55"] },
-  { iso: "CA", flag: "CA", dialCode: "+1", nationalPlaceholder: "(416) 555-0123", label: "Canada", search: ["canada", "ca", "+1"] },
-  { iso: "CL", flag: "CL", dialCode: "+56", nationalPlaceholder: "9 6123 4567", label: "Chile", search: ["chile", "cl", "+56"] },
-  { iso: "CN", flag: "CN", dialCode: "+86", nationalPlaceholder: "138 0013 8000", label: "China", search: ["china", "cn", "+86"] },
-  { iso: "CO", flag: "CO", dialCode: "+57", nationalPlaceholder: "300 1234567", label: "Colombia", search: ["colombia", "co", "+57"] },
-  { iso: "CZ", flag: "CZ", dialCode: "+420", nationalPlaceholder: "601 123 456", label: "Czech Republic", search: ["czech republic", "czechia", "cz", "+420"] },
-  { iso: "DK", flag: "DK", dialCode: "+45", nationalPlaceholder: "20 12 34 56", label: "Denmark", search: ["denmark", "dk", "+45"] },
-  { iso: "AE", flag: "AE", dialCode: "+971", nationalPlaceholder: "50 123 4567", label: "Dubai / UAE", search: ["uae", "dubai", "ae", "+971"] },
-  { iso: "FI", flag: "FI", dialCode: "+358", nationalPlaceholder: "40 1234567", label: "Finland", search: ["finland", "fi", "+358"] },
-  { iso: "FR", flag: "FR", dialCode: "+33", nationalPlaceholder: "6 12 34 56 78", label: "France", search: ["france", "fr", "+33"] },
-  { iso: "DE", flag: "DE", dialCode: "+49", nationalPlaceholder: "1512 3456789", label: "Germany", search: ["germany", "de", "deutschland", "+49"] },
-  { iso: "GR", flag: "GR", dialCode: "+30", nationalPlaceholder: "691 234 5678", label: "Greece", search: ["greece", "gr", "+30"] },
-  { iso: "HK", flag: "HK", dialCode: "+852", nationalPlaceholder: "5123 4567", label: "Hong Kong", search: ["hong kong", "hk", "+852"] },
-  { iso: "IN", flag: "IN", dialCode: "+91", nationalPlaceholder: "98765 43210", label: "India", search: ["india", "in", "+91"] },
-  { iso: "ID", flag: "ID", dialCode: "+62", nationalPlaceholder: "812 3456 7890", label: "Indonesia", search: ["indonesia", "id", "+62"] },
-  { iso: "IE", flag: "IE", dialCode: "+353", nationalPlaceholder: "85 123 4567", label: "Ireland", search: ["ireland", "ie", "+353"] },
-  { iso: "IL", flag: "IL", dialCode: "+972", nationalPlaceholder: "50-123-4567", label: "Israel", search: ["israel", "il", "+972"] },
-  { iso: "IT", flag: "IT", dialCode: "+39", nationalPlaceholder: "312 345 6789", label: "Italy", search: ["italy", "it", "+39"] },
-  { iso: "JP", flag: "JP", dialCode: "+81", nationalPlaceholder: "90-1234-5678", label: "Japan", search: ["japan", "jp", "+81"] },
-  { iso: "KZ", flag: "KZ", dialCode: "+7", nationalPlaceholder: "700 123 4567", label: "Kazakhstan", search: ["kazakhstan", "kz", "+7"] },
-  { iso: "MX", flag: "MX", dialCode: "+52", nationalPlaceholder: "55 1234 5678", label: "Mexico", search: ["mexico", "mx", "+52"] },
-  { iso: "MY", flag: "MY", dialCode: "+60", nationalPlaceholder: "12-345 6789", label: "Malaysia", search: ["malaysia", "my", "+60"] },
-  { iso: "NL", flag: "NL", dialCode: "+31", nationalPlaceholder: "6 12345678", label: "Netherlands", search: ["netherlands", "nl", "holland", "+31"] },
-  { iso: "NZ", flag: "NZ", dialCode: "+64", nationalPlaceholder: "21 123 4567", label: "New Zealand", search: ["new zealand", "nz", "+64"] },
-  { iso: "NO", flag: "NO", dialCode: "+47", nationalPlaceholder: "406 12 345", label: "Norway", search: ["norway", "no", "+47"] },
-  { iso: "PK", flag: "PK", dialCode: "+92", nationalPlaceholder: "300 1234567", label: "Pakistan", search: ["pakistan", "pk", "+92"] },
-  { iso: "PE", flag: "PE", dialCode: "+51", nationalPlaceholder: "912 345 678", label: "Peru", search: ["peru", "pe", "+51"] },
-  { iso: "PH", flag: "PH", dialCode: "+63", nationalPlaceholder: "917 123 4567", label: "Philippines", search: ["philippines", "ph", "+63"] },
-  { iso: "PL", flag: "PL", dialCode: "+48", nationalPlaceholder: "512 345 678", label: "Poland", search: ["poland", "pl", "+48"] },
-  { iso: "PT", flag: "PT", dialCode: "+351", nationalPlaceholder: "912 345 678", label: "Portugal", search: ["portugal", "pt", "+351"] },
-  { iso: "RO", flag: "RO", dialCode: "+40", nationalPlaceholder: "712 345 678", label: "Romania", search: ["romania", "ro", "+40"] },
-  { iso: "RU", flag: "RU", dialCode: "+7", nationalPlaceholder: "999 123-45-67", label: "Russia", search: ["russia", "ru", "rossiya", "+7"] },
-  { iso: "SA", flag: "SA", dialCode: "+966", nationalPlaceholder: "50 123 4567", label: "Saudi Arabia", search: ["saudi arabia", "sa", "+966"] },
-  { iso: "SG", flag: "SG", dialCode: "+65", nationalPlaceholder: "8123 4567", label: "Singapore", search: ["singapore", "sg", "+65"] },
-  { iso: "ZA", flag: "ZA", dialCode: "+27", nationalPlaceholder: "71 123 4567", label: "South Africa", search: ["south africa", "za", "+27"] },
-  { iso: "KR", flag: "KR", dialCode: "+82", nationalPlaceholder: "10-1234-5678", label: "South Korea", search: ["south korea", "korea", "kr", "+82"] },
-  { iso: "ES", flag: "ES", dialCode: "+34", nationalPlaceholder: "612 34 56 78", label: "Spain", search: ["spain", "es", "espana", "+34"] },
-  { iso: "SE", flag: "SE", dialCode: "+46", nationalPlaceholder: "70-123 45 67", label: "Sweden", search: ["sweden", "se", "+46"] },
-  { iso: "CH", flag: "CH", dialCode: "+41", nationalPlaceholder: "78 123 45 67", label: "Switzerland", search: ["switzerland", "ch", "+41"] },
-  { iso: "TH", flag: "TH", dialCode: "+66", nationalPlaceholder: "81 234 5678", label: "Thailand", search: ["thailand", "th", "+66"] },
-  { iso: "TR", flag: "TR", dialCode: "+90", nationalPlaceholder: "532 123 45 67", label: "Turkey", search: ["turkey", "tr", "+90"] },
-  { iso: "UA", flag: "UA", dialCode: "+380", nationalPlaceholder: "50 123 45 67", label: "Ukraine", search: ["ukraine", "ua", "+380"] },
-  { iso: "GB", flag: "GB", dialCode: "+44", nationalPlaceholder: "7400 123456", label: "United Kingdom", search: ["united kingdom", "uk", "gb", "britain", "+44"] },
-  { iso: "US", flag: "US", dialCode: "+1", nationalPlaceholder: "(201) 555-0123", label: "United States", search: ["united states", "usa", "us", "+1"] },
-  { iso: "VN", flag: "VN", dialCode: "+84", nationalPlaceholder: "091 234 56 78", label: "Vietnam", search: ["vietnam", "vn", "+84"] },
-];
-
-const TIMEZONE_COUNTRY_MAP: Record<string, string> = {
-  "Europe/Moscow": "RU",
-  "Europe/Madrid": "ES",
-  "Europe/London": "GB",
-  "Europe/Berlin": "DE",
-  "Europe/Paris": "FR",
-  "Europe/Rome": "IT",
-  "Europe/Istanbul": "TR",
-  "Europe/Kyiv": "UA",
-  "Asia/Dubai": "AE",
-  "Asia/Shanghai": "CN",
-  "Asia/Hong_Kong": "HK",
-  "Asia/Kolkata": "IN",
-  "Asia/Tokyo": "JP",
-  "Asia/Seoul": "KR",
-  "Asia/Singapore": "SG",
-  "America/Sao_Paulo": "BR",
-  "America/Mexico_City": "MX",
-  "America/Toronto": "CA",
-  "America/New_York": "US",
-  "America/Chicago": "US",
-  "America/Denver": "US",
-  "America/Los_Angeles": "US",
-};
-
-function detectCountryIso() {
-  if (typeof window === "undefined") return "US";
-
-  const localeValues = [navigator.language, ...navigator.languages].filter(Boolean).map((value) => value.toUpperCase());
-  for (const value of localeValues) {
-    const match = value.match(/[-_]([A-Z]{2})$/);
-    if (!match) continue;
-    const iso = match[1];
-    if (COUNTRY_OPTIONS.some((country) => country.iso === iso)) return iso;
-  }
-
-  const zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  return TIMEZONE_COUNTRY_MAP[zone] ?? "US";
-}
-
-function getCopy(lang: string) {
-  if (lang === "ru") {
-    return {
-      countrySelect: "Регион телефона",
-      searchPlaceholder: "Поиск страны или кода",
-      noResults: "Ничего не найдено",
-      missingFields: "Заполни имя, телефон и email.",
-      invalidEmail: "Проверь email.",
-      success: "Заявка отправлена.",
-    };
-  }
-  if (lang === "es") {
-    return {
-      countrySelect: "Region del telefono",
-      searchPlaceholder: "Busca un pais o codigo",
-      noResults: "No se encontro nada",
-      missingFields: "Completa nombre, telefono y email.",
-      invalidEmail: "Revisa el email.",
-      success: "Solicitud enviada.",
-    };
-  }
-  if (lang === "zh") {
-    return {
-      countrySelect: "Phone Region",
-      searchPlaceholder: "Search country or code",
-      noResults: "No matches found",
-      missingFields: "Fill in name, phone and email.",
-      invalidEmail: "Check the email.",
-      success: "Request sent.",
-    };
-  }
-  return {
-    countrySelect: "Phone Region",
-    searchPlaceholder: "Search country or code",
-    noResults: "No matches found",
-    missingFields: "Fill in name, phone and email.",
-    invalidEmail: "Check the email.",
-    success: "Request sent.",
-  };
-}
-
-function AlertToast({ alert }: { alert: AlertState }) {
-  return (
-    <AnimatePresence>
-      {alert && (
-        <motion.div
-          initial={{ opacity: 0, y: 10, scale: 0.98 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: 8, scale: 0.98 }}
-          transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed left-1/2 top-6 z-[90] w-[min(92vw,420px)] -translate-x-1/2 rounded-2xl px-4 py-3"
-          style={{
-            background: "var(--app-bg)",
-            border: `1px solid ${alert.tone === "error" ? "rgba(220,38,38,0.28)" : "var(--accent-border)"}`,
-            boxShadow: "0 20px 60px rgba(0,0,0,0.12)",
-          }}
-        >
-          <div className="flex items-center gap-3">
-            <span
-              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full"
-              style={{
-                background: alert.tone === "error" ? "rgba(220,38,38,0.12)" : "rgba(16,185,129,0.12)",
-                color: alert.tone === "error" ? "rgb(185,28,28)" : "rgb(4,120,87)",
-              }}
-            >
-              {alert.tone === "error" ? "!" : "OK"}
-            </span>
-            <p style={{ fontSize: "0.84rem", fontWeight: 600, color: "var(--fg-2)" }}>{alert.text}</p>
-          </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  );
-}
-
-function CountryPickerModal({
-  open,
-  onClose,
-  selectedIso,
-  onSelect,
-  copy,
-  anchorRect,
-}: {
-  open: boolean;
-  onClose: () => void;
-  selectedIso: string;
-  onSelect: (country: CountryOption) => void;
-  copy: ReturnType<typeof getCopy>;
-  anchorRect: DOMRect | null;
-}) {
-  const popRef = useRef<HTMLDivElement>(null);
-  const [query, setQuery] = useState("");
-
-  useEffect(() => {
-    if (!open) {
-      setQuery("");
-      return;
-    }
-
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-    const onClick = (e: MouseEvent) => {
-      if (!popRef.current) return;
-      const target = e.target as HTMLElement;
-      if (popRef.current.contains(target)) return;
-      if (target.closest?.('[data-phone-country-trigger="true"]')) return;
-      onClose();
-    };
-    const onScroll = () => onClose();
-
-    window.addEventListener("keydown", onKey);
-    window.addEventListener("mousedown", onClick);
-    window.addEventListener("scroll", onScroll);
-    window.addEventListener("resize", onScroll);
-
-    return () => {
-      window.removeEventListener("keydown", onKey);
-      window.removeEventListener("mousedown", onClick);
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-    };
-  }, [open, onClose]);
-
-  const countries = useMemo(() => {
-    const sorted = [...COUNTRY_OPTIONS].sort((a, b) => a.label.localeCompare(b.label, "en", { sensitivity: "base" }));
-    const normalizedQuery = query.trim().toLowerCase();
-    if (!normalizedQuery) return sorted;
-    return sorted.filter((country) =>
-      country.label.toLowerCase().includes(normalizedQuery) ||
-      country.dialCode.includes(normalizedQuery) ||
-      country.iso.toLowerCase().includes(normalizedQuery) ||
-      country.search.some((entry) => entry.includes(normalizedQuery)),
-    );
-  }, [query]);
-
-  return (
-    <AnimatePresence>
-      {open && anchorRect && (
-        <motion.div
-          ref={popRef}
-          initial={{ opacity: 0, y: 8, scale: 0.98 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: 6, scale: 0.99 }}
-          transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed z-[70] rounded-3xl p-3"
-          style={{
-            top: Math.min(anchorRect.bottom + 8, window.innerHeight - 440),
-            left: Math.max(16, Math.min(anchorRect.left, window.innerWidth - Math.min(420, window.innerWidth - 32) - 16)),
-            width: Math.min(420, window.innerWidth - 32),
-            background: "var(--app-bg)",
-            border: "1px solid var(--modal-border)",
-            boxShadow: "0 24px 90px rgba(0,0,0,0.16)",
-          }}
-        >
-            <div className="flex items-center justify-between px-3 pb-2 pt-2">
-              <span className="uppercase" style={{ fontSize: "0.5rem", letterSpacing: "0.25em", fontWeight: 700, color: "var(--fg-4)" }}>
-                {copy.countrySelect}
-              </span>
-              <span style={{ fontSize: "0.5rem", color: "var(--fg-4)", letterSpacing: "0.15em" }}>ESC</span>
-            </div>
-
-            <div className="px-2 pb-2 pt-1">
-              <div
-                className="rounded-2xl px-4"
-                style={{ background: "var(--surface-soft)", border: "1px solid var(--surface-border)" }}
-              >
-                <input
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  placeholder={copy.searchPlaceholder}
-                  className="w-full bg-transparent py-3 outline-none"
-                  style={{ fontSize: "0.86rem", color: "var(--fg-1)" }}
-                />
-              </div>
-            </div>
-
-            <div className="mt-1 flex max-h-[360px] flex-col gap-1 overflow-y-auto px-1 pb-1 pr-2">
-              {countries.length === 0 ? (
-                <div className="rounded-2xl px-4 py-8 text-center" style={{ background: "var(--surface-soft)", border: "1px solid var(--surface-border)" }}>
-                  <p style={{ fontSize: "0.82rem", color: "var(--fg-3)" }}>{copy.noResults}</p>
-                </div>
-              ) : (
-                countries.map((country) => {
-                  const active = selectedIso === country.iso;
-                  return (
-                    <button
-                      key={country.iso}
-                      type="button"
-                      onClick={() => {
-                        onSelect(country);
-                        onClose();
-                      }}
-                      className="flex items-center gap-3 rounded-2xl px-3 py-3 text-left transition-colors duration-200"
-                      style={{ background: active ? "var(--accent-soft)" : "transparent" }}
-                    >
-                      <span
-                        className="flex h-8 shrink-0 items-center justify-center rounded-md px-2"
-                        style={{
-                          background: "transparent",
-                          border: `1px solid ${active ? "var(--accent-border)" : "var(--surface-border)"}`,
-                          fontSize: "0.56rem",
-                          fontWeight: 800,
-                          letterSpacing: "0.08em",
-                          color: active ? "var(--fg-2)" : "var(--fg-4)",
-                          minWidth: "2.35rem",
-                        }}
-                      >
-                        {country.flag}
-                      </span>
-
-                      <div className="min-w-0 flex-1">
-                        <p style={{ fontSize: "0.9rem", fontWeight: 600, color: active ? "var(--fg-1)" : "var(--fg-2)", lineHeight: 1.15 }}>
-                          {country.label}
-                        </p>
-                        <p className="uppercase" style={{ fontSize: "0.55rem", letterSpacing: "0.18em", color: "var(--fg-4)", fontWeight: 600, marginTop: 4 }}>
-                          {country.dialCode}
-                        </p>
-                      </div>
-
-                      {active && (
-                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ color: "var(--fg-1)" }}>
-                          <path d="M2 7L6 11L12 3" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                      )}
-                    </button>
-                  );
-                })
-              )}
-            </div>
-          </motion.div>
-      )}
-    </AnimatePresence>
-  );
-}
-
-type BriefOption = {
-  value: string;
-  label: string;
-  meta?: string;
-};
-
-function BriefSelectModal({
-  open,
-  onClose,
-  title,
-  selectedValue,
-  onSelect,
-  anchorRect,
-  options,
-  triggerAttribute,
-}: {
-  open: boolean;
-  onClose: () => void;
-  title: string;
-  selectedValue: string;
-  onSelect: (value: string) => void;
-  anchorRect: DOMRect | null;
-  options: BriefOption[];
-  triggerAttribute: string;
-}) {
-  const popRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!open) return;
-
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
-
-    const onClick = (e: MouseEvent) => {
-      if (!popRef.current) return;
-      const target = e.target as HTMLElement;
-      if (popRef.current.contains(target)) return;
-      if (target.closest?.(`[${triggerAttribute}="true"]`)) return;
-      onClose();
-    };
-
-    const onScroll = () => onClose();
-
-    window.addEventListener("keydown", onKey);
-    window.addEventListener("mousedown", onClick);
-    window.addEventListener("scroll", onScroll);
-    window.addEventListener("resize", onScroll);
-
-    return () => {
-      window.removeEventListener("keydown", onKey);
-      window.removeEventListener("mousedown", onClick);
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-    };
-  }, [open, onClose, triggerAttribute]);
-
-  return (
-    <AnimatePresence>
-      {open && anchorRect && (
-        <motion.div
-          ref={popRef}
-          initial={{ opacity: 0, y: 8, scale: 0.98 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: 6, scale: 0.99 }}
-          transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed z-[70] rounded-3xl p-3"
-          style={{
-            top: Math.min(anchorRect.bottom + 8, window.innerHeight - 420),
-            left: Math.max(16, Math.min(anchorRect.left, window.innerWidth - Math.min(360, window.innerWidth - 32) - 16)),
-            width: Math.min(360, window.innerWidth - 32),
-            background: "var(--app-bg)",
-            border: "1px solid var(--modal-border)",
-            boxShadow: "0 24px 90px rgba(0,0,0,0.16)",
-          }}
-        >
-          <div className="flex items-center justify-between px-3 pb-2 pt-2">
-            <span className="uppercase" style={{ fontSize: "0.5rem", letterSpacing: "0.25em", fontWeight: 700, color: "var(--fg-4)" }}>
-              {title}
-            </span>
-            <span style={{ fontSize: "0.5rem", color: "var(--fg-4)", letterSpacing: "0.15em" }}>ESC</span>
-          </div>
-
-          <div className="mt-1 flex max-h-[320px] flex-col gap-1 overflow-y-auto px-1 pb-1 pr-2">
-            {options.map((option) => {
-              const active = selectedValue === option.value;
-              return (
-                <button
-                  key={option.value}
-                  type="button"
-                  onClick={() => {
-                    onSelect(option.value);
-                    onClose();
-                  }}
-                  className="flex items-center justify-between gap-3 rounded-2xl px-3 py-3 text-left transition-colors duration-200"
-                  style={{ background: active ? "var(--accent-soft)" : "transparent" }}
-                >
-                  <div className="min-w-0">
-                    <p style={{ fontSize: "0.9rem", fontWeight: 600, color: active ? "var(--fg-1)" : "var(--fg-2)", lineHeight: 1.15 }}>
-                      {option.label}
-                    </p>
-                    {option.meta ? (
-                      <p className="uppercase" style={{ fontSize: "0.55rem", letterSpacing: "0.18em", color: "var(--fg-4)", fontWeight: 600, marginTop: 4 }}>
-                        {option.meta}
-                      </p>
-                    ) : null}
-                  </div>
-
-                  {active && (
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ color: "var(--fg-1)" }}>
-                      <path d="M2 7L6 11L12 3" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  )}
-                </button>
-              );
-            })}
-          </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  );
-}
-
-function buildBriefDateOptions(lang: string) {
-  const now = new Date();
-  const locale = lang === "ru" ? "ru-RU" : lang === "es" ? "es-ES" : "en-US";
-
-  return Array.from({ length: 21 }, (_, index) => {
-    const date = new Date(now);
-    date.setDate(now.getDate() + index);
-    const value = date.toISOString().slice(0, 10);
-    const label = new Intl.DateTimeFormat(locale, {
-      day: "numeric",
-      month: "long",
-    }).format(date);
-    const meta = new Intl.DateTimeFormat(locale, {
-      weekday: "short",
-    }).format(date);
-
-    return { value, label, meta };
-  });
-}
-
-function formatBriefDateValue(value: string, lang: string) {
-  if (!value) return "";
-  const parsed = new Date(`${value}T12:00:00`);
-  if (Number.isNaN(parsed.getTime())) return value;
-  const locale = lang === "ru" ? "ru-RU" : lang === "es" ? "es-ES" : "en-US";
-  return new Intl.DateTimeFormat(locale, {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  }).format(parsed);
-}
 
 export function ContactSection() {
   const [ref, inView] = useInView(0.1);
-  const [submitted, setSubmitted] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
-  const [focused, setFocused] = useState<string | null>(null);
-  const [countryOpen, setCountryOpen] = useState(false);
-  const [briefDateOpen, setBriefDateOpen] = useState(false);
-  const [briefTimeOpen, setBriefTimeOpen] = useState(false);
-  const [countryAnchorRect, setCountryAnchorRect] = useState<DOMRect | null>(null);
-  const [briefDateAnchorRect, setBriefDateAnchorRect] = useState<DOMRect | null>(null);
-  const [briefTimeAnchorRect, setBriefTimeAnchorRect] = useState<DOMRect | null>(null);
-  const [alert, setAlert] = useState<AlertState>(null);
   const { t, lang } = useI18n();
-  const copy = getCopy(lang);
+  const {
+    alert,
+    briefDateAnchorRect,
+    briefDateDisplay,
+    briefDateLabel,
+    briefDateOpen,
+    briefDateOptions,
+    briefDateTriggerRef,
+    briefTimeAnchorRect,
+    briefTimeLabel,
+    briefTimeOpen,
+    briefTimeOptions,
+    briefTimeTriggerRef,
+    copy,
+    countryAnchorRect,
+    countryOpen,
+    countryTriggerRef,
+    focused,
+    handleOpenBriefDatePicker,
+    handleOpenBriefTimePicker,
+    handleOpenCountryPicker,
+    handleSubmit,
+    handleTextFieldChange,
+    phonePlaceholder,
+    selectedCountry,
+    setBriefDateOpen,
+    setBriefTimeOpen,
+    setCountryOpen,
+    setFocused,
+    setSelectedCountry,
+    setValues,
+    submitted,
+    submitting,
+    values,
+  } = useContactFormController(lang);
 
-  const [values, setValues] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    company: "",
-    briefDate: "",
-    briefTime: "",
-  });
-
-  const [selectedCountry, setSelectedCountry] = useState<CountryOption>(COUNTRY_OPTIONS.find((country) => country.iso === "US")!);
-  const countryTriggerRef = useRef<HTMLButtonElement>(null);
-  const briefDateTriggerRef = useRef<HTMLButtonElement>(null);
-  const briefTimeTriggerRef = useRef<HTMLButtonElement>(null);
-
-  useEffect(() => {
-    const iso = detectCountryIso();
-    const nextCountry = COUNTRY_OPTIONS.find((country) => country.iso === iso) ?? COUNTRY_OPTIONS.find((country) => country.iso === "US")!;
-    setSelectedCountry(nextCountry);
-  }, []);
-
-  useEffect(() => {
-    if (!alert) return;
-    const timeout = window.setTimeout(() => setAlert(null), 2600);
-    return () => window.clearTimeout(timeout);
-  }, [alert]);
-
-  const briefDateLabel = lang === "ru" ? "Дата брифа" : lang === "es" ? "Fecha del briefing" : "Brief date";
-  const briefTimeLabel = lang === "ru" ? "Время брифа" : lang === "es" ? "Hora del briefing" : "Brief time";
-  const missingScheduleText =
-    lang === "ru"
-      ? "Выбери удобные дату и время брифа."
-      : lang === "es"
-        ? "Elige una fecha y hora convenientes para el briefing."
-        : "Choose a suitable brief date and time.";
-  const phonePlaceholder = useMemo(
-    () => selectedCountry.nationalPlaceholder,
-    [selectedCountry],
-  );
-  const briefDateOptions = useMemo(() => buildBriefDateOptions(lang), [lang]);
-  const briefTimeOptions = useMemo<BriefOption[]>(
-    () => [
-      "09:00",
-      "10:00",
-      "11:00",
-      "12:00",
-      "13:00",
-      "14:00",
-      "15:00",
-      "16:00",
-      "17:00",
-      "18:00",
-      "19:00",
-    ].map((time) => ({ value: time, label: time, meta: "MSK" })),
-    [],
-  );
-  const briefDateDisplay = useMemo(() => formatBriefDateValue(values.briefDate, lang), [values.briefDate, lang]);
-
-  const fields = [
+  const fields: ContactTextFieldConfig[] = [
     {
-      name: "name" as const,
+      name: "name",
       placeholder: t("contact.name"),
       type: "text",
-      icon: (
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-          <circle cx="7" cy="4" r="3" stroke="currentColor" strokeWidth="1" />
-          <path d="M1 13C1 10 3.5 8 7 8C10.5 8 13 10 13 13" stroke="currentColor" strokeWidth="1" />
-        </svg>
-      ),
+      icon: <ContactUserIcon />,
     },
     {
-      name: "email" as const,
+      name: "email",
       placeholder: t("contact.email"),
       type: "email",
-      icon: (
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-          <rect x="1" y="3" width="12" height="8" rx="1" stroke="currentColor" strokeWidth="1" />
-          <path d="M1 3L7 8L13 3" stroke="currentColor" strokeWidth="1" />
-        </svg>
-      ),
+      icon: <ContactEmailIcon />,
     },
     {
-      name: "company" as const,
+      name: "company",
       placeholder: t("contact.company"),
       type: "text",
       optional: true,
-      icon: (
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-          <rect x="2" y="3" width="10" height="10" stroke="currentColor" strokeWidth="1" />
-          <path d="M5 7H9M5 10H9M5 3V1H9V3" stroke="currentColor" strokeWidth="1" />
-        </svg>
-      ),
+      icon: <ContactCompanyIcon />,
     },
   ];
 
-  const fieldBox = (field: (typeof fields)[number]) => {
-    const isFocused = focused === field.name;
+  const fieldBox = (field: ContactTextFieldConfig) => {
     return (
-      <div
+      <ContactTextField
         key={field.name}
-        className="relative rounded-xl transition-all duration-300"
-        style={{
-          background: isFocused ? "var(--surface-mid)" : "var(--surface-soft)",
-          border: `1px solid ${isFocused ? "var(--accent-border)" : "var(--surface-border)"}`,
-        }}
-      >
-        <div className="flex items-center gap-3 px-4">
-          <span className="shrink-0 transition-colors" style={{ color: isFocused ? "var(--fg-2)" : "var(--fg-4)" }}>
-            {field.icon}
-          </span>
-          <input
-            type={field.type}
-            placeholder={field.placeholder}
-            required={!field.optional}
-            value={values[field.name]}
-            onChange={(e) => setValues((prev) => ({ ...prev, [field.name]: e.target.value }))}
-            onFocus={() => setFocused(field.name)}
-            onBlur={() => setFocused(null)}
-            className="w-full bg-transparent px-0 py-4 outline-none"
-            style={{ fontSize: "0.9rem", color: "var(--fg-1)", border: "none" }}
-          />
-        </div>
-      </div>
+        field={field}
+        value={values[field.name]}
+        focused={focused === field.name}
+        onChange={handleTextFieldChange}
+        onFocus={setFocused}
+        onBlur={() => setFocused(null)}
+      />
     );
   };
 
   const phoneFocused = focused === "phone";
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    if (submitting) return;
-
-    if (!values.name.trim() || !values.phone.trim() || !values.email.trim()) {
-      setAlert({ tone: "error", text: copy.missingFields });
-      return;
-    }
-
-    if (!values.briefDate.trim() || !values.briefTime.trim()) {
-      setAlert({ tone: "error", text: missingScheduleText });
-      return;
-    }
-
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email.trim())) {
-      setAlert({ tone: "error", text: copy.invalidEmail });
-      return;
-    }
-
-    setSubmitting(true);
-
-    try {
-      const response = await fetch(LEADS_API_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: values.name.trim(),
-          email: values.email.trim(),
-          phone: values.phone.trim(),
-          company: values.company.trim(),
-          briefDate: values.briefDate.trim(),
-          briefTime: values.briefTime.trim(),
-          dialCode: selectedCountry.dialCode,
-          countryIso: selectedCountry.iso,
-          countryLabel: selectedCountry.label,
-        }),
-      });
-
-      if (!response.ok) {
-        setAlert({ tone: "error", text: "Could not send the request." });
-        return;
-      }
-
-      setAlert({ tone: "success", text: copy.success });
-      trackEvent("submit_lead_form", {
-        countryIso: selectedCountry.iso,
-        hasCompany: Boolean(values.company.trim()),
-        briefDate: values.briefDate.trim(),
-        briefTime: values.briefTime.trim(),
-      });
-      setSubmitted(true);
-    } catch {
-      setAlert({ tone: "error", text: "Could not send the request." });
-    } finally {
-      setSubmitting(false);
-    }
-  };
-
-  const handleOpenCountryPicker = () => {
-    if (countryTriggerRef.current) {
-      setCountryAnchorRect(countryTriggerRef.current.getBoundingClientRect());
-    }
-    setCountryOpen(true);
-  };
-
-  const handleOpenBriefDatePicker = () => {
-    trackEvent("open_brief", { field: "date" });
-    if (briefDateTriggerRef.current) {
-      setBriefDateAnchorRect(briefDateTriggerRef.current.getBoundingClientRect());
-    }
-    setBriefTimeOpen(false);
-    setBriefDateOpen(true);
-  };
-
-  const handleOpenBriefTimePicker = () => {
-    trackEvent("open_brief", { field: "time" });
-    if (briefTimeTriggerRef.current) {
-      setBriefTimeAnchorRect(briefTimeTriggerRef.current.getBoundingClientRect());
-    }
-    setBriefDateOpen(false);
-    setBriefTimeOpen(true);
-  };
-
   return (
     <section ref={ref} id="contact" className="relative px-6 py-32 md:px-20 md:py-44">
-
-
-      <AlertToast alert={alert} />
+      <ContactAlertToast alert={alert} />
 
       <CountryPickerModal
         open={countryOpen}
@@ -774,9 +131,16 @@ export function ContactSection() {
           style={{ background: "radial-gradient(circle, var(--surface-mid), transparent 55%)" }}
         />
 
-        <motion.div initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} className="relative mb-6 flex items-center gap-4">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          className="relative mb-6 flex items-center gap-4"
+        >
           <div className="h-px w-8" style={{ background: "var(--line-soft)" }} />
-          <span className="uppercase tracking-[0.35em]" style={{ fontSize: "0.65rem", fontWeight: 600, color: "var(--fg-3)" }}>
+          <span
+            className="uppercase tracking-[0.35em]"
+            style={{ fontSize: "0.65rem", fontWeight: 600, color: "var(--fg-3)" }}
+          >
             {t("contact.eyebrow")}
           </span>
         </motion.div>
@@ -786,7 +150,13 @@ export function ContactSection() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.1 }}
           className="relative mb-4"
-          style={{ fontSize: "clamp(2rem, 5vw, 3.4rem)", fontWeight: 800, lineHeight: 1.05, letterSpacing: "-0.04em", color: "var(--fg-1)" }}
+          style={{
+            fontSize: "clamp(2rem, 5vw, 3.4rem)",
+            fontWeight: 800,
+            lineHeight: 1.05,
+            letterSpacing: "-0.04em",
+            color: "var(--fg-1)",
+          }}
         >
           {t("contact.title")}
         </motion.h2>
@@ -815,10 +185,19 @@ export function ContactSection() {
                 style={{ background: "var(--fg-1)", color: "var(--app-bg)" }}
               >
                 <svg width="22" height="22" viewBox="0 0 20 20" fill="none">
-                  <path d="M4 10L8 14L16 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <path
+                    d="M4 10L8 14L16 6"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
                 </svg>
               </div>
-              <p className="uppercase tracking-[0.3em]" style={{ fontSize: "0.82rem", fontWeight: 800, color: "var(--fg-1)" }}>
+              <p
+                className="uppercase tracking-[0.3em]"
+                style={{ fontSize: "0.82rem", fontWeight: 800, color: "var(--fg-1)" }}
+              >
                 {t("contact.ok.t")}
               </p>
               <p className="mt-3" style={{ fontSize: "0.9rem", color: "var(--fg-3)" }}>
@@ -838,15 +217,24 @@ export function ContactSection() {
               boxShadow: "0 40px 120px -40px var(--surface-strong)",
             }}
           >
-            <div className="absolute inset-x-0 top-0 h-px" style={{ background: "linear-gradient(90deg, transparent, var(--fg-2), transparent)" }} />
+            <div
+              className="absolute inset-x-0 top-0 h-px"
+              style={{ background: "linear-gradient(90deg, transparent, var(--fg-2), transparent)" }}
+            />
 
             <div className="mb-8 flex flex-wrap items-center justify-between gap-3">
               <div className="flex items-center gap-2.5">
                 <span className="relative flex h-2 w-2">
-                  <span className="absolute inset-0 animate-ping rounded-full" style={{ background: "#10b981", opacity: 0.5 }} />
+                  <span
+                    className="absolute inset-0 animate-ping rounded-full"
+                    style={{ background: "#10b981", opacity: 0.5 }}
+                  />
                   <span className="relative h-2 w-2 rounded-full" style={{ background: "#10b981" }} />
                 </span>
-                <span className="uppercase" style={{ fontSize: "0.55rem", letterSpacing: "0.25em", fontWeight: 700, color: "var(--fg-2)" }}>
+                <span
+                  className="uppercase"
+                  style={{ fontSize: "0.55rem", letterSpacing: "0.25em", fontWeight: 700, color: "var(--fg-2)" }}
+                >
                   {t("contact.slot")}
                 </span>
               </div>
@@ -869,109 +257,40 @@ export function ContactSection() {
               <div className="mb-3 grid gap-3 md:grid-cols-2">
                 {fieldBox(fields[0])}
 
-                <div
-                  className="relative rounded-xl transition-all duration-300"
-                  style={{
-                    background: phoneFocused ? "var(--surface-mid)" : "var(--surface-soft)",
-                    border: `1px solid ${phoneFocused ? "var(--accent-border)" : "var(--surface-border)"}`,
-                  }}
-                >
-                  <div className="flex items-center gap-2 pl-2 pr-4">
-                    <button
-                      ref={countryTriggerRef}
-                      type="button"
-                      data-phone-country-trigger="true"
-                      onClick={handleOpenCountryPicker}
-                      className="flex shrink-0 items-center gap-2 rounded-lg px-2.5 py-2 transition-colors"
-                      style={{ background: phoneFocused ? "var(--surface-soft)" : "transparent", color: "var(--fg-2)" }}
-                    >
-                      <span
-                        className="flex h-7 items-center justify-center rounded-md px-2"
-                        style={{
-                          background: "transparent",
-                          border: "1px solid var(--surface-border)",
-                          fontSize: "0.52rem",
-                          fontWeight: 800,
-                          letterSpacing: "0.08em",
-                          color: "var(--fg-3)",
-                          minWidth: "2.2rem",
-                        }}
-                      >
-                        {selectedCountry.flag}
-                      </span>
-                      <span style={{ fontSize: "0.82rem", fontWeight: 700 }}>{selectedCountry.dialCode}</span>
-                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-                        <path d="M2 4L5 7L8 4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </button>
-
-                    <div className="h-6 w-px shrink-0" style={{ background: "var(--surface-border)" }} />
-
-                    <input
-                      type="tel"
-                      placeholder={phonePlaceholder}
-                      value={values.phone}
-                      onChange={(e) => setValues((prev) => ({ ...prev, phone: e.target.value }))}
-                      onFocus={() => setFocused("phone")}
-                      onBlur={() => setFocused(null)}
-                      className="w-full bg-transparent px-0 py-4 outline-none"
-                      style={{ fontSize: "0.9rem", color: "var(--fg-1)", border: "none" }}
-                    />
-                  </div>
-                </div>
+                <ContactPhoneField
+                  value={values.phone}
+                  placeholder={phonePlaceholder}
+                  selectedCountry={selectedCountry}
+                  focused={phoneFocused}
+                  triggerRef={countryTriggerRef}
+                  onOpenCountryPicker={handleOpenCountryPicker}
+                  onChange={(phone) => setValues((prev) => ({ ...prev, phone }))}
+                  onFocus={() => setFocused("phone")}
+                  onBlur={() => setFocused(null)}
+                />
               </div>
 
               <div className="space-y-3">
                 <div className="grid gap-3 md:grid-cols-2">
-                  <button
-                    ref={briefDateTriggerRef}
-                    type="button"
-                    data-brief-date-trigger="true"
+                  <ContactBriefButton
+                    label={briefDateLabel}
+                    value={briefDateDisplay}
+                    open={briefDateOpen}
+                    icon="date"
+                    triggerAttribute="data-brief-date-trigger"
+                    triggerRef={briefDateTriggerRef}
                     onClick={handleOpenBriefDatePicker}
-                    className="flex items-center gap-3 rounded-xl px-4 py-4 text-left transition-all duration-300"
-                    style={{
-                      background: briefDateOpen ? "var(--surface-mid)" : "var(--surface-soft)",
-                      border: `1px solid ${briefDateOpen ? "var(--accent-border)" : "var(--surface-border)"}`,
-                    }}
-                  >
-                    <span className="shrink-0 transition-colors" style={{ color: briefDateOpen ? "var(--fg-2)" : "var(--fg-4)" }}>
-                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                        <rect x="2" y="2.5" width="10" height="9" rx="1.5" stroke="currentColor" strokeWidth="1" />
-                        <path d="M4 1V4M10 1V4M2 5.5H12" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
-                      </svg>
-                    </span>
-                    <span className="min-w-0 flex-1" style={{ fontSize: "0.9rem", color: values.briefDate ? "var(--fg-1)" : "var(--fg-4)" }}>
-                      {briefDateDisplay || briefDateLabel}
-                    </span>
-                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" style={{ color: "var(--fg-4)" }}>
-                      <path d="M2 4L5 7L8 4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </button>
+                  />
 
-                  <button
-                    ref={briefTimeTriggerRef}
-                    type="button"
-                    data-brief-time-trigger="true"
+                  <ContactBriefButton
+                    label={briefTimeLabel}
+                    value={values.briefTime}
+                    open={briefTimeOpen}
+                    icon="time"
+                    triggerAttribute="data-brief-time-trigger"
+                    triggerRef={briefTimeTriggerRef}
                     onClick={handleOpenBriefTimePicker}
-                    className="flex items-center gap-3 rounded-xl px-4 py-4 text-left transition-all duration-300"
-                    style={{
-                      background: briefTimeOpen ? "var(--surface-mid)" : "var(--surface-soft)",
-                      border: `1px solid ${briefTimeOpen ? "var(--accent-border)" : "var(--surface-border)"}`,
-                    }}
-                  >
-                    <span className="shrink-0 transition-colors" style={{ color: briefTimeOpen ? "var(--fg-2)" : "var(--fg-4)" }}>
-                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                        <circle cx="7" cy="7" r="5" stroke="currentColor" strokeWidth="1" />
-                        <path d="M7 4.5V7L8.8 8.8" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
-                      </svg>
-                    </span>
-                    <span className="min-w-0 flex-1" style={{ fontSize: "0.9rem", color: values.briefTime ? "var(--fg-1)" : "var(--fg-4)" }}>
-                      {values.briefTime || briefTimeLabel}
-                    </span>
-                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none" style={{ color: "var(--fg-4)" }}>
-                      <path d="M2 4L5 7L8 4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </button>
+                  />
                 </div>
 
                 {fieldBox(fields[1])}
@@ -995,7 +314,13 @@ export function ContactSection() {
                 <span className="relative z-10 flex items-center justify-center gap-3">
                   {t("contact.submit")}
                   <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                    <path d="M1 6H11M11 6L7 2M11 6L7 10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    <path
+                      d="M1 6H11M11 6L7 2M11 6L7 10"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                   </svg>
                 </span>
               </button>

@@ -3,23 +3,26 @@ import { useState } from "react";
 import { useInView } from "./useInView";
 
 import { useI18n } from "../i18n";
+import { localizedPath, type Lang } from "../seo/site";
 import articlesData from "../../data/articles.json";
+
+type ArticleText = Record<Lang, string>;
 
 type Article = {
   id: string;
   date: string;
-  tag: { en: string; ru: string; es: string; zh: string };
-  title: { en: string; ru: string; es: string; zh: string };
-  excerpt: { en: string; ru: string; es: string; zh: string };
-  readTime: { en: string; ru: string; es: string; zh: string };
+  tag: ArticleText;
+  title: ArticleText;
+  excerpt: ArticleText;
+  readTime: ArticleText;
 };
 
 const articles = articlesData as Article[];
 
-function formatDate(dateStr: string, lang: string) {
+function formatDate(dateStr: string, lang: Lang) {
   const date = new Date(dateStr);
-  const localeMap: Record<string, string> = { en: "en-US", ru: "ru-RU", es: "es-ES", zh: "zh-CN" };
-  return new Intl.DateTimeFormat(localeMap[lang] || "en-US", { day: "numeric", month: "short", year: "numeric" }).format(date);
+  const localeMap: Record<Lang, string> = { en: "en-US", ru: "ru-RU", es: "es-ES", zh: "zh-CN" };
+  return new Intl.DateTimeFormat(localeMap[lang], { day: "numeric", month: "short", year: "numeric" }).format(date);
 }
 
 function isNew(dateStr: string) {
@@ -27,18 +30,26 @@ function isNew(dateStr: string) {
   return diff < 1000 * 60 * 60 * 24 * 14;
 }
 
-function ArticleCard({ article, index, inView, lang, t, featured = false }: {
+function ArticleCard({
+  article,
+  index,
+  inView,
+  lang,
+  t,
+  featured = false,
+}: {
   article: Article;
   index: number;
   inView: boolean;
-  lang: string;
+  lang: Lang;
   t: (k: string) => string;
   featured?: boolean;
 }) {
   const [hovered, setHovered] = useState(false);
 
   return (
-    <motion.article
+    <motion.a
+      href={localizedPath(`/blog/${article.id}`, lang)}
       initial={{ opacity: 0, y: 30 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.7, delay: 0.2 + index * 0.12 }}
@@ -51,14 +62,23 @@ function ArticleCard({ article, index, inView, lang, t, featured = false }: {
         transition: "background 0.4s ease, border-color 0.4s ease",
         borderColor: hovered ? "var(--accent-border)" : "var(--surface-border)",
       }}
+      aria-label={`${t("articles.read")}: ${article.title[lang]}`}
     >
-      <div className={`relative flex flex-col justify-between h-full ${featured ? "p-8 md:p-10 min-h-[280px]" : "p-6 md:p-8 min-h-[220px]"}`}>
+      <div
+        className={`relative flex flex-col justify-between h-full ${featured ? "p-8 md:p-10 min-h-[280px]" : "p-6 md:p-8 min-h-[220px]"}`}
+      >
         {/* Top row: tag + NEW + date */}
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3">
             <span
               className="px-2.5 py-1 rounded-lg uppercase tracking-[0.14em]"
-              style={{ fontSize: "0.48rem", fontWeight: 700, background: "var(--surface-strong)", color: "var(--fg-3)", border: "1px solid var(--surface-border)" }}
+              style={{
+                fontSize: "0.48rem",
+                fontWeight: 700,
+                background: "var(--surface-strong)",
+                color: "var(--fg-3)",
+                border: "1px solid var(--surface-border)",
+              }}
             >
               {article.tag[lang]}
             </span>
@@ -71,7 +91,10 @@ function ArticleCard({ article, index, inView, lang, t, featured = false }: {
               </span>
             )}
           </div>
-          <span className="uppercase tracking-[0.18em]" style={{ fontSize: "0.5rem", fontWeight: 600, color: "var(--fg-4)" }}>
+          <span
+            className="uppercase tracking-[0.18em]"
+            style={{ fontSize: "0.5rem", fontWeight: 600, color: "var(--fg-4)" }}
+          >
             {formatDate(article.date, lang)}
           </span>
         </div>
@@ -93,19 +116,24 @@ function ArticleCard({ article, index, inView, lang, t, featured = false }: {
         </h3>
 
         {/* Excerpt */}
-        <p style={{
-          fontSize: "0.78rem",
-          lineHeight: 1.65,
-          color: hovered ? "var(--fg-3)" : "var(--fg-4)",
-          maxWidth: featured ? "65ch" : "42ch",
-          transition: "color 0.4s ease",
-          flex: 1,
-        }}>
+        <p
+          style={{
+            fontSize: "0.78rem",
+            lineHeight: 1.65,
+            color: hovered ? "var(--fg-3)" : "var(--fg-4)",
+            maxWidth: featured ? "65ch" : "42ch",
+            transition: "color 0.4s ease",
+            flex: 1,
+          }}
+        >
           {article.excerpt[lang]}
         </p>
 
         {/* Bottom row: read time + arrow */}
-        <div className="flex items-center justify-between mt-6 pt-5" style={{ borderTop: "1px solid var(--surface-border)" }}>
+        <div
+          className="flex items-center justify-between mt-6 pt-5"
+          style={{ borderTop: "1px solid var(--surface-border)" }}
+        >
           <span style={{ fontSize: "0.58rem", color: "var(--fg-4)", fontWeight: 500, letterSpacing: "0.05em" }}>
             {article.readTime[lang]}
           </span>
@@ -113,7 +141,16 @@ function ArticleCard({ article, index, inView, lang, t, featured = false }: {
             className="flex items-center gap-2 transition-all duration-300"
             style={{ transform: hovered ? "translateX(4px)" : "translateX(0)" }}
           >
-            <span style={{ fontSize: "0.55rem", fontWeight: 600, color: hovered ? "var(--fg-2)" : "var(--fg-4)", letterSpacing: "0.12em", textTransform: "uppercase", transition: "color 0.3s" }}>
+            <span
+              style={{
+                fontSize: "0.55rem",
+                fontWeight: 600,
+                color: hovered ? "var(--fg-2)" : "var(--fg-4)",
+                letterSpacing: "0.12em",
+                textTransform: "uppercase",
+                transition: "color 0.3s",
+              }}
+            >
               {t("articles.read")}
             </span>
             <div
@@ -136,21 +173,23 @@ function ArticleCard({ article, index, inView, lang, t, featured = false }: {
           </div>
         </div>
       </div>
-    </motion.article>
+    </motion.a>
   );
 }
 
-export function ArticlesSection() {
+export function ArticlesSection({ variant = "home" }: { variant?: "home" | "page" }) {
   const [ref, inView] = useInView(0.06);
   const { t, lang } = useI18n();
+  const isPage = variant === "page";
 
   const featured = articles[0];
   const rest = articles.slice(1);
 
   return (
-    <section ref={ref} className="relative py-32 md:py-44 px-6 md:px-20 overflow-hidden">
-
-
+    <section
+      ref={ref}
+      className={`relative overflow-hidden ${isPage ? "px-0 pb-0 pt-4 md:pt-6" : "px-6 py-32 md:px-20 md:py-44"}`}
+    >
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <motion.div
@@ -159,7 +198,10 @@ export function ArticlesSection() {
           className="flex items-center gap-4 mb-6"
         >
           <div className="w-8 h-px" style={{ background: "var(--line-soft)" }} />
-          <span className="uppercase tracking-[0.35em]" style={{ fontSize: "0.65rem", fontWeight: 600, color: "var(--fg-3)" }}>
+          <span
+            className="uppercase tracking-[0.35em]"
+            style={{ fontSize: "0.65rem", fontWeight: 600, color: "var(--fg-3)" }}
+          >
             {t("articles.eyebrow")}
           </span>
         </motion.div>
@@ -169,7 +211,13 @@ export function ArticlesSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.1 }}
-            style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)", fontWeight: 700, lineHeight: 1.1, letterSpacing: "-0.03em", color: "var(--fg-1)" }}
+            style={{
+              fontSize: "clamp(1.8rem, 4vw, 3rem)",
+              fontWeight: 700,
+              lineHeight: 1.1,
+              letterSpacing: "-0.03em",
+              color: "var(--fg-1)",
+            }}
           >
             {t("articles.title")}
             <br />

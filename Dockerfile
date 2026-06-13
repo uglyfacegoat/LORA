@@ -1,37 +1,28 @@
-# ── Stage 1: build frontend ───────────────────────────────────────────────────
 FROM node:22-alpine AS builder
 
 WORKDIR /app
 
-# Install pnpm
-RUN corepack enable && corepack prepare pnpm@latest --activate
+COPY package.json package-lock.json ./
+RUN npm ci
 
-# Copy dependency manifests first (better layer caching)
-COPY pnpm-workspace.yaml pnpm-lock.yaml package.json ./
-COPY backend/package.json ./backend/
-
-# Install all deps
-RUN pnpm install --frozen-lockfile
-
-# Copy source (after install so node_modules layer is cached)
 COPY src ./src
 COPY public ./public
 COPY scripts ./scripts
-COPY index.html vite.config.ts postcss.config.mjs ./
+COPY index.html vite.config.ts postcss.config.mjs tsconfig.json ./
 COPY lib ./lib
 
-RUN pnpm build
+RUN npm run build
 
-# ── Stage 2: production server ────────────────────────────────────────────────
 FROM node:22-alpine AS runner
 
 WORKDIR /app
+ENV NODE_ENV=production
 
-# Copy backend source and lib
-COPY backend/ ./backend/
-COPY lib/ ./lib/
+COPY package.json package-lock.json ./
+RUN npm ci --omit=dev
 
-# Copy built frontend
+COPY backend ./backend
+COPY lib ./lib
 COPY --from=builder /app/dist ./dist
 
 EXPOSE 8787

@@ -10,7 +10,3 @@ services:
     environment:
       - PORT=8787
       - HOST=0.0.0.0
-    volumes:
-      # Hot-reload backend in dev (comment out in production)
-      - ./backend:/app/backend
-      - ./lib:/app/lib

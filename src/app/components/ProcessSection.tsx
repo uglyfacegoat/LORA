@@ -18,11 +18,17 @@ export function ProcessSection() {
 
   return (
     <section ref={ref} className="relative py-32 md:py-44 px-6 md:px-20">
-
       <div className="max-w-6xl mx-auto">
-        <motion.div initial={{ opacity: 0 }} animate={inView ? { opacity: 1 } : {}} className="flex items-center gap-4 mb-6">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          className="flex items-center gap-4 mb-6"
+        >
           <div className="w-8 h-px" style={{ background: "var(--line-soft)" }} />
-          <span className="uppercase tracking-[0.35em]" style={{ fontSize: "0.65rem", fontWeight: 600, color: "var(--fg-3)" }}>
+          <span
+            className="uppercase tracking-[0.35em]"
+            style={{ fontSize: "0.65rem", fontWeight: 600, color: "var(--fg-3)" }}
+          >
             {t("process.eyebrow")}
           </span>
         </motion.div>
@@ -33,7 +39,14 @@ export function ProcessSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.1 }}
-              style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)", fontWeight: 700, lineHeight: 1.1, letterSpacing: "-0.03em", color: "var(--fg-1)", marginBottom: "1.5rem" }}
+              style={{
+                fontSize: "clamp(1.8rem, 4vw, 3rem)",
+                fontWeight: 700,
+                lineHeight: 1.1,
+                letterSpacing: "-0.03em",
+                color: "var(--fg-1)",
+                marginBottom: "1.5rem",
+              }}
             >
               {t("process.title")}
               <br />
@@ -87,18 +100,41 @@ export function ProcessSection() {
                   }}
                 >
                   <div className="flex items-center justify-between mb-3">
-                    <span style={{ fontSize: "0.55rem", fontWeight: 800, letterSpacing: "0.05em", color: isActive ? "var(--fg-2)" : "var(--fg-5)" }}>
+                    <span
+                      style={{
+                        fontSize: "0.55rem",
+                        fontWeight: 800,
+                        letterSpacing: "0.05em",
+                        color: isActive ? "var(--fg-2)" : "var(--fg-5)",
+                      }}
+                    >
                       {step.num}
                     </span>
-                    <span style={{ fontSize: "0.5rem", fontWeight: 600, letterSpacing: "0.1em", color: isActive ? "var(--fg-4)" : "var(--fg-5)" }}>
+                    <span
+                      style={{
+                        fontSize: "0.5rem",
+                        fontWeight: 600,
+                        letterSpacing: "0.1em",
+                        color: isActive ? "var(--fg-4)" : "var(--fg-5)",
+                      }}
+                    >
                       {step.duration}
                     </span>
                   </div>
-                  <p className="uppercase tracking-[0.1em]" style={{ fontSize: "0.72rem", fontWeight: 700, color: isActive ? "var(--fg-1)" : "var(--fg-4)" }}>
+                  <p
+                    className="uppercase tracking-[0.1em]"
+                    style={{ fontSize: "0.72rem", fontWeight: 700, color: isActive ? "var(--fg-1)" : "var(--fg-4)" }}
+                  >
                     {step.title}
                   </p>
-                  <div className="mt-4 h-[2px] rounded-full overflow-hidden" style={{ background: "var(--surface-border)" }}>
-                    <div className="h-full rounded-full transition-all duration-500" style={{ width: isActive ? "100%" : "0%", background: "var(--line-strong)" }} />
+                  <div
+                    className="mt-4 h-[2px] rounded-full overflow-hidden"
+                    style={{ background: "var(--surface-border)" }}
+                  >
+                    <div
+                      className="h-full rounded-full transition-all duration-500"
+                      style={{ width: isActive ? "100%" : "0%", background: "var(--line-strong)" }}
+                    />
                   </div>
                 </motion.button>
               );
@@ -113,27 +149,54 @@ export function ProcessSection() {
             className="rounded-2xl overflow-hidden relative"
             style={{ border: "1px solid var(--surface-border)", background: "var(--surface-soft)" }}
           >
-            <div className="absolute -top-16 -left-16 w-48 h-48 pointer-events-none" style={{ background: "radial-gradient(circle, var(--glow-soft), transparent 60%)" }} />
+            <div
+              className="absolute -top-16 -left-16 w-48 h-48 pointer-events-none"
+              style={{ background: "radial-gradient(circle, var(--glow-soft), transparent 60%)" }}
+            />
 
             <div className="p-8 md:p-14 flex items-center gap-10 md:gap-14">
-              <p className="shrink-0 select-none" style={{ fontSize: "8rem", fontWeight: 900, lineHeight: 0.8, letterSpacing: "-0.06em", color: "var(--glow-mid)" }}>
+              <p
+                className="shrink-0 select-none"
+                style={{
+                  fontSize: "8rem",
+                  fontWeight: 900,
+                  lineHeight: 0.8,
+                  letterSpacing: "-0.06em",
+                  color: "var(--glow-mid)",
+                }}
+              >
                 {steps[active].num}
               </p>
               <div>
-                <h3 className="uppercase tracking-[0.1em] mb-4" style={{ fontSize: "1.3rem", fontWeight: 800, color: "var(--fg-1)" }}>
+                <h3
+                  className="uppercase tracking-[0.1em] mb-4"
+                  style={{ fontSize: "1.3rem", fontWeight: 800, color: "var(--fg-1)" }}
+                >
                   {steps[active].title}
                 </h3>
                 <p style={{ fontSize: "1rem", lineHeight: 1.8, maxWidth: 520, color: "var(--fg-3)" }}>
                   {steps[active].desc}
                 </p>
                 <div className="mt-8 flex items-center gap-3">
-                  <div className="px-4 py-2 rounded-lg" style={{ border: "1px solid var(--surface-border)", background: "var(--surface-mid)" }}>
-                    <span className="uppercase tracking-[0.15em]" style={{ fontSize: "0.55rem", fontWeight: 700, color: "var(--fg-3)" }}>
+                  <div
+                    className="px-4 py-2 rounded-lg"
+                    style={{ border: "1px solid var(--surface-border)", background: "var(--surface-mid)" }}
+                  >
+                    <span
+                      className="uppercase tracking-[0.15em]"
+                      style={{ fontSize: "0.55rem", fontWeight: 700, color: "var(--fg-3)" }}
+                    >
                       {t("process.duration")}: {steps[active].duration}
                     </span>
                   </div>
-                  <div className="px-4 py-2 rounded-lg" style={{ border: "1px solid var(--surface-border)", background: "var(--surface-mid)" }}>
-                    <span className="uppercase tracking-[0.15em]" style={{ fontSize: "0.55rem", fontWeight: 700, color: "var(--fg-3)" }}>
+                  <div
+                    className="px-4 py-2 rounded-lg"
+                    style={{ border: "1px solid var(--surface-border)", background: "var(--surface-mid)" }}
+                  >
+                    <span
+                      className="uppercase tracking-[0.15em]"
+                      style={{ fontSize: "0.55rem", fontWeight: 700, color: "var(--fg-3)" }}
+                    >
                       {t("process.step")} {active + 1} {t("process.of")} {steps.length}
                     </span>
                   </div>
@@ -158,13 +221,27 @@ export function ProcessSection() {
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
-                    <span style={{ fontSize: "0.6rem", fontWeight: 800, color: isActive ? "var(--fg-2)" : "var(--fg-5)" }}>{step.num}</span>
-                    <h4 className="uppercase tracking-[0.1em]" style={{ fontSize: "0.8rem", fontWeight: 700, color: isActive ? "var(--fg-1)" : "var(--fg-4)" }}>{step.title}</h4>
+                    <span
+                      style={{ fontSize: "0.6rem", fontWeight: 800, color: isActive ? "var(--fg-2)" : "var(--fg-5)" }}
+                    >
+                      {step.num}
+                    </span>
+                    <h4
+                      className="uppercase tracking-[0.1em]"
+                      style={{ fontSize: "0.8rem", fontWeight: 700, color: isActive ? "var(--fg-1)" : "var(--fg-4)" }}
+                    >
+                      {step.title}
+                    </h4>
                   </div>
                   <span style={{ fontSize: "0.5rem", color: "var(--fg-5)" }}>{step.duration}</span>
                 </div>
                 {isActive && (
-                  <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mt-3 ml-10" style={{ fontSize: "0.82rem", lineHeight: 1.6, color: "var(--fg-3)" }}>
+                  <motion.p
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className="mt-3 ml-10"
+                    style={{ fontSize: "0.82rem", lineHeight: 1.6, color: "var(--fg-3)" }}
+                  >
                     {step.desc}
                   </motion.p>
                 )}

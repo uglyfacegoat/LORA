@@ -1,6 +1,12 @@
 export type Lang = "en" | "es" | "ru" | "zh";
 
-export const SITE_URL = (import.meta.env.VITE_SITE_URL || "https://loragroup.space").replace(/\/$/, "");
+function readSiteUrl() {
+  const viteEnv = typeof import.meta.env === "object" ? import.meta.env : undefined;
+  const nodeEnv = typeof process === "object" ? process.env : undefined;
+  return (viteEnv?.VITE_SITE_URL || nodeEnv?.VITE_SITE_URL || "https://loragroup.space").replace(/\/$/, "");
+}
+
+export const SITE_URL = readSiteUrl();
 export const SITE_NAME = "LORA";
 export const DEFAULT_LANG: Lang = "en";
 export const LANGS: Lang[] = ["en", "es", "ru", "zh"];
@@ -12,7 +18,6 @@ export const LANG_LABELS: Record<Lang, string> = {
   zh: "中文",
 };
 
-export const CONTACT_EMAIL = "support@loragroup.space";
 export const OG_IMAGE = "/logo-large-dark.svg";
 
 export type LocalizedText = Record<Lang, string>;

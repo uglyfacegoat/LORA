@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://loragroup.space/en/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/" />
@@ -13,7 +13,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/es/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/" />
@@ -24,7 +24,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/ru/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/" />
@@ -35,7 +35,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/zh/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/" />
@@ -46,7 +46,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/en/services/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/services/" />
@@ -57,7 +57,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/es/services/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/services/" />
@@ -68,7 +68,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/ru/services/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/services/" />
@@ -79,7 +79,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/zh/services/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/services/" />
@@ -90,7 +90,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/en/industries/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/industries/" />
@@ -101,7 +101,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/es/industries/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/industries/" />
@@ -112,7 +112,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/ru/industries/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/industries/" />
@@ -123,7 +123,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/zh/industries/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/industries/" />
@@ -134,7 +134,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/en/blog/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/blog/" />
@@ -145,7 +145,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/es/blog/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/blog/" />
@@ -156,7 +156,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/ru/blog/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/blog/" />
@@ -167,7 +167,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/zh/blog/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/blog/" />
@@ -178,7 +178,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/en/pricing/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/pricing/" />
@@ -189,7 +189,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/es/pricing/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/pricing/" />
@@ -200,7 +200,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/ru/pricing/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/pricing/" />
@@ -211,7 +211,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/zh/pricing/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/pricing/" />
@@ -222,7 +222,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/en/cases/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/cases/" />
@@ -233,7 +233,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/es/cases/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/cases/" />
@@ -244,7 +244,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/ru/cases/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/cases/" />
@@ -255,7 +255,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/zh/cases/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.55</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/cases/" />
@@ -265,8 +265,52 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://loragroup.space/en/cases/" />
   </url>
   <url>
+    <loc>https://loragroup.space/en/history/</loc>
+    <lastmod>2026-06-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/history/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://loragroup.space/es/history/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://loragroup.space/ru/history/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://loragroup.space/zh/history/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://loragroup.space/en/history/" />
+  </url>
+  <url>
+    <loc>https://loragroup.space/es/history/</loc>
+    <lastmod>2026-06-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/history/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://loragroup.space/es/history/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://loragroup.space/ru/history/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://loragroup.space/zh/history/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://loragroup.space/en/history/" />
+  </url>
+  <url>
+    <loc>https://loragroup.space/ru/history/</loc>
+    <lastmod>2026-06-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/history/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://loragroup.space/es/history/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://loragroup.space/ru/history/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://loragroup.space/zh/history/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://loragroup.space/en/history/" />
+  </url>
+  <url>
+    <loc>https://loragroup.space/zh/history/</loc>
+    <lastmod>2026-06-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.55</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/history/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://loragroup.space/es/history/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://loragroup.space/ru/history/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://loragroup.space/zh/history/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://loragroup.space/en/history/" />
+  </url>
+  <url>
     <loc>https://loragroup.space/en/contacts/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/contacts/" />
@@ -277,7 +321,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/es/contacts/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/contacts/" />
@@ -288,7 +332,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/ru/contacts/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/contacts/" />
@@ -299,7 +343,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/zh/contacts/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/contacts/" />
@@ -310,7 +354,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/en/audit/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/audit/" />
@@ -321,7 +365,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/es/audit/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/audit/" />
@@ -332,7 +376,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/ru/audit/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/audit/" />
@@ -343,7 +387,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/zh/audit/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/audit/" />
@@ -354,7 +398,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/en/privacy/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.35</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/privacy/" />
@@ -365,7 +409,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/es/privacy/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.35</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/privacy/" />
@@ -376,7 +420,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/ru/privacy/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.35</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/privacy/" />
@@ -387,7 +431,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/zh/privacy/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.35</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/privacy/" />
@@ -398,7 +442,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/en/cookies/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/cookies/" />
@@ -409,7 +453,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/es/cookies/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/cookies/" />
@@ -420,7 +464,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/ru/cookies/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/cookies/" />
@@ -431,7 +475,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/zh/cookies/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-10</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/cookies/" />
@@ -441,8 +485,52 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://loragroup.space/en/cookies/" />
   </url>
   <url>
+    <loc>https://loragroup.space/en/terms/</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/terms/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://loragroup.space/es/terms/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://loragroup.space/ru/terms/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://loragroup.space/zh/terms/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://loragroup.space/en/terms/" />
+  </url>
+  <url>
+    <loc>https://loragroup.space/es/terms/</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/terms/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://loragroup.space/es/terms/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://loragroup.space/ru/terms/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://loragroup.space/zh/terms/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://loragroup.space/en/terms/" />
+  </url>
+  <url>
+    <loc>https://loragroup.space/ru/terms/</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/terms/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://loragroup.space/es/terms/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://loragroup.space/ru/terms/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://loragroup.space/zh/terms/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://loragroup.space/en/terms/" />
+  </url>
+  <url>
+    <loc>https://loragroup.space/zh/terms/</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/terms/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://loragroup.space/es/terms/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://loragroup.space/ru/terms/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://loragroup.space/zh/terms/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://loragroup.space/en/terms/" />
+  </url>
+  <url>
     <loc>https://loragroup.space/en/services/websites/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.82</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/services/websites/" />
@@ -453,7 +541,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/es/services/websites/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.82</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/services/websites/" />
@@ -464,7 +552,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/ru/services/websites/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.82</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/services/websites/" />
@@ -475,7 +563,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/zh/services/websites/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.82</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/services/websites/" />
@@ -486,7 +574,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/en/services/landing-pages/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.82</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/services/landing-pages/" />
@@ -497,7 +585,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/es/services/landing-pages/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.82</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/services/landing-pages/" />
@@ -508,7 +596,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/ru/services/landing-pages/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.82</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/services/landing-pages/" />
@@ -519,7 +607,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/zh/services/landing-pages/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.82</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/services/landing-pages/" />
@@ -530,7 +618,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/en/services/corporate-websites/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.82</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/services/corporate-websites/" />
@@ -541,7 +629,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/es/services/corporate-websites/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.82</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/services/corporate-websites/" />
@@ -552,7 +640,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/ru/services/corporate-websites/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.82</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/services/corporate-websites/" />
@@ -563,7 +651,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/zh/services/corporate-websites/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.82</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/services/corporate-websites/" />
@@ -574,7 +662,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/en/services/ecommerce/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.82</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/services/ecommerce/" />
@@ -585,7 +673,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/es/services/ecommerce/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.82</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/services/ecommerce/" />
@@ -596,7 +684,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/ru/services/ecommerce/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.82</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/services/ecommerce/" />
@@ -607,7 +695,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/zh/services/ecommerce/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.82</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/services/ecommerce/" />
@@ -618,7 +706,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/en/services/ux-ui-design/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.82</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/services/ux-ui-design/" />
@@ -629,7 +717,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/es/services/ux-ui-design/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.82</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/services/ux-ui-design/" />
@@ -640,7 +728,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/ru/services/ux-ui-design/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.82</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/services/ux-ui-design/" />
@@ -651,7 +739,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/zh/services/ux-ui-design/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.82</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/services/ux-ui-design/" />
@@ -662,7 +750,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/en/services/website-redesign/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.82</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/services/website-redesign/" />
@@ -673,7 +761,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/es/services/website-redesign/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.82</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/services/website-redesign/" />
@@ -684,7 +772,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/ru/services/website-redesign/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.82</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/services/website-redesign/" />
@@ -695,7 +783,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/zh/services/website-redesign/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.82</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/services/website-redesign/" />
@@ -706,7 +794,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/en/services/seo-optimization/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.82</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/services/seo-optimization/" />
@@ -717,7 +805,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/es/services/seo-optimization/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.82</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/services/seo-optimization/" />
@@ -728,7 +816,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/ru/services/seo-optimization/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.82</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/services/seo-optimization/" />
@@ -739,7 +827,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/zh/services/seo-optimization/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.82</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/services/seo-optimization/" />
@@ -750,7 +838,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/en/services/crm-integration/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.82</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/services/crm-integration/" />
@@ -761,7 +849,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/es/services/crm-integration/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.82</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/services/crm-integration/" />
@@ -772,7 +860,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/ru/services/crm-integration/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.82</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/services/crm-integration/" />
@@ -783,7 +871,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/zh/services/crm-integration/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.82</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/services/crm-integration/" />
@@ -794,7 +882,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/en/services/business-automation/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.82</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/services/business-automation/" />
@@ -805,7 +893,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/es/services/business-automation/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.82</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/services/business-automation/" />
@@ -816,7 +904,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/ru/services/business-automation/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.82</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/services/business-automation/" />
@@ -827,7 +915,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/zh/services/business-automation/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.82</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/services/business-automation/" />
@@ -838,7 +926,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/en/services/website-support/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.82</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/services/website-support/" />
@@ -849,7 +937,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/es/services/website-support/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.82</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/services/website-support/" />
@@ -860,7 +948,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/ru/services/website-support/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.82</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/services/website-support/" />
@@ -871,7 +959,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/zh/services/website-support/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.82</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/services/website-support/" />
@@ -882,7 +970,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/en/industries/beauty-salon/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/industries/beauty-salon/" />
@@ -893,7 +981,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/es/industries/beauty-salon/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/industries/beauty-salon/" />
@@ -904,7 +992,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/ru/industries/beauty-salon/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/industries/beauty-salon/" />
@@ -915,7 +1003,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/zh/industries/beauty-salon/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/industries/beauty-salon/" />
@@ -926,7 +1014,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/en/industries/restaurant/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/industries/restaurant/" />
@@ -937,7 +1025,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/es/industries/restaurant/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/industries/restaurant/" />
@@ -948,7 +1036,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/ru/industries/restaurant/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/industries/restaurant/" />
@@ -959,7 +1047,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/zh/industries/restaurant/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/industries/restaurant/" />
@@ -970,7 +1058,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/en/industries/construction-company/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/industries/construction-company/" />
@@ -981,7 +1069,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/es/industries/construction-company/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/industries/construction-company/" />
@@ -992,7 +1080,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/ru/industries/construction-company/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/industries/construction-company/" />
@@ -1003,7 +1091,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/zh/industries/construction-company/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/industries/construction-company/" />
@@ -1014,7 +1102,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/en/industries/clinic/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/industries/clinic/" />
@@ -1025,7 +1113,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/es/industries/clinic/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/industries/clinic/" />
@@ -1036,7 +1124,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/ru/industries/clinic/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/industries/clinic/" />
@@ -1047,7 +1135,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/zh/industries/clinic/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/industries/clinic/" />
@@ -1058,7 +1146,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/en/industries/online-school/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/industries/online-school/" />
@@ -1069,7 +1157,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/es/industries/online-school/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/industries/online-school/" />
@@ -1080,7 +1168,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/ru/industries/online-school/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/industries/online-school/" />
@@ -1091,7 +1179,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/zh/industries/online-school/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/industries/online-school/" />
@@ -1102,7 +1190,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/en/industries/expert/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/industries/expert/" />
@@ -1113,7 +1201,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/es/industries/expert/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/industries/expert/" />
@@ -1124,7 +1212,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/ru/industries/expert/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/industries/expert/" />
@@ -1135,7 +1223,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/zh/industries/expert/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/industries/expert/" />
@@ -1146,7 +1234,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/en/industries/b2b-company/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/industries/b2b-company/" />
@@ -1157,7 +1245,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/es/industries/b2b-company/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/industries/b2b-company/" />
@@ -1168,7 +1256,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/ru/industries/b2b-company/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/industries/b2b-company/" />
@@ -1179,7 +1267,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/zh/industries/b2b-company/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/industries/b2b-company/" />
@@ -1190,7 +1278,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/en/industries/service-business/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/industries/service-business/" />
@@ -1201,7 +1289,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/es/industries/service-business/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/industries/service-business/" />
@@ -1212,7 +1300,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/ru/industries/service-business/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/industries/service-business/" />
@@ -1223,7 +1311,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/zh/industries/service-business/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/industries/service-business/" />
@@ -1234,7 +1322,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/en/industries/legal-company/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/industries/legal-company/" />
@@ -1245,7 +1333,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/es/industries/legal-company/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/industries/legal-company/" />
@@ -1256,7 +1344,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/ru/industries/legal-company/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/industries/legal-company/" />
@@ -1267,7 +1355,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/zh/industries/legal-company/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/industries/legal-company/" />
@@ -1278,7 +1366,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/en/industries/real-estate/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/industries/real-estate/" />
@@ -1289,7 +1377,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/es/industries/real-estate/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/industries/real-estate/" />
@@ -1300,7 +1388,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/ru/industries/real-estate/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/industries/real-estate/" />
@@ -1311,7 +1399,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/zh/industries/real-estate/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.78</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/industries/real-estate/" />
@@ -1322,7 +1410,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/en/blog/why-landing-pages-fail/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-04-10</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.55</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/blog/why-landing-pages-fail/" />
@@ -1333,7 +1421,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/es/blog/why-landing-pages-fail/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-04-10</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.55</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/blog/why-landing-pages-fail/" />
@@ -1344,7 +1432,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/ru/blog/why-landing-pages-fail/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-04-10</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.55</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/blog/why-landing-pages-fail/" />
@@ -1355,7 +1443,7 @@
   </url>
   <url>
     <loc>https://loragroup.space/zh/blog/why-landing-pages-fail/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-04-10</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.55</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/blog/why-landing-pages-fail/" />
@@ -1363,5 +1451,93 @@
     <xhtml:link rel="alternate" hreflang="ru" href="https://loragroup.space/ru/blog/why-landing-pages-fail/" />
     <xhtml:link rel="alternate" hreflang="zh" href="https://loragroup.space/zh/blog/why-landing-pages-fail/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://loragroup.space/en/blog/why-landing-pages-fail/" />
+  </url>
+  <url>
+    <loc>https://loragroup.space/en/blog/crm-that-actually-works/</loc>
+    <lastmod>2026-04-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.55</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/blog/crm-that-actually-works/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://loragroup.space/es/blog/crm-that-actually-works/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://loragroup.space/ru/blog/crm-that-actually-works/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://loragroup.space/zh/blog/crm-that-actually-works/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://loragroup.space/en/blog/crm-that-actually-works/" />
+  </url>
+  <url>
+    <loc>https://loragroup.space/es/blog/crm-that-actually-works/</loc>
+    <lastmod>2026-04-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.55</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/blog/crm-that-actually-works/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://loragroup.space/es/blog/crm-that-actually-works/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://loragroup.space/ru/blog/crm-that-actually-works/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://loragroup.space/zh/blog/crm-that-actually-works/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://loragroup.space/en/blog/crm-that-actually-works/" />
+  </url>
+  <url>
+    <loc>https://loragroup.space/ru/blog/crm-that-actually-works/</loc>
+    <lastmod>2026-04-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.55</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/blog/crm-that-actually-works/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://loragroup.space/es/blog/crm-that-actually-works/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://loragroup.space/ru/blog/crm-that-actually-works/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://loragroup.space/zh/blog/crm-that-actually-works/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://loragroup.space/en/blog/crm-that-actually-works/" />
+  </url>
+  <url>
+    <loc>https://loragroup.space/zh/blog/crm-that-actually-works/</loc>
+    <lastmod>2026-04-18</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.55</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/blog/crm-that-actually-works/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://loragroup.space/es/blog/crm-that-actually-works/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://loragroup.space/ru/blog/crm-that-actually-works/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://loragroup.space/zh/blog/crm-that-actually-works/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://loragroup.space/en/blog/crm-that-actually-works/" />
+  </url>
+  <url>
+    <loc>https://loragroup.space/en/blog/revenue-machine-blueprint/</loc>
+    <lastmod>2026-04-24</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.55</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/blog/revenue-machine-blueprint/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://loragroup.space/es/blog/revenue-machine-blueprint/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://loragroup.space/ru/blog/revenue-machine-blueprint/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://loragroup.space/zh/blog/revenue-machine-blueprint/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://loragroup.space/en/blog/revenue-machine-blueprint/" />
+  </url>
+  <url>
+    <loc>https://loragroup.space/es/blog/revenue-machine-blueprint/</loc>
+    <lastmod>2026-04-24</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.55</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/blog/revenue-machine-blueprint/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://loragroup.space/es/blog/revenue-machine-blueprint/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://loragroup.space/ru/blog/revenue-machine-blueprint/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://loragroup.space/zh/blog/revenue-machine-blueprint/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://loragroup.space/en/blog/revenue-machine-blueprint/" />
+  </url>
+  <url>
+    <loc>https://loragroup.space/ru/blog/revenue-machine-blueprint/</loc>
+    <lastmod>2026-04-24</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.55</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/blog/revenue-machine-blueprint/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://loragroup.space/es/blog/revenue-machine-blueprint/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://loragroup.space/ru/blog/revenue-machine-blueprint/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://loragroup.space/zh/blog/revenue-machine-blueprint/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://loragroup.space/en/blog/revenue-machine-blueprint/" />
+  </url>
+  <url>
+    <loc>https://loragroup.space/zh/blog/revenue-machine-blueprint/</loc>
+    <lastmod>2026-04-24</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.55</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://loragroup.space/en/blog/revenue-machine-blueprint/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://loragroup.space/es/blog/revenue-machine-blueprint/" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://loragroup.space/ru/blog/revenue-machine-blueprint/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://loragroup.space/zh/blog/revenue-machine-blueprint/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://loragroup.space/en/blog/revenue-machine-blueprint/" />
   </url>
 </urlset>

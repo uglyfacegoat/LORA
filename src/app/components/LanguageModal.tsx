@@ -13,7 +13,9 @@ export function LanguageModal({ open, onClose }: Props) {
 
   useEffect(() => {
     if (!open) return;
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
     const onClick = (e: MouseEvent) => {
       if (!popRef.current) return;
       const target = e.target as HTMLElement;
@@ -58,17 +60,38 @@ export function LanguageModal({ open, onClose }: Props) {
 
           <div className="relative px-2 pb-3 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <span className="flex h-7 w-7 items-center justify-center rounded-lg" style={{ background: "var(--surface-soft)", border: "1px solid var(--surface-border)", color: "var(--fg-3)" }}>
+              <span
+                className="flex h-7 w-7 items-center justify-center rounded-lg"
+                style={{
+                  background: "var(--surface-soft)",
+                  border: "1px solid var(--surface-border)",
+                  color: "var(--fg-3)",
+                }}
+              >
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                   <circle cx="7" cy="7" r="6" stroke="currentColor" strokeWidth="1" />
                   <path d="M1 7H13M7 1C9 3.5 9 10.5 7 13M7 1C5 3.5 5 10.5 7 13" stroke="currentColor" strokeWidth="1" />
                 </svg>
               </span>
-              <span className="uppercase" style={{ fontSize: "0.54rem", letterSpacing: "0.28em", fontWeight: 800, color: "var(--fg-3)" }}>
+              <span
+                className="uppercase"
+                style={{ fontSize: "0.54rem", letterSpacing: "0.28em", fontWeight: 800, color: "var(--fg-3)" }}
+              >
                 {t("nav.language")}
               </span>
             </div>
-            <span className="uppercase rounded-full px-2.5 py-1" style={{ fontSize: "0.48rem", color: "var(--fg-4)", letterSpacing: "0.18em", border: "1px solid var(--surface-border)", background: "var(--surface-soft)" }}>ESC</span>
+            <span
+              className="uppercase rounded-full px-2.5 py-1"
+              style={{
+                fontSize: "0.48rem",
+                color: "var(--fg-4)",
+                letterSpacing: "0.18em",
+                border: "1px solid var(--surface-border)",
+                background: "var(--surface-soft)",
+              }}
+            >
+              ESC
+            </span>
           </div>
 
           <div className="relative flex flex-col gap-1">
@@ -77,7 +100,10 @@ export function LanguageModal({ open, onClose }: Props) {
               return (
                 <button
                   key={l.code}
-                  onClick={() => { setLang(l.code); onClose(); }}
+                  onClick={() => {
+                    setLang(l.code);
+                    onClose();
+                  }}
                   className="group relative flex items-center gap-3 px-3 py-3 rounded-xl transition-all duration-300 cursor-pointer text-left overflow-hidden"
                   style={{
                     background: active ? "var(--surface-mid)" : "transparent",
@@ -104,10 +130,26 @@ export function LanguageModal({ open, onClose }: Props) {
                     }}
                   />
                   <div className="flex-1 min-w-0 flex items-center justify-between gap-3">
-                    <p style={{ fontSize: "0.9rem", fontWeight: 700, color: active ? "var(--fg-1)" : "var(--fg-2)", lineHeight: 1.1, letterSpacing: "-0.01em" }}>
+                    <p
+                      style={{
+                        fontSize: "0.9rem",
+                        fontWeight: 700,
+                        color: active ? "var(--fg-1)" : "var(--fg-2)",
+                        lineHeight: 1.1,
+                        letterSpacing: "-0.01em",
+                      }}
+                    >
                       {l.native}
                     </p>
-                    <span className="uppercase" style={{ fontSize: "0.52rem", letterSpacing: "0.2em", color: active ? "var(--fg-3)" : "var(--fg-4)", fontWeight: 800 }}>
+                    <span
+                      className="uppercase"
+                      style={{
+                        fontSize: "0.52rem",
+                        letterSpacing: "0.2em",
+                        color: active ? "var(--fg-3)" : "var(--fg-4)",
+                        fontWeight: 800,
+                      }}
+                    >
                       {l.flag}
                     </span>
                   </div>
@@ -119,7 +161,13 @@ export function LanguageModal({ open, onClose }: Props) {
                       style={{ color: "var(--fg-1)" }}
                     >
                       <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
-                        <path d="M2 7L5.6 10.5L12 3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                        <path
+                          d="M2 7L5.6 10.5L12 3"
+                          stroke="currentColor"
+                          strokeWidth="1.6"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
                       </svg>
                     </motion.span>
                   )}

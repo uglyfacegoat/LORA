@@ -3,9 +3,10 @@ import { useInView } from "./useInView";
 
 import { useI18n } from "../i18n";
 
-export function StorySection() {
+export function StorySection({ variant = "home" }: { variant?: "home" | "page" }) {
   const [ref, inView] = useInView(0.08);
   const { t } = useI18n();
+  const isPage = variant === "page";
 
   const steps = [
     { year: t("story.s1.year"), text: t("story.s1.text") },
@@ -21,9 +22,7 @@ export function StorySection() {
   ];
 
   return (
-    <section ref={ref} className="relative py-32 md:py-44 px-6 md:px-20">
-
-
+    <section ref={ref} className={`relative ${isPage ? "px-0 pb-0 pt-4 md:pt-6" : "px-6 py-32 md:px-20 md:py-44"}`}>
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <motion.div
@@ -32,7 +31,10 @@ export function StorySection() {
           className="flex items-center gap-4 mb-6"
         >
           <div className="w-8 h-px" style={{ background: "var(--line-soft)" }} />
-          <span className="uppercase tracking-[0.35em]" style={{ fontSize: "0.65rem", fontWeight: 600, color: "var(--fg-3)" }}>
+          <span
+            className="uppercase tracking-[0.35em]"
+            style={{ fontSize: "0.65rem", fontWeight: 600, color: "var(--fg-3)" }}
+          >
             {t("story.eyebrow")}
           </span>
         </motion.div>
@@ -42,7 +44,13 @@ export function StorySection() {
             initial={{ opacity: 0, y: 20 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.1 }}
-            style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)", fontWeight: 700, lineHeight: 1.1, letterSpacing: "-0.03em", color: "var(--fg-1)" }}
+            style={{
+              fontSize: "clamp(1.8rem, 4vw, 3rem)",
+              fontWeight: 700,
+              lineHeight: 1.1,
+              letterSpacing: "-0.03em",
+              color: "var(--fg-1)",
+            }}
           >
             {t("story.title")}
             <br />
@@ -60,26 +68,36 @@ export function StorySection() {
               {stats.map((s, i) => (
                 <div key={i} className="flex items-center">
                   <div className="px-6 py-3 text-center">
-                    <p style={{ fontSize: "1.6rem", fontWeight: 800, letterSpacing: "-0.04em", color: "var(--fg-1)", lineHeight: 1 }}>
+                    <p
+                      style={{
+                        fontSize: "1.6rem",
+                        fontWeight: 800,
+                        letterSpacing: "-0.04em",
+                        color: "var(--fg-1)",
+                        lineHeight: 1,
+                      }}
+                    >
                       {s.value}
                     </p>
-                    <p className="uppercase tracking-[0.15em] mt-1" style={{ fontSize: "0.48rem", fontWeight: 700, color: "var(--fg-4)" }}>
+                    <p
+                      className="uppercase tracking-[0.15em] mt-1"
+                      style={{ fontSize: "0.48rem", fontWeight: 700, color: "var(--fg-4)" }}
+                    >
                       {s.label}
                     </p>
                   </div>
-                  {i < stats.length - 1 && (
-                    <div className="w-px h-8" style={{ background: "var(--surface-border)" }} />
-                  )}
+                  {i < stats.length - 1 && <div className="w-px h-8" style={{ background: "var(--surface-border)" }} />}
                 </div>
               ))}
             </div>
             <div className="text-right" style={{ maxWidth: "22rem" }}>
-              <p className="uppercase tracking-[0.3em] mb-1" style={{ fontSize: "0.85rem", fontWeight: 700, color: "var(--fg-4)" }}>
+              <p
+                className="uppercase tracking-[0.3em] mb-1"
+                style={{ fontSize: "0.85rem", fontWeight: 700, color: "var(--fg-4)" }}
+              >
                 {t("results.nda.label")}
               </p>
-              <p style={{ fontSize: "0.62rem", lineHeight: 1.6, color: "var(--fg-4)" }}>
-                {t("results.nda.text")}
-              </p>
+              <p style={{ fontSize: "0.62rem", lineHeight: 1.6, color: "var(--fg-4)" }}>{t("results.nda.text")}</p>
             </div>
           </motion.div>
         </div>
@@ -134,7 +152,6 @@ export function StorySection() {
             {t("story.closing")}
           </p>
         </motion.div>
-
       </div>
     </section>
   );

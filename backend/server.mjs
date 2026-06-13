@@ -28,14 +28,22 @@ const PORT = Number(process.env.PORT || 8787);
 
 // ── In-memory Redis-like mode store (works fine on a real server) ─────────────
 const chatModes = new Map();
-function getMode(chatId) { return chatModes.get(String(chatId)) || null; }
-function setMode(chatId, mode) { chatModes.set(String(chatId), mode); }
-function clearMode(chatId) { chatModes.delete(String(chatId)); }
+function getMode(chatId) {
+  return chatModes.get(String(chatId)) || null;
+}
+function setMode(chatId, mode) {
+  chatModes.set(String(chatId), mode);
+}
+function clearMode(chatId) {
+  chatModes.delete(String(chatId));
+}
 
 // ── Conversation history (last 20 messages = 10 exchanges) ───────────────────
 const chatHistory = new Map();
 const MAX_HISTORY = 20;
-function getHistory(chatId) { return chatHistory.get(String(chatId)) || []; }
+function getHistory(chatId) {
+  return chatHistory.get(String(chatId)) || [];
+}
 function addToHistory(chatId, role, content) {
   const id = String(chatId);
   const hist = chatHistory.get(id) || [];
@@ -43,7 +51,9 @@ function addToHistory(chatId, role, content) {
   if (hist.length > MAX_HISTORY) hist.splice(0, hist.length - MAX_HISTORY);
   chatHistory.set(id, hist);
 }
-function clearHistory(chatId) { chatHistory.delete(String(chatId)); }
+function clearHistory(chatId) {
+  chatHistory.delete(String(chatId));
+}
 // ─────────────────────────────────────────────────────────────────────────────
 
 const BOT_HELP_TEXT = [
@@ -66,10 +76,14 @@ const BOT_HELP_TEXT = [
 
 function getModeIntro(mode) {
   switch (mode) {
-    case "reply":    return "✉️ <b>Ответ клиенту</b> — давай контекст лида или сообщение клиента.";
-    case "followup": return "🔄 <b>Фоллоу-ап</b> — опиши ситуацию, подготовлю следующее касание.";
-    case "offer":    return "📋 <b>Оффер</b> — дай нишу, задачу или контекст клиента.";
-    default:         return "🧠 <b>AI Чат</b> — отправь любой запрос.";
+    case "reply":
+      return "✉️ <b>Ответ клиенту</b> — давай контекст лида или сообщение клиента.";
+    case "followup":
+      return "🔄 <b>Фоллоу-ап</b> — опиши ситуацию, подготовлю следующее касание.";
+    case "offer":
+      return "📋 <b>Оффер</b> — дай нишу, задачу или контекст клиента.";
+    default:
+      return "🧠 <b>AI Чат</b> — отправь любой запрос.";
   }
 }
 
@@ -86,10 +100,7 @@ function parseCommand(text) {
 }
 
 function escapeHtml(str) {
-  return str
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;");
+  return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
 async function sendAiReply(token, chatId, mode, prompt, apiKey, model) {
@@ -114,7 +125,7 @@ async function sendAiReply(token, chatId, mode, prompt, apiKey, model) {
   }
 }
 
-async function handleTelegramCallback(update, token, apiKey, model) {
+async function handleTelegramCallback(update, token) {
   const cb = update.callback_query;
   const callbackId = cb?.id;
   const chatId = cb?.message?.chat?.id;
@@ -147,7 +158,9 @@ async function handleTelegramCallback(update, token, apiKey, model) {
     clearHistory(chatId);
     await answerCallbackQuery(token, callbackId, "Режим выбран");
     await editTelegramMessage(
-      token, chatId, messageId,
+      token,
+      chatId,
+      messageId,
       `${getModeIntro(mode)}\n\nПросто пиши — я буду отвечать в этом режиме.\nСброс: <code>/reset</code> или <code>/menu</code>`,
       getExitMarkup(),
     );
@@ -182,7 +195,6 @@ async function handleTelegramMessage(update, token, apiKey, model) {
   }
   if (command === "/clear") {
     clearHistory(chatId);
-    const count = 0;
     await sendTelegramMessage(token, chatId, "🧹 Память диалога очищена. Начинаем с чистого листа.");
     return;
   }
@@ -198,7 +210,8 @@ async function handleTelegramMessage(update, token, apiKey, model) {
     if (!prompt) {
       setMode(chatId, commandMode);
       await sendTelegramMessage(
-        token, chatId,
+        token,
+        chatId,
         `${getModeIntro(commandMode)}\n\nПросто пиши — я буду отвечать в этом режиме.\nСброс: <code>/reset</code> или <code>/menu</code>`,
         { reply_markup: getExitMarkup() },
       );
@@ -213,7 +226,12 @@ async function handleTelegramMessage(update, token, apiKey, model) {
   }
 
   if (command) {
-    await sendTelegramMessage(token, chatId, `❓ Неизвестная команда <code>${command}</code>. Напиши <code>/menu</code>.`, { reply_markup: getBotMenuMarkup() });
+    await sendTelegramMessage(
+      token,
+      chatId,
+      `❓ Неизвестная команда <code>${command}</code>. Напиши <code>/menu</code>.`,
+      { reply_markup: getBotMenuMarkup() },
+    );
     return;
   }
 
@@ -256,7 +274,10 @@ const server = createServer(async (req, res) => {
   // ── Leads ────────────────────────────────────────────────────────────────
   if (req.method === "POST" && path === "/api/leads") {
     const token = process.env.TELEGRAM_BOT_TOKEN || "";
-    if (!token) { json(res, 500, { ok: false, error: "telegram_not_configured" }); return; }
+    if (!token) {
+      json(res, 500, { ok: false, error: "telegram_not_configured" });
+      return;
+    }
     try {
       const body = await readJson(req);
       const name = asText(body.name);
@@ -274,7 +295,17 @@ const server = createServer(async (req, res) => {
         return;
       }
 
-      const text = formatLeadMessage({ name, email, phone, company, briefDate, briefTime, dialCode, countryIso, countryLabel });
+      const text = formatLeadMessage({
+        name,
+        email,
+        phone,
+        company,
+        briefDate,
+        briefTime,
+        dialCode,
+        countryIso,
+        countryLabel,
+      });
       const replyMarkup = buildLeadActions({ email, dialCode, phone });
       await sendTelegramToAdmins(token, getTelegramAdminChatIds(process.env), text, { reply_markup: replyMarkup });
       json(res, 200, { ok: true });
@@ -289,12 +320,15 @@ const server = createServer(async (req, res) => {
     const token = process.env.TELEGRAM_BOT_TOKEN || "";
     const apiKey = process.env.OPENROUTER_API_KEY || "";
     const model = process.env.OPENROUTER_MODEL || "openai/gpt-4o-mini";
-    if (!token) { json(res, 500, { ok: false, error: "telegram_not_configured" }); return; }
+    if (!token) {
+      json(res, 500, { ok: false, error: "telegram_not_configured" });
+      return;
+    }
     try {
       const update = await readJson(req);
       json(res, 200, { ok: true }); // ACK Telegram immediately
       if (update.callback_query) {
-        await handleTelegramCallback(update, token, apiKey, model);
+        await handleTelegramCallback(update, token);
       } else if (update.message) {
         await handleTelegramMessage(update, token, apiKey, model);
       }
@@ -310,8 +344,14 @@ const server = createServer(async (req, res) => {
     const token = process.env.TELEGRAM_BOT_TOKEN || "";
     const secret = process.env.TELEGRAM_SETUP_SECRET || "";
     const receivedSecret = url.searchParams.get("secret") || "";
-    if (!token) { json(res, 500, { ok: false, error: "telegram_not_configured" }); return; }
-    if (secret && receivedSecret !== secret) { json(res, 403, { ok: false, error: "forbidden" }); return; }
+    if (!token) {
+      json(res, 500, { ok: false, error: "telegram_not_configured" });
+      return;
+    }
+    if (secret && receivedSecret !== secret) {
+      json(res, 403, { ok: false, error: "forbidden" });
+      return;
+    }
     try {
       const webhookUrl = `${process.env.WEBHOOK_BASE_URL || `http://localhost:${PORT}`}/api/telegram`;
       await telegramApi(token, "setWebhook", {
@@ -320,12 +360,12 @@ const server = createServer(async (req, res) => {
       });
       await telegramApi(token, "setMyCommands", {
         commands: [
-          { command: "menu",      description: "Главное меню" },
-          { command: "ai",        description: "AI запрос" },
-          { command: "reply",     description: "Ответ клиенту" },
-          { command: "followup",  description: "Фоллоу-ап" },
-          { command: "offer",     description: "Оффер" },
-          { command: "reset",     description: "Сброс режима" },
+          { command: "menu", description: "Главное меню" },
+          { command: "ai", description: "AI запрос" },
+          { command: "reply", description: "Ответ клиенту" },
+          { command: "followup", description: "Фоллоу-ап" },
+          { command: "offer", description: "Оффер" },
+          { command: "reset", description: "Сброс режима" },
         ],
       });
       json(res, 200, { ok: true, webhookUrl });
@@ -338,39 +378,30 @@ const server = createServer(async (req, res) => {
   // ── Static frontend ────────────────────────────────────────────────────
   const distDir = join(__dirname, "../dist");
   if (existsSync(distDir)) {
-    // Strip query string, decode URI
-    let filePath = decodeURIComponent(path);
-    // Never serve dotfiles or escape dist
-    if (filePath.includes("..") || filePath.startsWith("/..")) {
-      res.writeHead(403); res.end(); return;
+    const filePath = decodeURIComponent(path);
+    if (isUnsafeStaticPath(filePath)) {
+      res.writeHead(403);
+      res.end();
+      return;
     }
-    let candidate = join(distDir, filePath);
-    // Directory → index.html
-    if (!existsSync(candidate) || !statSync(candidate).isFile()) {
-      candidate = join(distDir, "index.html");
+
+    const staticFile = resolveStaticFile(distDir, filePath);
+    if (staticFile) {
+      streamFile(res, staticFile, 200, filePath);
+      return;
     }
-    if (existsSync(candidate) && statSync(candidate).isFile()) {
-      const ext = candidate.split(".").pop();
-      const mime = {
-        html: "text/html; charset=utf-8",
-        js:   "application/javascript",
-        css:  "text/css",
-        svg:  "image/svg+xml",
-        png:  "image/png",
-        jpg:  "image/jpeg",
-        ico:  "image/x-icon",
-        woff2:"font/woff2",
-        woff: "font/woff",
-        ttf:  "font/ttf",
-        json: "application/json",
-        webp: "image/webp",
-      }[ext] || "application/octet-stream";
-      const isAsset = filePath.startsWith("/assets/");
-      res.writeHead(200, {
-        "Content-Type": mime,
-        ...(isAsset ? { "Cache-Control": "public, max-age=31536000, immutable" } : {}),
-      });
-      createReadStream(candidate).pipe(res);
+
+    if (!looksLikeAssetRequest(filePath)) {
+      const fallback = join(distDir, "index.html");
+      if (existsSync(fallback) && statSync(fallback).isFile()) {
+        streamFile(res, fallback, 404, filePath);
+        return;
+      }
+    }
+
+    if (looksLikeAssetRequest(filePath)) {
+      res.writeHead(404);
+      res.end();
       return;
     }
   }
@@ -388,20 +419,23 @@ async function startPolling() {
   const token = process.env.TELEGRAM_BOT_TOKEN;
   const apiKey = process.env.OPENROUTER_API_KEY || "";
   const model = process.env.OPENROUTER_MODEL || "openai/gpt-4o-mini";
-  if (!token) { console.warn("polling: TELEGRAM_BOT_TOKEN not set, skipping"); return; }
+  if (!token) {
+    console.warn("polling: TELEGRAM_BOT_TOKEN not set, skipping");
+    return;
+  }
 
   // Delete any existing webhook so Telegram switches to getUpdates
   try {
     await telegramApi(token, "deleteWebhook", { drop_pending_updates: false });
     await telegramApi(token, "setMyCommands", {
       commands: [
-        { command: "menu",      description: "Главное меню" },
-        { command: "ai",        description: "AI запрос" },
-        { command: "reply",     description: "Ответ клиенту" },
-        { command: "followup",  description: "Фоллоу-ап" },
-        { command: "offer",     description: "Оффер" },
-        { command: "reset",     description: "Сброс режима и памяти" },
-        { command: "clear",     description: "Очистить память диалога" },
+        { command: "menu", description: "Главное меню" },
+        { command: "ai", description: "AI запрос" },
+        { command: "reply", description: "Ответ клиенту" },
+        { command: "followup", description: "Фоллоу-ап" },
+        { command: "offer", description: "Оффер" },
+        { command: "reset", description: "Сброс режима и памяти" },
+        { command: "clear", description: "Очистить память диалога" },
       ],
     });
     console.log("polling: webhook removed, starting long-poll loop");
@@ -412,13 +446,17 @@ async function startPolling() {
   let offset = 0;
   while (true) {
     try {
-      const data = await telegramApi(token, "getUpdates", { timeout: 30, offset, allowed_updates: ["message", "callback_query"] });
+      const data = await telegramApi(token, "getUpdates", {
+        timeout: 30,
+        offset,
+        allowed_updates: ["message", "callback_query"],
+      });
       const updates = data?.result ?? [];
       for (const update of updates) {
         offset = update.update_id + 1;
         try {
           if (update.callback_query) {
-            await handleTelegramCallback({ callback_query: update.callback_query }, token, apiKey, model);
+            await handleTelegramCallback({ callback_query: update.callback_query }, token);
           } else if (update.message) {
             await handleTelegramMessage({ message: update.message }, token, apiKey, model);
           }
@@ -428,7 +466,7 @@ async function startPolling() {
       }
     } catch (e) {
       console.error("polling: getUpdates error:", e.message);
-      await new Promise(r => setTimeout(r, 5000));
+      await new Promise((r) => setTimeout(r, 5000));
     }
   }
 }
@@ -442,6 +480,62 @@ function setCors(res) {
 function json(res, status, payload) {
   res.writeHead(status, { "Content-Type": "application/json; charset=utf-8" });
   res.end(JSON.stringify(payload));
+}
+
+function isUnsafeStaticPath(filePath) {
+  const segments = filePath.split("/").filter(Boolean);
+  return filePath.includes("..") || segments.some((segment) => segment.startsWith("."));
+}
+
+function looksLikeAssetRequest(filePath) {
+  return /\.[a-zA-Z0-9]+$/.test(filePath);
+}
+
+function resolveStaticFile(distDir, filePath) {
+  const direct = join(distDir, filePath);
+  if (existsSync(direct)) {
+    const directStat = statSync(direct);
+    if (directStat.isFile()) return direct;
+    if (directStat.isDirectory()) {
+      const directoryIndex = join(direct, "index.html");
+      if (existsSync(directoryIndex) && statSync(directoryIndex).isFile()) return directoryIndex;
+    }
+  }
+
+  if (!looksLikeAssetRequest(filePath)) {
+    const routeIndex = join(distDir, filePath.replace(/^\/+|\/+$/g, ""), "index.html");
+    if (existsSync(routeIndex) && statSync(routeIndex).isFile()) return routeIndex;
+  }
+
+  return null;
+}
+
+function streamFile(res, file, status, requestPath) {
+  const ext = file.split(".").pop();
+  const mime =
+    {
+      html: "text/html; charset=utf-8",
+      js: "application/javascript",
+      css: "text/css",
+      svg: "image/svg+xml",
+      png: "image/png",
+      jpg: "image/jpeg",
+      jpeg: "image/jpeg",
+      ico: "image/x-icon",
+      woff2: "font/woff2",
+      woff: "font/woff",
+      ttf: "font/ttf",
+      json: "application/json",
+      webp: "image/webp",
+      avif: "image/avif",
+    }[ext] || "application/octet-stream";
+
+  const isAsset = requestPath.startsWith("/assets/");
+  res.writeHead(status, {
+    "Content-Type": mime,
+    ...(isAsset ? { "Cache-Control": "public, max-age=31536000, immutable" } : {}),
+  });
+  createReadStream(file).pipe(res);
 }
 
 function readJson(req) {

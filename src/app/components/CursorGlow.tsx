@@ -6,11 +6,17 @@ export function CursorGlow() {
   const { theme } = useTheme();
 
   useEffect(() => {
-    let x = 0, y = 0, cx = 0, cy = 0;
+    let x = 0,
+      y = 0,
+      cx = 0,
+      cy = 0;
     const el = ref.current;
     if (!el) return;
 
-    const onMove = (e: MouseEvent) => { x = e.clientX; y = e.clientY; };
+    const onMove = (e: MouseEvent) => {
+      x = e.clientX;
+      y = e.clientY;
+    };
     window.addEventListener("mousemove", onMove);
 
     let raf: number;

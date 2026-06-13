@@ -6,10 +6,42 @@ import { useI18n } from "../i18n";
 export function PainSection() {
   const { t } = useI18n();
   const pains = [
-    { id: "01", text: t("pain.01.t"), sub: t("pain.01.s"), percent: "73%", percentLabel: t("pain.01.l"), src: t("pain.01.src"), color: "var(--surface-mid)" },
-    { id: "02", text: t("pain.02.t"), sub: t("pain.02.s"), percent: "4.2x", percentLabel: t("pain.02.l"), src: t("pain.02.src"), color: "var(--surface-soft)" },
-    { id: "03", text: t("pain.03.t"), sub: t("pain.03.s"), percent: "89%", percentLabel: t("pain.03.l"), src: t("pain.03.src"), color: "var(--surface-mid)" },
-    { id: "04", text: t("pain.04.t"), sub: t("pain.04.s"), percent: "0%", percentLabel: t("pain.04.l"), src: t("pain.04.src"), color: "var(--surface-soft)" },
+    {
+      id: "01",
+      text: t("pain.01.t"),
+      sub: t("pain.01.s"),
+      percent: "73%",
+      percentLabel: t("pain.01.l"),
+      src: t("pain.01.src"),
+      color: "var(--surface-mid)",
+    },
+    {
+      id: "02",
+      text: t("pain.02.t"),
+      sub: t("pain.02.s"),
+      percent: "4.2x",
+      percentLabel: t("pain.02.l"),
+      src: t("pain.02.src"),
+      color: "var(--surface-soft)",
+    },
+    {
+      id: "03",
+      text: t("pain.03.t"),
+      sub: t("pain.03.s"),
+      percent: "89%",
+      percentLabel: t("pain.03.l"),
+      src: t("pain.03.src"),
+      color: "var(--surface-mid)",
+    },
+    {
+      id: "04",
+      text: t("pain.04.t"),
+      sub: t("pain.04.s"),
+      percent: "0%",
+      percentLabel: t("pain.04.l"),
+      src: t("pain.04.src"),
+      color: "var(--surface-soft)",
+    },
   ];
 
   const sectionRef = useRef<HTMLElement>(null);
@@ -23,9 +55,12 @@ export function PainSection() {
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
-    const obs = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) setInView(true);
-    }, { threshold: 0.1 });
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setInView(true);
+      },
+      { threshold: 0.1 },
+    );
     obs.observe(el);
     return () => obs.disconnect();
   }, []);
@@ -67,7 +102,12 @@ export function PainSection() {
                 text={t("pain.eyebrow")}
                 trigger={inView}
                 className="uppercase tracking-[0.35em]"
-                style={{ fontSize: "0.65rem", fontWeight: 600, fontFamily: "ui-monospace, SFMono-Regular, monospace", color: "var(--fg-3)" }}
+                style={{
+                  fontSize: "0.65rem",
+                  fontWeight: 600,
+                  fontFamily: "ui-monospace, SFMono-Regular, monospace",
+                  color: "var(--fg-3)",
+                }}
               />
             </motion.div>
 
@@ -75,7 +115,14 @@ export function PainSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.1 }}
-              style={{ fontSize: "clamp(1.8rem, 4vw, 3rem)", fontWeight: 700, lineHeight: 1.1, letterSpacing: "-0.03em", color: "var(--fg-1)", marginBottom: "1.5rem" }}
+              style={{
+                fontSize: "clamp(1.8rem, 4vw, 3rem)",
+                fontWeight: 700,
+                lineHeight: 1.1,
+                letterSpacing: "-0.03em",
+                color: "var(--fg-1)",
+                marginBottom: "1.5rem",
+              }}
             >
               {t("pain.title")}
               <br />
@@ -84,57 +131,85 @@ export function PainSection() {
 
             <div className="grid md:grid-cols-[1.3fr_1fr] gap-8 md:gap-16 mt-12 sm:mt-16">
               <div className="relative">
-              <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                animate={inView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="relative rounded-2xl overflow-hidden p-6 sm:p-8 md:p-12"
-                style={{ background: current.color, border: "1px solid var(--surface-border)" }}
-              >
-                <div className="absolute top-4 right-4 flex items-center gap-2 opacity-30">
-                  <div className="w-1 h-1 rounded-full" style={{ background: "var(--fg-1)" }} />
-                  <div className="w-6 h-px" style={{ background: "var(--fg-3)" }} />
-                </div>
-
-                <div>
-                  <p
-                    style={{
-                      fontSize: "clamp(5rem, 14vw, 10rem)",
-                      fontWeight: 900,
-                      lineHeight: 0.85,
-                      letterSpacing: "-0.05em",
-                      color: "var(--fg-1)",
-                      textShadow: "0 0 80px var(--shadow-soft)",
-                    }}
-                  >
-                    {current.percent}
-                  </p>
-                  <p className="uppercase tracking-[0.25em] mt-4" style={{ fontSize: "0.65rem", fontWeight: 700, color: "var(--fg-3)" }}>
-                    {current.percentLabel}
-                  </p>
-                </div>
-
-                <motion.div key={current.id + "-text"} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4, delay: 0.15 }} className="mt-10">
-                  <h3 style={{ fontSize: "clamp(1.2rem, 2.5vw, 1.6rem)", fontWeight: 700, lineHeight: 1.2, color: "var(--fg-1)", marginBottom: "0.75rem" }}>
-                    {current.text}
-                  </h3>
-                  <p style={{ fontSize: "0.9rem", lineHeight: 1.7, maxWidth: 380, color: "var(--fg-3)", overflowWrap: "anywhere" }}>
-                    {current.sub} <span style={{ color: "var(--fg-4)" }}>{current.src}.</span>
-                  </p>
-                </motion.div>
-
-                <div className="mt-10">
-                  <div className="relative h-[3px] overflow-hidden rounded-full" style={{ background: "var(--surface-strong)" }}>
-                    <motion.div
-                      className="absolute inset-y-0 left-0 rounded-full"
-                      style={{ background: "var(--fg-2)" }}
-                      initial={{ width: "0%" }}
-                      animate={{ width: `${progress * 100}%` }}
-                      transition={{ duration: 0.18, ease: "linear" }}
-                    />
+                <motion.div
+                  initial={{ opacity: 0, x: -30 }}
+                  animate={inView ? { opacity: 1, x: 0 } : {}}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                  className="relative rounded-2xl overflow-hidden p-6 sm:p-8 md:p-12"
+                  style={{ background: current.color, border: "1px solid var(--surface-border)" }}
+                >
+                  <div className="absolute top-4 right-4 flex items-center gap-2 opacity-30">
+                    <div className="w-1 h-1 rounded-full" style={{ background: "var(--fg-1)" }} />
+                    <div className="w-6 h-px" style={{ background: "var(--fg-3)" }} />
                   </div>
-                </div>
-              </motion.div>
+
+                  <div>
+                    <p
+                      style={{
+                        fontSize: "clamp(5rem, 14vw, 10rem)",
+                        fontWeight: 900,
+                        lineHeight: 0.85,
+                        letterSpacing: "-0.05em",
+                        color: "var(--fg-1)",
+                        textShadow: "0 0 80px var(--shadow-soft)",
+                      }}
+                    >
+                      {current.percent}
+                    </p>
+                    <p
+                      className="uppercase tracking-[0.25em] mt-4"
+                      style={{ fontSize: "0.65rem", fontWeight: 700, color: "var(--fg-3)" }}
+                    >
+                      {current.percentLabel}
+                    </p>
+                  </div>
+
+                  <motion.div
+                    key={current.id + "-text"}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.4, delay: 0.15 }}
+                    className="mt-10"
+                  >
+                    <h3
+                      style={{
+                        fontSize: "clamp(1.2rem, 2.5vw, 1.6rem)",
+                        fontWeight: 700,
+                        lineHeight: 1.2,
+                        color: "var(--fg-1)",
+                        marginBottom: "0.75rem",
+                      }}
+                    >
+                      {current.text}
+                    </h3>
+                    <p
+                      style={{
+                        fontSize: "0.9rem",
+                        lineHeight: 1.7,
+                        maxWidth: 380,
+                        color: "var(--fg-3)",
+                        overflowWrap: "anywhere",
+                      }}
+                    >
+                      {current.sub} <span style={{ color: "var(--fg-4)" }}>{current.src}.</span>
+                    </p>
+                  </motion.div>
+
+                  <div className="mt-10">
+                    <div
+                      className="relative h-[3px] overflow-hidden rounded-full"
+                      style={{ background: "var(--surface-strong)" }}
+                    >
+                      <motion.div
+                        className="absolute inset-y-0 left-0 rounded-full"
+                        style={{ background: "var(--fg-2)" }}
+                        initial={{ width: "0%" }}
+                        animate={{ width: `${progress * 100}%` }}
+                        transition={{ duration: 0.18, ease: "linear" }}
+                      />
+                    </div>
+                  </div>
+                </motion.div>
               </div>
 
               <motion.div
@@ -163,7 +238,13 @@ export function PainSection() {
                             border: `1px solid ${isActive ? "var(--accent-border)" : "var(--surface-border)"}`,
                           }}
                         >
-                          <span style={{ fontSize: "0.5rem", fontWeight: 800, color: isActive ? "var(--fg-2)" : "var(--fg-5)" }}>
+                          <span
+                            style={{
+                              fontSize: "0.5rem",
+                              fontWeight: 800,
+                              color: isActive ? "var(--fg-2)" : "var(--fg-5)",
+                            }}
+                          >
                             {pain.id}
                           </span>
                         </div>

@@ -1,5 +1,12 @@
 node_modules/
 dist/
-.dev.log
-.dev.err.log
-backend/.env
+coverage/
+.DS_Store
+*.log
+.env
+.env.*
+!.env.example
+PROJECT_IMPROVEMENT_PLAN*.md
+guidelines/
+plans/
+default_shadcn_theme.css
